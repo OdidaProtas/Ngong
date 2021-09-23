@@ -1,15 +1,12 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React from "react";
+import AppNavigation from "./navigation/AppNavigation";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <div className="App">
-    
+      <AppNavigation />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -8,9 +8,9 @@ const useStyles = makeStyles((theme: Theme) =>
       textAlign:"center"
     },
     icon: {
-      height: "30px",
-      width: "30px",
-      marginTop: theme.spacing(1.2),
+      height: "48px",
+      width: "48px",
+      marginTop: theme.spacing(0.5),
     },
     text: {
       color: colors.primary,

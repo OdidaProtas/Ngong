@@ -6,7 +6,7 @@ export default function LogoComponent() {
   return (
     <div className={classes.root}>
       <Grid container>
-        <Grid item xs={2}>
+        <Grid item>
           <img className={classes.icon} src={logoIcon} alt="BizMkononi logo" />
         </Grid>
         <Grid item xs={1}>

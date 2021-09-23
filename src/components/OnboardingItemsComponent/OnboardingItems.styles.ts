@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
     icon: {
       height: 30,
       width: 30,
+      marginTop: theme.spacing(2)
     },
   })
 );

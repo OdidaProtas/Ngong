@@ -15,10 +15,10 @@ export default function OnboardingItemsComponent({
   return (
     <div>
       <Grid container>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <img className={classes.icon} src={icon} alt={text} />
         </Grid>
-        <Grid item xs>
+        <Grid item xs={6}>
           <p>{text}</p>
         </Grid>
       </Grid>

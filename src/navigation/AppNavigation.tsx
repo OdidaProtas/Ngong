@@ -6,7 +6,7 @@ export default function AppNavigation() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/registration">
           <RegistrationScreen />
         </Route>
         <Route exact path="/login">

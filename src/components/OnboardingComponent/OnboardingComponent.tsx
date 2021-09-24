@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import React from "react";
 import { LogoComponent, StyledBackground } from "..";
 import {
@@ -7,6 +7,7 @@ import {
   CustomerIcon,
   InsightIcon,
 } from "../../assets/images";
+import colors from "../../constants/Themes/colors";
 import OnboardingItemsComponent from "../OnboardingItemsComponent/OnboardingItemsComponent";
 import useStyles from "./OnboardingComponent.styles";
 
@@ -28,7 +29,9 @@ export default function OnboardingComponent() {
     <div>
       <div className={classes.root}>
         <div>
-          <Typography variant="h5" className={classes.title}>{title}</Typography>
+          <Typography variant="h5" className={classes.title}>
+            {title}
+          </Typography>
           <div>
             <div className={classes.logoContainer}>
               <LogoComponent />

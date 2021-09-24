@@ -9,7 +9,18 @@ body {
 }
 
 .styledDeco {
-  box-shadow: inset 8px 40px 192px 0px rgba(15, 76, 113, 0.75);
-  -webkit-box-shadow: inset 8px 40px 192px 0px rgba(15, 76, 113, 0.75);
--moz-box-shadow: inset 98px 40px 192px 0px rgba(15, 76, 113, 0.75);
+  box-shadow: 23px 96px 234px 78px rgba(15, 76, 117, 0.75);
+  -webkit-box-shadow: 23px 96px 234px 78px rgba(15, 76, 117, 0.75);
+  -moz-box-shadow: 23px 96px 234px 78px rgba(15, 76, 117, 0.75);
+  background-color: rgba(15, 76, 117, 0.75);
+}
+
+.footerGradient {
+  background: #bbe1fa;
+  background: -webkit-radial-gradient(bottom right, #bbe1fa, #ffffff);
+  background: -moz-radial-gradient(bottom right, #bbe1fa, #ffffff);
+  background: radial-gradient(to top left, #bbe1fa, #ffffff);
+  box-shadow: 117px 105px 327px 73px rgba(187,225,250,0.75);
+-webkit-box-shadow: 117px 105px 327px 73px rgba(187,225,250,0.75);
+-moz-box-shadow: 117px 105px 327px 73px rgba(187,225,250,0.75);
 }

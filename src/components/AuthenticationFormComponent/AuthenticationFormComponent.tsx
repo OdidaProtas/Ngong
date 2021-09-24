@@ -33,7 +33,6 @@ const DecoItem = ({ context }: DecoItemInterface) => {
           className={isLogin ? classes.decoSvg : classes.regSvg}
         />
       </div>
-      )
     </>
   );
 };
@@ -92,7 +91,7 @@ export default function AuthenticationFormComponent({
             size="small"
             variant="contained"
           >
-            Register Account
+            {isLogin ? "Login" : "Register Account"}
           </Button>
         </form>
         <SignInWithGoogleComponent context={context} title="Register" />

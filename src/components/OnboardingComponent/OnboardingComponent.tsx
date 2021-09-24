@@ -23,10 +23,28 @@ const listItems = [
   { icon: BusinessIcon, text: "Revenue Projection Charts" },
 ];
 
+const Deco = () => {
+  return (
+    <div>
+      <div
+        className="styledDeco"
+        style={{
+          height: 50,
+          width: 50,
+          position: "absolute",
+          top: -100,
+          left: -100,
+        }}
+      ></div>
+    </div>
+  );
+};
+
 export default function OnboardingComponent() {
   const classes = useStyles();
   return (
     <div>
+      <Deco />
       <div className={classes.root}>
         <div>
           <Typography variant="h5" className={classes.title}>
@@ -48,6 +66,17 @@ export default function OnboardingComponent() {
             </div>
           </div>
         </div>
+        <div
+          className="footerGradient"
+          style={{
+            backgroundColor: "blue",
+            height: 200,
+            width: 200,
+            position: "absolute",
+            right: "50%",
+            bottom: 0,
+          }}
+        ></div>
       </div>
     </div>
   );

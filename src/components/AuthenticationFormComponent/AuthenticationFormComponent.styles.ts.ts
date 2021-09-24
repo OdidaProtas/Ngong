@@ -48,6 +48,11 @@ const useStyles = makeStyles((theme: Theme) =>
     regContainer: {
       display: "none",
     },
+    regSvg: {
+      position: "absolute",
+      maxWidth: "100%",
+      maxHeight: "100%",
+    },
   })
 );
 

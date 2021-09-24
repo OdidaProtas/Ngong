@@ -27,8 +27,11 @@ const DecoItem = ({ context }: DecoItemInterface) => {
   const isLogin = context === "login";
   return (
     <>
-      <div className={isLogin? classes.loginDecoContainer : classes.regContainer}>
-        <img src={isLogin ? loginDeco : regDeco} className={classes.decoSvg} />
+      <div className={isLogin ? classes.loginDecoContainer : ""}>
+        <img
+          src={isLogin ? loginDeco : regDeco}
+          className={isLogin ? classes.decoSvg : classes.regSvg}
+        />
       </div>
       )
     </>

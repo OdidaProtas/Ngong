@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import useStyles from "./OnboardingItems.styles";
 
 interface OnboardingItemsInterface {
@@ -13,13 +13,15 @@ export default function OnboardingItemsComponent({
 }: OnboardingItemsInterface) {
   const classes = useStyles();
   return (
-    <div>
-      <Grid container>
-        <Grid item xs={2}>
+    <div className={classes.root}>
+      <Grid container spacing={8}>
+        <Grid item xs={1}>
           <img className={classes.icon} src={icon} alt={text} />
         </Grid>
-        <Grid item xs={6}>
-          <p>{text}</p>
+        <Grid item xs={7}>
+          <Typography variant="body1" className={classes.text}>
+            {text}
+          </Typography>
         </Grid>
       </Grid>
     </div>

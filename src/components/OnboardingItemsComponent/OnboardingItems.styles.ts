@@ -7,11 +7,15 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: "flex",
       justifyContent: "center",
+      marginBottom: theme.spacing(3)
     },
     icon: {
-      height: 30,
-      width: 30,
-      marginTop: theme.spacing(2)
+      height: 42,
+      width: 42,
+    },
+    text: {
+      fontFamily: "Poppins",
+      textAlign: "left",
     },
   })
 );

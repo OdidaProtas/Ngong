@@ -52,7 +52,6 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "none",
     },
     regSvg: {
-      position: "absolute",
       maxWidth: "100%",
       maxHeight: "100%",
     },

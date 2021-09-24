@@ -1,13 +1,11 @@
-import { Grid, Typography } from "@mui/material";
-import React from "react";
-import { LogoComponent, StyledBackground } from "..";
+import { Typography } from "@mui/material";
+import { LogoComponent } from "..";
 import {
   AiIcon,
   BusinessIcon,
   CustomerIcon,
   InsightIcon,
 } from "../../assets/images";
-import colors from "../../constants/Themes/colors";
 import OnboardingItemsComponent from "../OnboardingItemsComponent/OnboardingItemsComponent";
 import useStyles from "./OnboardingComponent.styles";
 
@@ -23,7 +21,7 @@ const listItems = [
   { icon: BusinessIcon, text: "Revenue Projection Charts" },
 ];
 
-const Deco = () => {
+const BlurredDeco = () => {
   return (
     <div>
       <div
@@ -40,43 +38,46 @@ const Deco = () => {
   );
 };
 
+const BluttedFooter = () => {
+  const classes = useStyles();
+  return <div className={`footerGradient ${classes.footerGradient}`} />;
+};
+
 export default function OnboardingComponent() {
   const classes = useStyles();
   return (
     <div>
-      <Deco />
-      <div className={classes.root}>
+      <BlurredDeco />
+      <div>
         <div>
-          <Typography variant="h5" className={classes.title}>
+          <Typography variant="h6" className={classes.title}>
             {title}
           </Typography>
           <div>
             <div className={classes.logoContainer}>
               <LogoComponent />
             </div>
-            <p className={classes.onBoardingText}>{onboardingText}</p>
+            <div className={classes.onBoardingTextContainer}>
+              <p className={classes.onBoardingText}>{onboardingText}</p>
+            </div>
             <div className={classes.list}>
-              {listItems.map((list: any, index: number) => (
-                <OnboardingItemsComponent item={list} key={index} />
-              ))}
+              <div>
+                {listItems.map((list: any, index: number) => (
+                  <OnboardingItemsComponent item={list} key={index} />
+                ))}
+              </div>
             </div>
             <div className={classes.footer}>
-              <a className={classes.footerLink}>{termsText}</a>
-              <a className={classes.footerLink}>{policyText}</a>
+              <Typography variant="body2" className={classes.footerLink}>
+                {termsText}
+              </Typography>
+              <Typography variant="body2" className={classes.footerLink}>
+                {policyText}
+              </Typography>
             </div>
           </div>
         </div>
-        <div
-          className="footerGradient"
-          style={{
-            backgroundColor: "blue",
-            height: 200,
-            width: 200,
-            position: "absolute",
-            right: "50%",
-            bottom: 0,
-          }}
-        ></div>
+        <BluttedFooter />
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ export default function LogoComponent() {
           <img className={classes.icon} src={logoIcon} alt="BizMkononi logo" />
         </Grid>
         <Grid item xs={1}>
-          <p className={classes.text}>BizMkononi</p>
+          <h5 className={classes.text}>BizMkononi</h5>
         </Grid>
       </Grid>
     </div>

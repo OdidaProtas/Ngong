@@ -22,18 +22,10 @@ const listItems = [
 ];
 
 const BlurredDeco = () => {
+  const classes = useStyles()
   return (
     <div>
-      <div
-        className="styledDeco"
-        style={{
-          height: 50,
-          width: 50,
-          position: "absolute",
-          top: -100,
-          left: -100,
-        }}
-      ></div>
+      <div className={`styledDeco ${classes.styledDeco}`} />;
     </div>
   );
 };

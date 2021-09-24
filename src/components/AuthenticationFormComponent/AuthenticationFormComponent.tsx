@@ -11,7 +11,7 @@ import useStyles from "./AuthenticationFormComponent.styles.ts";
 const regTitle = "Create Account";
 const loginTitle = "Sign In";
 const formHelper = "Already have an account? Login";
-
+const formHelperSignup = "New user? Create Account";
 import regDeco from "../../assets/images/registrationBg.svg";
 import loginDeco from "../../assets/images/loginBg.svg";
 import { SignInWithGoogleComponent } from "..";
@@ -56,7 +56,7 @@ export default function AuthenticationFormComponent({
           {isLogin ? loginTitle : regTitle}
         </Typography>
         <Typography className={classes.helperText} variant="body2">
-          {formHelper}
+          {isLogin ? formHelperSignup : formHelper}
         </Typography>
 
         <form className={classes.form}>
@@ -71,6 +71,7 @@ export default function AuthenticationFormComponent({
                 <TextField
                   size="small"
                   fullWidth
+                  required
                   className={classes.textInput}
                   key={index}
                   label={placeholder}
@@ -86,6 +87,7 @@ export default function AuthenticationFormComponent({
             />
           </FormGroup>
           <Button
+            type="submit"
             className={classes.submitBtn}
             fullWidth
             size="small"

@@ -5,7 +5,7 @@ import colors from "../../constants/Themes/colors";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      marginTop: theme.spacing(3),
+      marginTop: theme.spacing(5),
       backgroundColor: "white",
       display: "flex",
       alignItems: "center",
@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme: Theme) =>
       boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
       color: colors.primary,
       fontFamily: "Poppins",
-      padding: theme.spacing(1)
+      padding: theme.spacing(1.4),
+      borderRadius:4
     },
     icon: {
       height: 20, width: 20

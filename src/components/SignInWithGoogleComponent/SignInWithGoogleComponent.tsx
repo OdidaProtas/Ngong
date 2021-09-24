@@ -18,7 +18,7 @@ export default function SignInWithGoogleComponent({
   return (
     <div className={classes.root}>
       <img className={classes.icon} src={iconUrl} />
-      <Typography className={classes.btnText} variant="body2">
+      <Typography className={classes.btnText} variant="body1">
         {isLogin ? "Login" : "Register"} with Google
       </Typography>
     </div>

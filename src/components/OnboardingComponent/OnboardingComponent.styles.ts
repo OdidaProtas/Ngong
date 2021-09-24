@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     title: {
       textAlign: "center",
-      marginTop: theme.spacing(3),
+      marginTop: theme.spacing(1),
       fontFamily: "Poppins",
       fontWeight: "bold",
       letterSpacing: theme.spacing(0.4),
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
     logoContainer: {
       display: "flex",
       justifyContent: "center",
-      marginTop: theme.spacing(2),
+      marginTop: theme.spacing(1),
     },
     onBoardingText: {
       textAlign: "center",
@@ -50,8 +50,15 @@ const useStyles = makeStyles((theme: Theme) =>
       right: "50%",
       bottom: 0,
       [theme.breakpoints.down("md")]: {
-        display:"none"
+        display: "none",
       },
+    },
+    styledDeco: {
+      height: 50,
+      width: 50,
+      position: "absolute",
+      top: -100,
+      left: -100,
     },
   })
 );

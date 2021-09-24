@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: theme.spacing(1.8),
     },
     title: {
-      marginTop: theme.spacing(6),
+      marginTop: theme.spacing(3),
       fontFamily: "Poppins",
     },
     helperText: {
@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
     regSvg: {
       maxWidth: "100%",
       maxHeight: "100%",
+      marginTop:-50
     },
   })
 );

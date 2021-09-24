@@ -29,9 +29,12 @@ const useStyles = makeStyles((theme: Theme) =>
       color: colors.text,
       fontFamily: "Poppins",
     },
-    form: {},
+    form: {
+      textAlign:"left"
+    },
     formInputLabel: {
       marginBottom: theme.spacing(3),
+      textAlign:"right"
     },
     submitBtn: {
       marginTop: theme.spacing(2),

@@ -98,20 +98,21 @@ export default function NavbarComponent() {
 
 const SearchBox = () => {
   return (
-    <TextField
-      id="input-with-icon-textfield"
-      label="Search for insights, sales, customers"
-      variant="filled"
-      style={{ borderRadius: "24px" }}
-      fullWidth
-      InputProps={{
-        endAdornment: (
-          <InputAdornment position="end">
-            <SearchIcon />
-          </InputAdornment>
-        ),
-        disableUnderline: true,
-      }}
-    />
+    <div className="TextField-without-border-radius">
+      <TextField
+        id="input-with-icon-textfield"
+        label="Search for insights, sales, customers"
+        variant="filled"
+        fullWidth
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+          disableUnderline: true
+        }}
+      />
+    </div>
   );
 };

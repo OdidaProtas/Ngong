@@ -12,7 +12,7 @@ interface DrawerItemComponentInterface {
 export default function DrawerItemComponent({
   item,
 }: DrawerItemComponentInterface) {
-  const { title, icon } = item;
+  const { title, icon, items } = item;
   return (
     <div style={{ marginBottom: "3px" }}>
       <Accordion
@@ -29,6 +29,9 @@ export default function DrawerItemComponent({
           <Typography variant="body2">{title}</Typography>
         </AccordionSummary>
         <AccordionDetails>
+          {items.map((li: any, idx: number) => (
+            <li key={idx}>{li.title}</li>
+          ))}
         </AccordionDetails>
       </Accordion>
     </div>

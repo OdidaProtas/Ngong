@@ -27,12 +27,12 @@ const drawerItems = [
 ];
 
 const sections = [
-  { title: "Sales", icon: <ReceiptIcon /> },
-  { title: "Supplies", icon: <KitchenIcon /> },
-  { title: "Customers", icon: <PeopleIcon /> },
-  { title: "Suppliers", icon: <DirectionsWalkIcon /> },
-  { title: "Products", icon: <AllInboxIcon /> },
-  { title: "Employees", icon: <AccountBoxIcon /> },
+  { title: "Sales", icon: <ReceiptIcon />, items: [] },
+  { title: "Supplies", icon: <KitchenIcon />, items: [] },
+  { title: "Customers", icon: <PeopleIcon />, items: [] },
+  { title: "Suppliers", icon: <DirectionsWalkIcon />, items: [] },
+  { title: "Products", icon: <AllInboxIcon />, items: [] },
+  { title: "Employees", icon: <AccountBoxIcon />, items: [] },
 ];
 
 export { drawerItems, sections };

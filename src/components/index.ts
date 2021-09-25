@@ -6,6 +6,8 @@ import AuthenticationFormComponent from "./AuthenticationFormComponent/Authentic
 import NavbarComponent from "./NavbarComponent/NavbarComponent";
 import DrawerComponent from "./DrawerComponent/DrawerComponent";
 import DrawerItemComponent from "./DrawerItemComponent/DrawerItemComponent";
+import LandingPageComponent from "./LandingPageComponent/LandingPageComponent";
+
 export {
   OnboardingComponent,
   StyledBackground,
@@ -15,4 +17,5 @@ export {
   NavbarComponent,
   DrawerComponent,
   DrawerItemComponent,
+  LandingPageComponent,
 };

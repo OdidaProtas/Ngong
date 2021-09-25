@@ -24,3 +24,7 @@ body {
 -webkit-box-shadow: 117px 105px 327px 73px rgba(187,225,250,0.75);
 -moz-box-shadow: 117px 105px 327px 73px rgba(187,225,250,0.75);
 }
+
+.TextField-without-border-radius fieldset {
+  border-radius: 24px;
+}

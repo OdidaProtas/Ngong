@@ -1,11 +1,14 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { RegistrationScreen, LoginScreen } from "../screens";
+import { RegistrationScreen, LoginScreen, HomeScreen } from "../screens";
 import NotFoundScreen from "../screens/NotFoundScreen/NotFoundScreen";
 
 export default function AppNavigation() {
   return (
     <Router>
       <Switch>
+        <Route exact path="/">
+          <HomeScreen />
+        </Route>
         <Route exact path="/registration">
           <RegistrationScreen />
         </Route>
@@ -13,7 +16,7 @@ export default function AppNavigation() {
           <LoginScreen />
         </Route>
         <Route path="**">
-          <NotFoundScreen/>
+          <NotFoundScreen />
         </Route>
       </Switch>
     </Router>

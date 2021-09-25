@@ -1,4 +1,4 @@
 import LoginScreen from "./LoginScreen/LoginScreen";
 import RegistrationScreen from "./RegistrationScreen/RegistrationScreen";
-
-export {RegistrationScreen, LoginScreen}
+import HomeScreen from "./HomeScreen/HomeScreen";
+export { RegistrationScreen, LoginScreen, HomeScreen };

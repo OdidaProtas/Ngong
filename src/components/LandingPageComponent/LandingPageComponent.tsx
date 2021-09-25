@@ -26,10 +26,13 @@ const CardItems = ({ item }: CardItemsInterface) => {
   const { icon, title, btn } = item;
   return (
     <div
+      className="landingScreenCards"
       style={{
         justifyContent: "center",
         alignItems: "center",
         width: 200,
+        padding: "14px",
+        borderRadius:"4px"
       }}
     >
       {icon}
@@ -66,7 +69,7 @@ export default function LandingPageComponent() {
           <img style={{ height: 280, width: 280 }} src={startuplife} alt="" />
         </Grid>
       </Grid>
-      <div style={{ textAlign: "center", paddingLeft:80 }}>
+      <div style={{ textAlign: "center", paddingLeft: 80 }}>
         <Grid container>
           {cards.map((item: any, idx: number) => (
             <Grid item xs>

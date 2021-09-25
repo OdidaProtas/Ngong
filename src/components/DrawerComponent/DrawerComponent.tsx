@@ -1,18 +1,37 @@
-import Divider from "@mui/material/Divider/Divider";
-import List from "@mui/material/List/List";
-import ListItem from "@mui/material/ListItem/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText/ListItemText";
 import Toolbar from "@mui/material/Toolbar/Toolbar";
 
 import Drawer from "@mui/material/Drawer";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import Box from "@mui/material/Box/Box";
+import { DrawerItemComponent } from "..";
+import colors from "../../constants/Themes/colors";
+import { drawerItems, sections } from "../../constants/drawerItems";
+import { Divider, Typography } from "@mui/material";
 
 const drawer = (
-  <div>
+  <div
+    style={{
+      backgroundColor: colors.accent,
+      minHeight: "100vh",
+      padding: "3px",
+      overflow:"hidden"
+    }}
+  >
     <Toolbar />
+    {drawerItems.map((item: any, idx: number) => {
+      return <DrawerItemComponent key={idx} item={item} />;
+    })}
+    <Divider />
+    <div>
+      <Typography
+        style={{ fontFamily: "Poppins", margin: "6px" }}
+        variant="body2"
+      >
+        Section
+      </Typography>
+      {sections.map((item: any, idx: number) => {
+        return <DrawerItemComponent key={idx} item={item} />;
+      })}
+    </div>
   </div>
 );
 

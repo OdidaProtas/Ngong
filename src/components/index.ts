@@ -5,7 +5,7 @@ import SignInWithGoogleComponent from "./SignInWithGoogleComponent/SignInWithGoo
 import AuthenticationFormComponent from "./AuthenticationFormComponent/AuthenticationFormComponent";
 import NavbarComponent from "./NavbarComponent/NavbarComponent";
 import DrawerComponent from "./DrawerComponent/DrawerComponent";
-
+import DrawerItemComponent from "./DrawerItemComponent/DrawerItemComponent";
 export {
   OnboardingComponent,
   StyledBackground,
@@ -14,4 +14,5 @@ export {
   SignInWithGoogleComponent,
   NavbarComponent,
   DrawerComponent,
+  DrawerItemComponent,
 };

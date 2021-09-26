@@ -6,34 +6,37 @@ import { DrawerItemComponent } from "..";
 import colors from "../../constants/Themes/colors";
 import { drawerItems, sections } from "../../constants/drawerItems";
 import { Divider, Typography } from "@mui/material";
+import LogoComponent from "../LogoComponent/LogoComponent";
+import useStyles from "./DrawerComponent.styles";
 
-const drawer = (
-  <div
-    style={{
-      backgroundColor: colors.accent,
-      minHeight: "100vh",
-      padding: "3px",
-      overflow:"hidden"
-    }}
-  >
-    <Toolbar />
-    {drawerItems.map((item: any, idx: number) => {
-      return <DrawerItemComponent key={idx} item={item} />;
-    })}
-    <Divider />
-    <div>
-      <Typography
-        style={{ fontFamily: "Poppins", margin: "6px" }}
-        variant="body2"
-      >
-        Section
-      </Typography>
-      {sections.map((item: any, idx: number) => {
-        return <DrawerItemComponent key={idx} item={item} />;
-      })}
+const DrawerContainer = () => {
+  const classes = useStyles();
+  return (
+    <div className={classes.root}>
+      <div className={classes.logoContainer}>
+        <LogoComponent />
+      </div>
+      <div className={classes.drawerItemsContainer}>
+        {drawerItems.map((item: any, idx: number) => {
+          return <DrawerItemComponent key={idx} item={item} />;
+        })}
+      </div>
+
+      <Divider />
+      <div>
+        <Typography
+          style={{ fontFamily: "Poppins", margin: "6px" }}
+          variant="body2"
+        >
+          Section
+        </Typography>
+        {sections.map((item: any, idx: number) => {
+          return <DrawerItemComponent key={idx} item={item} />;
+        })}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 interface DrawerComponentInterface {
   container: any;
@@ -72,7 +75,7 @@ export default function DrawerComponent({
             },
           }}
         >
-          {drawer}
+          <DrawerContainer />
         </Drawer>
         <Drawer
           variant="permanent"
@@ -85,7 +88,7 @@ export default function DrawerComponent({
           }}
           open
         >
-          {drawer}
+          <DrawerContainer />
         </Drawer>
       </Box>
     </>

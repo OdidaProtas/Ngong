@@ -3,11 +3,14 @@ import { createStyles, makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    appBar: {
-      elevation: 0,
+    title: {
+      fontFamily: "Poppins",
+      marginLeft: theme.spacing(1),
+      marginTop: theme.spacing(0.2),
     },
-    searchBar:{
-      borderRadius: "24px"
+    listItems:{
+        cursor:"pointer",
+        marginLeft: theme.spacing(3)
     }
   })
 );

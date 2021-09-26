@@ -97,12 +97,14 @@ export default function NavbarComponent() {
 }
 
 const SearchBox = () => {
+  const classes = useStyles();
   return (
     <div className="TextField-without-border-radius">
       <TextField
         id="input-with-icon-textfield"
         label="Search for insights, sales, customers"
         variant="filled"
+        size="small"
         fullWidth
         InputProps={{
           endAdornment: (
@@ -110,7 +112,8 @@ const SearchBox = () => {
               <SearchIcon />
             </InputAdornment>
           ),
-          disableUnderline: true
+          disableUnderline: true,
+          className: classes.searchBar,
         }}
       />
     </div>

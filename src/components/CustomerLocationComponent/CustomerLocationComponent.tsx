@@ -6,7 +6,9 @@ export default function CustomerLocationComponent() {
   return (
     <div className={classes.root}>
       <Paper>
-        <Typography variant="h6" className={classes.title}>Customer Location</Typography>
+        <Typography variant="h6" className={classes.title}>
+          Customer Location
+        </Typography>
       </Paper>
     </div>
   );

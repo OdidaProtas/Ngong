@@ -8,8 +8,8 @@ export default function LandingPageComponent() {
       <DateComponent />
       <WelcomeComponent />
       <OverviewComponent />
-      <ChartsComponent />
-      <CustomerLocationComponent />
+      {/* <ChartsComponent /> */}
+      {/* <CustomerLocationComponent /> */}
     </div>
   );
 }

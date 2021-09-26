@@ -6,6 +6,8 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     appBar: {
       elevation: 0,
+      backgroundColor:"#fff",
+      color:"black"
     },
     searchBar: {
       borderRadius: "24px",

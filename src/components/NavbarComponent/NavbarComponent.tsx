@@ -30,12 +30,10 @@ export default function NavbarComponent({
   return (
     <div>
       <AppBar
-        position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}
-        color="transparent"
         elevation={0}
         className={classes.appBar}
       >

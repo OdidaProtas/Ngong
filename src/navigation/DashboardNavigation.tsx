@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { LandingPageComponent } from "../components";
+import { LandingPageComponent, OverviewComponent } from "../components";
 
 export default function DashboardNavigation() {
   return (

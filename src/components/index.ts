@@ -7,9 +7,13 @@ import NavbarComponent from "./NavbarComponent/NavbarComponent";
 import DrawerComponent from "./DrawerComponent/DrawerComponent";
 import DrawerItemComponent from "./DrawerItemComponent/DrawerItemComponent";
 import LandingPageComponent from "./LandingPageComponent/LandingPageComponent";
-import WelcomeComponent from "./WelcomeComponent/WelcomeCompent";
 import CallToActionComponent from "./CallToActionComponents/CallToActionComponent";
-
+import WelcomeComponent from "./WelcomeComponent/WelcomeCompent";
+import DateComponent from "./DateComponent/DateComponent";
+import OverviewComponent from "./OverviewComponent/OverviewComponent";
+import OverviewSummaryComponent from "./OverviewSummaryComponent/OverviewSummaryComponent";
+import ChartsComponent from "./ChartsComponent/ChartsComponent";
+import CustomerChurnRateComponent from "../charts/CustomerChurnRateComponent/CustomerChurnRateComponent";
 export {
   OnboardingComponent,
   StyledBackground,
@@ -22,4 +26,9 @@ export {
   LandingPageComponent,
   WelcomeComponent,
   CallToActionComponent,
+  DateComponent,
+  OverviewComponent,
+  OverviewSummaryComponent,
+  ChartsComponent,
+  CustomerChurnRateComponent,
 };

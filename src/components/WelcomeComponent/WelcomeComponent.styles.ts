@@ -20,6 +20,13 @@ const useStyles = makeStyles((theme: Theme) =>
       fontFamily: "Poppins",
       marginLeft: theme.spacing(5),
     },
+    hero2Container: {
+      textAlign: "center",
+      paddingTop: theme.spacing(3),
+    },
+    hero2: {
+      maxWidth: "50%",
+    },
   })
 );
 

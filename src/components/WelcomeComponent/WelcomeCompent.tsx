@@ -1,5 +1,6 @@
 import { Grid, Typography } from "@mui/material";
 import React from "react";
+import { CallToActionComponent } from "..";
 
 import HeroImage from "../../assets/images/startup.svg";
 import useStyles from "./WelcomeComponent.styles";
@@ -21,6 +22,9 @@ export default function WelcomeComponent() {
           <img src={HeroImage} className={classes.img} alt="" />
         </Grid>
       </Grid>
+      <div>
+        <CallToActionComponent />
+      </div>
     </>
   );
 }

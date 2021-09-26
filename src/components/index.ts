@@ -8,6 +8,7 @@ import DrawerComponent from "./DrawerComponent/DrawerComponent";
 import DrawerItemComponent from "./DrawerItemComponent/DrawerItemComponent";
 import LandingPageComponent from "./LandingPageComponent/LandingPageComponent";
 import WelcomeComponent from "./WelcomeComponent/WelcomeCompent";
+import CallToActionComponent from "./CallToActionComponents/CallToActionComponent";
 
 export {
   OnboardingComponent,
@@ -20,4 +21,5 @@ export {
   DrawerItemComponent,
   LandingPageComponent,
   WelcomeComponent,
+  CallToActionComponent,
 };

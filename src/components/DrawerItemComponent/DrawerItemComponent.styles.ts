@@ -8,10 +8,13 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: theme.spacing(1),
       marginTop: theme.spacing(0.2),
     },
-    listItems:{
-        cursor:"pointer",
-        marginLeft: theme.spacing(3)
-    }
+    listItems: {
+      cursor: "pointer",
+      marginLeft: theme.spacing(3),
+    },
+    subListItems: {
+      fontFamily: "Poppins",
+    },
   })
 );
 

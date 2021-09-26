@@ -10,7 +10,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 const drawerItems = [
   {
     title: "Insights",
-    icon: <InsightsIcon />,
+    icon: <InsightsIcon fontSize="small" />,
     items: [
       { title: "Overview" },
       { title: "Sales Insights" },
@@ -21,18 +21,22 @@ const drawerItems = [
   },
   {
     title: "Businesses",
-    icon: <StoreIcon />,
+    icon: <StoreIcon fontSize="small" />,
     items: [],
   },
 ];
 
 const sections = [
-  { title: "Sales", icon: <ReceiptIcon />, items: [] },
-  { title: "Supplies", icon: <KitchenIcon />, items: [] },
-  { title: "Customers", icon: <PeopleIcon />, items: [] },
-  { title: "Suppliers", icon: <DirectionsWalkIcon />, items: [] },
-  { title: "Products", icon: <AllInboxIcon />, items: [] },
-  { title: "Employees", icon: <AccountBoxIcon />, items: [] },
+  { title: "Sales", icon: <ReceiptIcon fontSize="small" />, items: [] },
+  { title: "Supplies", icon: <KitchenIcon fontSize="small" />, items: [] },
+  { title: "Customers", icon: <PeopleIcon fontSize="small" />, items: [] },
+  {
+    title: "Suppliers",
+    icon: <DirectionsWalkIcon fontSize="small" />,
+    items: [],
+  },
+  { title: "Products", icon: <AllInboxIcon fontSize="small" />, items: [] },
+  { title: "Employees", icon: <AccountBoxIcon fontSize="small" />, items: [] },
 ];
 
 export { drawerItems, sections };

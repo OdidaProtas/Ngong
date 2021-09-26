@@ -17,9 +17,13 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       justifyContent: "center",
     },
-    drawerItemsContainer:{
-      paddingLeft: theme.spacing(3)
-    }
+    drawerItemsContainer: {
+      paddingLeft: theme.spacing(3),
+    },
+    sectionTitle: {
+      fontFamily: "Poppins",
+      margin: theme.spacing(3),
+    },
   })
 );
 

@@ -33,7 +33,7 @@ export default function DrawerItemComponent({
         <AccordionDetails>
           {items.map((li: any, idx: number) => (
             <li className={classes.listItems} key={idx}>
-              <Typography variant="caption">{li.title}</Typography>
+              <Typography className={classes.subListItems} variant="caption">{li.title}</Typography>
             </li>
           ))}
         </AccordionDetails>

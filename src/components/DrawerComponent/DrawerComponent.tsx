@@ -25,8 +25,8 @@ const DrawerContainer = () => {
       <Divider />
       <div>
         <Typography
-          style={{ fontFamily: "Poppins", margin: "6px" }}
           variant="body2"
+          className={classes.sectionTitle}
         >
           Section
         </Typography>

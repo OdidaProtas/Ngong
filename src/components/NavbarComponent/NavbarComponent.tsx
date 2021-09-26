@@ -1,4 +1,3 @@
-import React from "react";
 import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -8,19 +7,28 @@ import useStyles from "./NavbarComponent.styles";
 import TextField from "@mui/material/TextField/TextField";
 import InputAdornment from "@mui/material/InputAdornment/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
-import LayersIcon from "@mui/icons-material/Layers";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Box from "@mui/material/Box/Box";
+import AutoAwesomeMotionIcon from "@mui/icons-material/AutoAwesomeMotion";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Avatar } from "@mui/material";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import React from "react";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 const drawerWidth = 240;
 
-export default function NavbarComponent() {
-  const handleDrawerToggle = () => {};
+interface NavbarComponentInterface {
+  handleDrawerToggle: any;
+}
+
+export default function NavbarComponent({
+  handleDrawerToggle,
+}: NavbarComponentInterface) {
   const classes = useStyles();
   return (
-    <>
+    <div>
       <AppBar
         position="fixed"
         sx={{
@@ -41,58 +49,31 @@ export default function NavbarComponent() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography
+            className={classes.shopName}
+            variant="h6"
+            noWrap
+            component="div"
+          >
             Bootique Shop
           </Typography>
-          <div
-            style={{ textAlign: "center", marginLeft: "60px", width: "50%" }}
-          >
+          <div className={classes.searchBarContainer}>
             <SearchBox />
           </div>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <LayersIcon />
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              // aria-controls={menuId}
-              aria-haspopup="true"
-              // onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <NotificationsIcon />
-            </IconButton>
+            <div className={classes.desktopMenu}>
+              <NavItems />
+            </div>
           </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              // aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              // onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <LayersIcon />
-            </IconButton>
+          <Box sx={{ display: { xs: "block", md: "block", lg: "none" } }}>
+            <div className={classes.mobileMenu}>
+              <MobileMenu />
+            </div>
           </Box>
-          <Avatar>H</Avatar>
-          <div>
-            <Typography>John Doe</Typography>
-            <Typography variant="caption">Admin</Typography>
-          </div>
-          <div>
-            <ArrowDropDownIcon />
-          </div>
         </Toolbar>
       </AppBar>
-    </>
+    </div>
   );
 }
 
@@ -116,6 +97,73 @@ const SearchBox = () => {
           className: classes.searchBar,
         }}
       />
+    </div>
+  );
+};
+
+const NavItems = () => {
+  return (
+    <div>
+      <div style={{ display: "flex" }}>
+        <div>
+          <IconButton>
+            <AutoAwesomeMotionIcon />
+          </IconButton>
+          <IconButton>
+            <NotificationsIcon />
+          </IconButton>
+        </div>
+        <div style={{ display: "flex" }}>
+          <div style={{ marginRight: "6px" }}>
+            <Avatar>J</Avatar>
+          </div>
+          <div>
+            <div style={{ display: "flex" }}>
+              <Typography variant="body1">John Doe</Typography>
+              <ArrowDropDownIcon fontSize="small" />
+            </div>
+            <Typography variant="caption">Admin</Typography>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const MobileMenu = () => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <div>
+      <IconButton
+        id="basic-button"
+        aria-controls="basic-menu"
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
+        onClick={handleClick}
+      >
+        <MoreVertIcon />
+      </IconButton>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          "aria-labelledby": "basic-button",
+        }}
+      >
+        <div style={{ padding: "6px" }}>
+          <NavItems />
+        </div>
+      </Menu>
     </div>
   );
 };

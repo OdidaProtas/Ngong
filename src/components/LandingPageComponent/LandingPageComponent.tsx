@@ -4,6 +4,9 @@ import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import startuplife from "../../assets/images/startup.svg";
 import PeopleIcon from "@mui/icons-material/People";
 import InboxIcon from "@mui/icons-material/Inbox";
+import useStyles from "./LandingPageComponent.styles";
+import { WelcomeComponent } from "..";
+import DateComponent from "../DateComponent/DateComponent";
 
 const cards = [
   {
@@ -24,60 +27,15 @@ interface CardItemsInterface {
 
 const CardItems = ({ item }: CardItemsInterface) => {
   const { icon, title, btn } = item;
-  return (
-    <div
-      className="landingScreenCards"
-      style={{
-        justifyContent: "center",
-        alignItems: "center",
-        width: 200,
-        padding: "14px",
-        borderRadius:"4px"
-      }}
-    >
-      {icon}
-      <Typography
-        style={{ fontWeight: "bold", marginTop: 36, marginBottom: 20 }}
-        variant="body1"
-      >
-        {title}
-      </Typography>
-      <Button variant="contained" size="small">
-        {btn}
-      </Button>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default function LandingPageComponent() {
+  const classes = useStyles();
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <CalendarTodayIcon fontSize="small" />
-        <Typography variant="body1">August 26, 2021</Typography>
-      </div>
-      <Grid container>
-        <Grid item xs>
-          <Typography style={{ marginTop: 40, marginLeft: 50 }} variant="h5">
-            Welcome John Doe,
-          </Typography>
-          <Typography variant="body1" style={{ marginLeft: 60, marginTop: 19 }}>
-            To set up your business effectively and smoothly,
-          </Typography>
-        </Grid>
-        <Grid item xs>
-          <img style={{ height: 280, width: 280 }} src={startuplife} alt="" />
-        </Grid>
-      </Grid>
-      <div style={{ textAlign: "center", paddingLeft: 80 }}>
-        <Grid container>
-          {cards.map((item: any, idx: number) => (
-            <Grid item xs>
-              <CardItems item={item} key={idx} />
-            </Grid>
-          ))}
-        </Grid>
-      </div>
+      <DateComponent />
+      <WelcomeComponent />
     </div>
   );
 }

@@ -8,6 +8,7 @@ import {
   LandingPageComponent,
 } from "../../components";
 import { Container } from "@mui/material";
+import { DashboardNavigation } from "../../navigation";
 
 const drawerWidth = 240;
 
@@ -38,8 +39,9 @@ export default function HomeScreen(props: Props) {
       />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        <Container>{/* <LandingPageComponent /> */}</Container>
-        {/* content goes here */}
+        <Container>
+          <DashboardNavigation/>
+        </Container>
       </Box>
     </Box>
   );

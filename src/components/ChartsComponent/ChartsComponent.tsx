@@ -12,7 +12,7 @@ export default function ChartsComponent() {
           <CustomerChurnRateComponent />
         </Grid>
         <Grid item xs>
-          {/* <MostSellingComponent /> */}
+          <MostSellingComponent />
         </Grid>
       </Grid>
     </div>

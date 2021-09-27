@@ -12,8 +12,6 @@ import WelcomeComponent from "./WelcomeComponent/WelcomeCompent";
 import DateComponent from "./DateComponent/DateComponent";
 import OverviewComponent from "./OverviewComponent/OverviewComponent";
 import OverviewSummaryComponent from "./OverviewSummaryComponent/OverviewSummaryComponent";
-import ChartsComponent from "./ChartsComponent/ChartsComponent";
-import CustomerChurnRateComponent from "../charts/CustomerChurnRateComponent/CustomerChurnRateComponent";
 export {
   OnboardingComponent,
   StyledBackground,
@@ -29,6 +27,4 @@ export {
   DateComponent,
   OverviewComponent,
   OverviewSummaryComponent,
-  ChartsComponent,
-  CustomerChurnRateComponent,
 };

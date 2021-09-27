@@ -7,6 +7,9 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       paddingTop: theme.spacing(3),
     },
+    dateContainer: {
+      margin: theme.spacing(3),
+    },
   })
 );
 

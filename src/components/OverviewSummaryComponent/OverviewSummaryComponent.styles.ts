@@ -4,16 +4,13 @@ import { createStyles, makeStyles } from "@mui/styles";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      padding: theme.spacing(3),
-      display: "flex",
-      justifyContent: "space-between",
-      paddingTop: theme.spacing(6),
+      paddingTop: theme.spacing(5),
     },
     item: {
-      padding: theme.spacing(2),
       textAlign: "center",
       border: "3px solid lightblue",
-      borderRadius: "4px"
+      padding: theme.spacing(3),
+      borderRadius: "4px",
     },
   })
 );

@@ -4,13 +4,13 @@ import { createStyles, makeStyles } from "@mui/styles";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      padding: theme.spacing(12),
-    },
-    title: {
       textAlign: "center",
     },
-    dummyMap: {
-      height: "20%",
+    dateContainer: {
+      margin: theme.spacing(3),
+    },
+    section: {
+      paddingTop: theme.spacing(3),
     },
   })
 );

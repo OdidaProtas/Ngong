@@ -1,11 +1,17 @@
-import { WelcomeComponent, DateComponent, OverviewComponent } from "..";
+import {
+  WelcomeComponent,
+  OverviewComponent,
+  ChartsComponent,
+  CustomerLocationComponent,
+} from "..";
 
 export default function LandingPageComponent() {
   return (
     <div>
-      <DateComponent />
       <WelcomeComponent />
       <OverviewComponent />
+      <ChartsComponent />
+      <CustomerLocationComponent />
     </div>
   );
 }

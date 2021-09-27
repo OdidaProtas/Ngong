@@ -9,6 +9,9 @@ export default function WelcomeComponent() {
   const classes = useStyles();
   return (
     <>
+      <div className={classes.dateContainer}>
+        <DateComponent />
+      </div>
       <Grid container>
         <Grid item xs={12} lg={6}>
           <Typography className={classes.salutation} variant="h5">

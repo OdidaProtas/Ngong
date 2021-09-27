@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import useStyles from "./OverviewSummaryComponent.styles";
 
 const items = [
@@ -28,9 +28,13 @@ export default function OverviewSummaryComponent() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      {items.map((item: any, idx: number) => (
-        <ItemComponment item={item} key={idx} />
-      ))}
+      <Grid container spacing={3}>
+        {items.map((item: any, idx: number) => (
+          <Grid item xs={12} lg={3} md={3} key={idx}>
+            <ItemComponment item={item} />
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 }

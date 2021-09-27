@@ -12,6 +12,9 @@ import WelcomeComponent from "./WelcomeComponent/WelcomeCompent";
 import DateComponent from "./DateComponent/DateComponent";
 import OverviewComponent from "./OverviewComponent/OverviewComponent";
 import OverviewSummaryComponent from "./OverviewSummaryComponent/OverviewSummaryComponent";
+import ChartsComponent from "./ChartsComponent/ChartsComponent";
+import CardComponent from "./CardComponent/CardComponent";
+import CustomerLocationComponent from "./CustomerLocationComponent/CustomerLocationComponent";
 export {
   OnboardingComponent,
   StyledBackground,
@@ -27,4 +30,7 @@ export {
   DateComponent,
   OverviewComponent,
   OverviewSummaryComponent,
+  ChartsComponent,
+  CardComponent,
+  CustomerLocationComponent,
 };

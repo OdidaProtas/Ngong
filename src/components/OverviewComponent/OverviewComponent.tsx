@@ -6,7 +6,9 @@ export default function OverviewComponent() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <DateComponent />
+      <div className={classes.dateContainer}>
+        <DateComponent />
+      </div>
       <Typography variant="h5">Welcome John Doe,</Typography>
       <Typography>Here is your today overview insights</Typography>
       <OverviewSummaryComponent />

@@ -15,10 +15,16 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(3),
       fontFamily: "Poppins",
       fontWeight: "bold",
+      [theme.breakpoints.down("lg")]: {
+        margin: 0,
+      },
     },
     helper: {
       fontFamily: "Poppins",
       marginLeft: theme.spacing(5),
+      [theme.breakpoints.down("lg")]: {
+        marginLeft: 0,
+      },
     },
     hero2Container: {
       textAlign: "center",
@@ -26,6 +32,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     hero2: {
       maxWidth: "50%",
+    },
+    dateContainer: {
+      margin: theme.spacing(3),
     },
   })
 );

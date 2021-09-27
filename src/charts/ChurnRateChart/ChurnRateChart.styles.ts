@@ -5,8 +5,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       textAlign: "center",
-      height: 300,
-      padding: theme.spacing(3),
+      height: 350,
     },
   })
 );

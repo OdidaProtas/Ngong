@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { RegistrationScreen, LoginScreen, HomeScreen } from "../screens";
 import NotFoundScreen from "../screens/NotFoundScreen/NotFoundScreen";
@@ -7,13 +8,19 @@ export default function AppNavigation() {
     <Router>
       <Switch>
         <Route exact path="/">
-          <HomeScreen />
+          <Suspense fallback={<div></div>}>
+            <HomeScreen />
+          </Suspense>
         </Route>
         <Route exact path="/registration">
-          <RegistrationScreen />
+          <Suspense fallback={<div></div>}>
+            <RegistrationScreen />
+          </Suspense>
         </Route>
         <Route exact path="/login">
-          <LoginScreen />
+          <Suspense fallback={<div></div>}>
+            <LoginScreen />
+          </Suspense>
         </Route>
         <Route path="**">
           <NotFoundScreen />

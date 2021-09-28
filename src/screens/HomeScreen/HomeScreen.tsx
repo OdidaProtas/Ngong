@@ -5,7 +5,6 @@ import Toolbar from "@mui/material/Toolbar";
 import {
   NavbarComponent,
   DrawerComponent,
-  LandingPageComponent,
 } from "../../components";
 import { Container } from "@mui/material";
 import { DashboardNavigation } from "../../navigation";

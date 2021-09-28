@@ -1,4 +1,5 @@
 import { lazy } from "react";
+
 const LoginScreen = lazy(() => import("./LoginScreen/LoginScreen"));
 const RegistrationScreen = lazy(
   () => import("./RegistrationScreen/RegistrationScreen")

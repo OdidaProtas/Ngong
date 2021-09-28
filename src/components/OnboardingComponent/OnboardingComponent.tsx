@@ -25,7 +25,7 @@ const BlurredDeco = () => {
   const classes = useStyles()
   return (
     <div>
-      <div className={`styledDeco ${classes.styledDeco}`} />;
+      <div className={`styledDeco ${classes.styledDeco}`} />
     </div>
   );
 };

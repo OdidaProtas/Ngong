@@ -1,9 +1,4 @@
-import {
-  WelcomeComponent,
-  OverviewComponent,
-  ChartsComponent,
-  CustomerLocationComponent,
-} from "..";
+import { WelcomeComponent, OverviewComponent, ChartsComponent } from "..";
 
 export default function LandingPageComponent() {
   return (
@@ -11,7 +6,7 @@ export default function LandingPageComponent() {
       <WelcomeComponent />
       <OverviewComponent />
       <ChartsComponent />
-      <CustomerLocationComponent />
+      {/* <CustomerLocationComponent /> */}
     </div>
   );
 }

@@ -18,15 +18,7 @@ const data = {
 };
 
 const options: any = {
-  scales: {
-    yAxes: [
-      {
-        ticks: {
-          beginAtZero: true,
-        },
-      },
-    ],
-  },
+  responsive: true,
 };
 
 export default function ChurnRateChart() {
@@ -40,7 +32,10 @@ export default function ChurnRateChart() {
               Customer Churn Rate
             </Typography>
           </div>
-          <Line data={data} options={options} />
+          <Line
+            data={data}
+            options={{ responsive: true, maintainAspectRatio: true }}
+          />
         </div>
       </div>
     </CardComponent>

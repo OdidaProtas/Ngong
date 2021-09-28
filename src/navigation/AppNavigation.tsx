@@ -2,16 +2,17 @@ import { Suspense } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { RegistrationScreen, LoginScreen, HomeScreen } from "../screens";
 import NotFoundScreen from "../screens/NotFoundScreen/NotFoundScreen";
+import ProtectedRoute from "./ProtectedRoute";
 
 export default function AppNavigation() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/">
+        <ProtectedRoute exact path="/">
           <Suspense fallback={<div></div>}>
             <HomeScreen />
           </Suspense>
-        </Route>
+        </ProtectedRoute>
         <Route exact path="/registration">
           <Suspense fallback={<div></div>}>
             <RegistrationScreen />

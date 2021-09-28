@@ -15,6 +15,7 @@ import OverviewSummaryComponent from "./OverviewSummaryComponent/OverviewSummary
 import ChartsComponent from "./ChartsComponent/ChartsComponent";
 import CardComponent from "./CardComponent/CardComponent";
 import CustomerLocationComponent from "./CustomerLocationComponent/CustomerLocationComponent";
+import AuthModalForm from "./AuthModalForm/AuthModalForm";
 export {
   OnboardingComponent,
   StyledBackground,
@@ -33,4 +34,5 @@ export {
   ChartsComponent,
   CardComponent,
   CustomerLocationComponent,
+  AuthModalForm
 };

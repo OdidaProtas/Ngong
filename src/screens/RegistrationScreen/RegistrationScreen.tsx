@@ -1,22 +1,55 @@
 import { Grid } from "@mui/material";
+import { useContext } from "react";
 import {
   AuthenticationFormComponent,
   OnboardingComponent,
   StyledBackground,
 } from "../../components";
+import { AuthContext } from "../../state/authstate";
+import * as Yup from "yup";
+import phoneRegExp from "../../constants/phoneRegExp";
+
+const RegistrationValidationSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(2, "Too Short")
+    .max(50, "Name too long")
+    .required("Name is required"),
+  phone: Yup.string()
+    .matches(phoneRegExp, "Could not validate phone number")
+    .required("Phone number is required"),
+  email: Yup.string().email("Invalid Email").required("Email is required"),
+  password: Yup.string()
+    .required("No password provided.")
+    .min(8, "Password is too short"),
+});
 
 const fields = [
   {
     label: "Your Fullname",
-    name: "fullname",
+    name: "name",
     placeholder: "Enter your Full Name",
   },
-  { label: "Your Phone Number", name: "phoneNumber", placeholder: "+254" },
+  { label: "Your Phone Number", name: "phone", placeholder: "+254" },
   { label: "Email Address", name: "email", placeholder: "Enter email address" },
   { label: "Create Password", name: "password", placeholder: "Enter password" },
 ];
 
+const initalValues = {
+  phone: "",
+  password: "",
+  email: "",
+  name: "",
+};
+
+const requestOptions = {
+  method: "post",
+  context: "registration",
+  isAuthenticated: false,
+  endpoint: "/auth/register/",
+};
+
 export default function RegistrationScreen() {
+  const { user } = useContext(AuthContext) as any;
   return (
     <>
       <Grid container>
@@ -28,6 +61,12 @@ export default function RegistrationScreen() {
             <AuthenticationFormComponent
               context="registration"
               fields={fields}
+              validationSchema={RegistrationValidationSchema}
+              initialValues={initalValues}
+              options={requestOptions}
+              title={""}
+              subtitle={""}
+              btnText={""}
             />
           </StyledBackground>
         </Grid>

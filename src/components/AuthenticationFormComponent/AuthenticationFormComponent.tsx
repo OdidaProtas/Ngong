@@ -54,17 +54,15 @@ export default function AuthenticationFormComponent({
   // hook to handle network requests
   const { processRequest, data, loading, error } = useAxiosRequest();
 
-
   const [modalOpen, setModalOpen] = useState(false);
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [passContext, setPassContext] = useState("");
-
 
   const toggleModal = () => setModalOpen((prevState: boolean) => !prevState);
   const togglePasswordModal = () =>
     setPasswordModalOpen((prevState: boolean) => !prevState);
 
-    // request opt verification
+  // request opt verification
   const handleOtp = (value: any) => {};
 
   useEffect(() => {
@@ -78,8 +76,8 @@ export default function AuthenticationFormComponent({
 
   return (
     <div style={{ height: "100vh" }}>
-      <OtpVerificationForm phone={"F"} open={modalOpen} toggle={toggleModal} />
-      <PasswordFormComponent />
+      <OtpVerificationForm open={modalOpen} toggle={toggleModal} />
+      {/* <PasswordFormComponent context="passwordReset" /> */}
       <DecoItem context={context} />
       <div className={classes.root}>
         <Typography variant="h6" className={classes.title}>

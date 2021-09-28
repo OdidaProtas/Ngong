@@ -24,7 +24,7 @@ const style = {
 interface OtpVerificationFormInterface {
   open: boolean;
   toggle: any;
-  phone: any;
+  phone?: any;
 }
 
 export default function OtpVerificationForm({

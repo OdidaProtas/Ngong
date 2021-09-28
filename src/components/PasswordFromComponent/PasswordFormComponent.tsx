@@ -74,7 +74,7 @@ export default function PasswordFormComponent({
 }: PasswordFormInterface) {
   const handleClose = () => {};
 
-  const fields = passwordFormFields[context];
+  const fields = passwordFormFields[context].fields;
   const validationSchema = validationSchemas[context];
 
   return (

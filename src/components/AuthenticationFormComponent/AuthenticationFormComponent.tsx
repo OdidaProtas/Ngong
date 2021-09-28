@@ -1,16 +1,13 @@
 import { Button, InputAdornment, TextField, Typography } from "@mui/material";
 import useStyles from "./AuthenticationFormComponent.styles.ts";
 
-const regTitle = "Create Account";
-const loginTitle = "Sign In";
-const formHelper = "Already have an account? Login";
-const formHelperSignup = "New user? Create Account";
 import regDeco from "../../assets/images/registrationBg.svg";
 import loginDeco from "../../assets/images/loginBg.svg";
 import { Formik, Form } from "formik";
 import { useAxiosRequest } from "../../hooks";
 import { OtpVerificationForm, SignInWithGoogleComponent } from "..";
 import { useEffect, useState } from "react";
+import PasswordFormComponent from "../PasswordFromComponent/PasswordFormComponent";
 
 interface DecoItemInterface {
   context: string;
@@ -53,9 +50,22 @@ export default function AuthenticationFormComponent({
   btnText,
 }: RegistrationFormInterface) {
   const classes = useStyles();
+
+  // hook to handle network requests
   const { processRequest, data, loading, error } = useAxiosRequest();
-  const [modalOpen, setModalOpen] = useState(true);
+
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [passwordModalOpen, setPasswordModalOpen] = useState(false);
+  const [passContext, setPassContext] = useState("");
+
+
   const toggleModal = () => setModalOpen((prevState: boolean) => !prevState);
+  const togglePasswordModal = () =>
+    setPasswordModalOpen((prevState: boolean) => !prevState);
+
+    // request opt verification
+  const handleOtp = (value: any) => {};
 
   useEffect(() => {
     const modal = () => {
@@ -66,15 +76,10 @@ export default function AuthenticationFormComponent({
     modal();
   }, [data]);
 
-  const handleOtp = (value: any) => {};
-
   return (
     <div style={{ height: "100vh" }}>
-      <OtpVerificationForm
-        phone={"F"}
-        open={modalOpen}
-        toggle={toggleModal}
-      />
+      <OtpVerificationForm phone={"F"} open={modalOpen} toggle={toggleModal} />
+      <PasswordFormComponent />
       <DecoItem context={context} />
       <div className={classes.root}>
         <Typography variant="h6" className={classes.title}>

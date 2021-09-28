@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
         position: "relative",
         paddingLeft: theme.spacing(2),
         textAlign: "center",
+        paddingTop: 0
       },
     },
     textInput: {
@@ -28,13 +29,14 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: theme.spacing(3),
       color: colors.text,
       fontFamily: "Poppins",
+      cursor: "pointer",
     },
     form: {
-      textAlign:"left"
+      textAlign: "left",
     },
     formInputLabel: {
       marginBottom: theme.spacing(3),
-      textAlign:"right"
+      textAlign: "right",
     },
     submitBtn: {
       marginTop: theme.spacing(2),
@@ -54,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
     regSvg: {
       maxWidth: "100%",
       maxHeight: "100%",
-      marginTop:-50
+      marginTop: -50,
     },
   })
 );

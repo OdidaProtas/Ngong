@@ -5,9 +5,15 @@ import regDeco from "../../assets/images/registrationBg.svg";
 import loginDeco from "../../assets/images/loginBg.svg";
 import { Formik, Form } from "formik";
 import { useAxiosRequest } from "../../hooks";
-import { OtpVerificationForm, SignInWithGoogleComponent } from "..";
+import {
+  OtpVerificationForm,
+  SignInWithGoogleComponent,
+  SnackBarComponent,
+} from "..";
 import { useEffect, useState } from "react";
-import PasswordFormComponent from "../PasswordFromComponent/PasswordFormComponent";
+
+import { useHistory } from "react-router-dom";
+import formatPhoneNumber from "../../constants/formatPhoneNumber";
 
 interface DecoItemInterface {
   context: string;
@@ -50,13 +56,14 @@ export default function AuthenticationFormComponent({
   btnText,
 }: RegistrationFormInterface) {
   const classes = useStyles();
-
+  const history = useHistory();
   // hook to handle network requests
   const { processRequest, data, loading, error } = useAxiosRequest();
 
   const [modalOpen, setModalOpen] = useState(false);
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [passContext, setPassContext] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const toggleModal = () => setModalOpen((prevState: boolean) => !prevState);
   const togglePasswordModal = () =>
@@ -74,29 +81,55 @@ export default function AuthenticationFormComponent({
     modal();
   }, [data]);
 
+  const handleNavigation = () => {
+    const isLogin = context === "login";
+    history.push(isLogin ? "/signup" : "/login");
+  };
+
+  const [snackBar, setSnackBar] = useState(false);
+  const toggleSnackBar = () => {
+    setSnackBar((prevState) => !prevState);
+  };
+
+  useEffect(() => {
+    // toggleSnackBar();
+  }, [error]);
+
   return (
     <div style={{ height: "100vh" }}>
       <OtpVerificationForm open={modalOpen} toggle={toggleModal} />
       {/* <PasswordFormComponent context="passwordReset" /> */}
+      <SnackBarComponent
+        toggle={toggleSnackBar}
+        message={"An error occured"}
+        severity={"error"}
+        open={snackBar}
+      />
       <DecoItem context={context} />
       <div className={classes.root}>
         <Typography variant="h6" className={classes.title}>
           {title}
         </Typography>
-        <Typography className={classes.helperText} variant="body2">
+        <Typography
+          onClick={handleNavigation}
+          className={classes.helperText}
+          variant="body2"
+        >
           {subtitle}
         </Typography>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={(values) => {
-            processRequest({ ...options, payload: values });
+            const phoneNumber = formatPhoneNumber(values.phone);
+            setPhoneNumber(phoneNumber.toString());
+            processRequest({ ...options, payload: values, });
           }}
         >
           {({ errors, touched, values, handleChange }) => (
             <Form>
               {fields.map((field: any, index: number) => {
-                const { name, label, placeholder } = field;
+                const { name, label, placeholder, type } = field;
                 return (
                   <div key={index}>
                     <Typography variant="caption">{label}</Typography>
@@ -110,6 +143,7 @@ export default function AuthenticationFormComponent({
                       value={values[name]}
                       onChange={handleChange}
                       helperText={touched[name] && errors[name]}
+                      type={type}
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position="end">

@@ -28,10 +28,26 @@ const fields = [
     label: "Your Fullname",
     name: "name",
     placeholder: "Enter your Full Name",
+    type: "text",
   },
-  { label: "Your Phone Number", name: "phone", placeholder: "+254" },
-  { label: "Email Address", name: "email", placeholder: "Enter email address" },
-  { label: "Create Password", name: "password", placeholder: "Enter password" },
+  {
+    label: "Your Phone Number",
+    name: "phone",
+    placeholder: "+254",
+    type: "number",
+  },
+  {
+    label: "Email Address",
+    name: "email",
+    placeholder: "Enter email address",
+    type: "email",
+  },
+  {
+    label: "Create Password",
+    name: "password",
+    placeholder: "Enter password",
+    type: "password",
+  },
 ];
 
 const initalValues = {

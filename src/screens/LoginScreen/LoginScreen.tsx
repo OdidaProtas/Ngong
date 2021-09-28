@@ -24,6 +24,13 @@ const initalValues = {
   password: "",
 };
 
+const requestOptions = {
+  method: "post",
+  context: "registration",
+  isAuthenticated: false,
+  endpoint: "/auth/register/",
+};
+
 export default function LoginScreen() {
   return (
     <div>
@@ -38,6 +45,10 @@ export default function LoginScreen() {
               context="login"
               fields={fields}
               initialValues={initalValues}
+              options={requestOptions}
+              title={"Sign In"}
+              subtitle={"New user? Create Account"}
+              btnText={"Login"}
             />
           </StyledBackground>
         </Grid>

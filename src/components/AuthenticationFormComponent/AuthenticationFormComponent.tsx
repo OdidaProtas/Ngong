@@ -7,13 +7,9 @@ const formHelper = "Already have an account? Login";
 const formHelperSignup = "New user? Create Account";
 import regDeco from "../../assets/images/registrationBg.svg";
 import loginDeco from "../../assets/images/loginBg.svg";
-import { AuthModalForm } from "..";
-import { Formik, Form, Field } from "formik";
-import useAxiosRequest, {
-  UseAxiosRequestInterface,
-} from "../../hooks/network/useAxiosRequest";
+import { Formik, Form,  } from "formik";
+import { useAxiosRequest } from "../../hooks";
 
-const conditionsLabel = "I agree to terms & conditions";
 
 interface DecoItemInterface {
   context: string;
@@ -56,7 +52,6 @@ export default function AuthenticationFormComponent({
   btnText,
 }: RegistrationFormInterface) {
   const classes = useStyles();
-  const isLogin = context === "login";
 
   const { processRequest, data, loading, error } = useAxiosRequest();
 
@@ -66,10 +61,10 @@ export default function AuthenticationFormComponent({
       <DecoItem context={context} />
       <div className={classes.root}>
         <Typography variant="h6" className={classes.title}>
-          {isLogin ? loginTitle : regTitle}
+          {title}
         </Typography>
         <Typography className={classes.helperText} variant="body2">
-          {isLogin ? formHelperSignup : formHelper}
+          {subtitle}
         </Typography>
         <Formik
           initialValues={initialValues}
@@ -99,7 +94,7 @@ export default function AuthenticationFormComponent({
                 );
               })}
               <Button size="small" variant="contained" fullWidth type="submit">
-                Submit
+                {btnText}
               </Button>
             </Form>
           )}

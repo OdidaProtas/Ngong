@@ -64,9 +64,9 @@ export default function RegistrationScreen() {
               validationSchema={RegistrationValidationSchema}
               initialValues={initalValues}
               options={requestOptions}
-              title={""}
-              subtitle={""}
-              btnText={""}
+              title={"Create Account"}
+              subtitle={"Already have an account? Login"}
+              btnText={"Register Account"}
             />
           </StyledBackground>
         </Grid>

@@ -12,25 +12,24 @@ export interface UseAxiosRequestInterface {
 
 export default function useAxiosRequest() {
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState();
+  const [data, setData] = useState(null);
   const [error, setError] = useState(false);
 
   const processRequest = async (options: UseAxiosRequestInterface) => {
     setLoading(true);
     const { method, endpoint, payload } = options;
     const promise = axiosInstance[method](endpoint, payload);
-    const [res] = await refTryRefactor(promise);
-
-    if (res) {
-      setLoading(false);
-      setData(res.data);
-    } else {
-      setLoading(false);
-      setError(true);
-    }
+    const [res, err] = await refTryRefactor(promise);
+    setError(err ? true : false);
+    setData(res ? res.data : null);
+    setLoading(false);
   };
-
-  useEffect(() => {}, [loading, data, error]);
-
+  useEffect(() => {
+    return () => {
+      setError(false);
+      setData(null);
+      setLoading(false);
+    };
+  }, [loading, data, error]);
   return { processRequest, data, loading, error };
 }

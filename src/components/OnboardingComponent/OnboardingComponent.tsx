@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import { LogoComponent } from "..";
 import {
   AiIcon,
@@ -22,7 +22,7 @@ const listItems = [
 ];
 
 const BlurredDeco = () => {
-  const classes = useStyles()
+  const classes = useStyles();
   return (
     <div>
       <div className={`styledDeco ${classes.styledDeco}`} />
@@ -49,9 +49,9 @@ export default function OnboardingComponent() {
             <div className={classes.logoContainer}>
               <LogoComponent />
             </div>
-            <div className={classes.onBoardingTextContainer}>
+            <Container className={classes.onBoardingTextContainer}>
               <p className={classes.onBoardingText}>{onboardingText}</p>
-            </div>
+            </Container>
             <div className={classes.list}>
               <div>
                 {listItems.map((list: any, index: number) => (

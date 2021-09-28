@@ -26,9 +26,9 @@ const initalValues = {
 
 const requestOptions = {
   method: "post",
-  context: "registration",
+  context: "login",
   isAuthenticated: false,
-  endpoint: "/auth/register/",
+  endpoint: "/auth/login/",
 };
 
 export default function LoginScreen() {

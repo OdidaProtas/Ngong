@@ -13,7 +13,7 @@ export default function AppNavigation() {
             <HomeScreen />
           </Suspense>
         </ProtectedRoute>
-        <Route exact path="/registration">
+        <Route exact path="/signup">
           <Suspense fallback={<div></div>}>
             <RegistrationScreen />
           </Suspense>

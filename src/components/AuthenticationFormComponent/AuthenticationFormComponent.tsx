@@ -1,4 +1,4 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, InputAdornment, TextField, Typography } from "@mui/material";
 import useStyles from "./AuthenticationFormComponent.styles.ts";
 
 const regTitle = "Create Account";
@@ -7,9 +7,10 @@ const formHelper = "Already have an account? Login";
 const formHelperSignup = "New user? Create Account";
 import regDeco from "../../assets/images/registrationBg.svg";
 import loginDeco from "../../assets/images/loginBg.svg";
-import { Formik, Form,  } from "formik";
+import { Formik, Form } from "formik";
 import { useAxiosRequest } from "../../hooks";
-
+import { OtpVerificationForm, SignInWithGoogleComponent } from "..";
+import { useEffect, useState } from "react";
 
 interface DecoItemInterface {
   context: string;
@@ -52,12 +53,28 @@ export default function AuthenticationFormComponent({
   btnText,
 }: RegistrationFormInterface) {
   const classes = useStyles();
-
   const { processRequest, data, loading, error } = useAxiosRequest();
+  const [modalOpen, setModalOpen] = useState(true);
+  const toggleModal = () => setModalOpen((prevState: boolean) => !prevState);
+
+  useEffect(() => {
+    const modal = () => {
+      if (data) {
+        // toggleModal();
+      }
+    };
+    modal();
+  }, [data]);
+
+  const handleOtp = (value: any) => {};
 
   return (
     <div style={{ height: "100vh" }}>
-      {/* <AuthModalForm /> */}
+      <OtpVerificationForm
+        phone={"F"}
+        open={modalOpen}
+        toggle={toggleModal}
+      />
       <DecoItem context={context} />
       <div className={classes.root}>
         <Typography variant="h6" className={classes.title}>
@@ -79,28 +96,46 @@ export default function AuthenticationFormComponent({
                 const { name, label, placeholder } = field;
                 return (
                   <div key={index}>
-                    <Typography>{label}</Typography>
+                    <Typography variant="caption">{label}</Typography>
                     <TextField
                       fullWidth
                       size="small"
                       name={name}
+                      className={classes.textInput}
                       label={placeholder}
                       error={touched[name] && Boolean(errors[name])}
                       value={values[name]}
                       onChange={handleChange}
                       helperText={touched[name] && errors[name]}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            {name === "password " ? (
+                              <Typography variant="caption">Show</Typography>
+                            ) : null}
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                   </div>
                 );
               })}
-              <Button size="small" variant="contained" fullWidth type="submit">
-                {btnText}
-              </Button>
+              {loading ? null : (
+                <Button
+                  className={classes.submitBtn}
+                  size="small"
+                  variant="contained"
+                  fullWidth
+                  type="submit"
+                >
+                  {btnText}
+                </Button>
+              )}
             </Form>
           )}
         </Formik>
+        <SignInWithGoogleComponent context={context} title="Register" />
       </div>
-      {/* <SignInWithGoogleComponent context={context} title="Register" /> */}
     </div>
   );
 }

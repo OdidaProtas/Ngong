@@ -9,6 +9,9 @@ const useStyles = makeStyles((theme: Theme) =>
       fontFamily: "Poppins",
       fontWeight: "bold",
       letterSpacing: theme.spacing(0.4),
+      [theme.breakpoints.down("lg")]: {
+        marginTop: theme.spacing(15),
+      },
     },
     logoContainer: {
       display: "flex",
@@ -32,6 +35,12 @@ const useStyles = makeStyles((theme: Theme) =>
       position: "absolute",
       bottom: 0,
       left: 170,
+      [theme.breakpoints.down("lg")]: {
+        left:0,
+        textAlign: "center",
+        position: "relative",
+        marginTop: theme.spacing(1)
+      },
     },
     footerLink: {
       textAlign: "center",

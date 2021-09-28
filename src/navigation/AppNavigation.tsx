@@ -4,15 +4,17 @@ import { RegistrationScreen, LoginScreen, HomeScreen } from "../screens";
 import NotFoundScreen from "../screens/NotFoundScreen/NotFoundScreen";
 import ProtectedRoute from "./ProtectedRoute";
 
+const HomePage = (
+  <Suspense fallback={<div></div>}>
+    <HomeScreen />
+  </Suspense>
+);
+
 export default function AppNavigation() {
   return (
     <Router>
       <Switch>
-        <ProtectedRoute exact path="/">
-          <Suspense fallback={<div></div>}>
-            <HomeScreen />
-          </Suspense>
-        </ProtectedRoute>
+        <ProtectedRoute exact path="/" component={HomePage} />
         <Route exact path="/signup">
           <Suspense fallback={<div></div>}>
             <RegistrationScreen />

@@ -11,7 +11,7 @@ import * as Yup from "yup";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import useStyles from "./PasswordFromComponent.styles";
 import { useAxiosRequest } from "../../hooks";
-import { LoadingBtnComponent } from "..";
+import { LoadingBtnComponent, LogoComponent } from "..";
 import formatPhoneNumber from "../../constants/formatPhoneNumber";
 import { useHistory } from "react-router";
 import { Suspense } from "react";
@@ -157,12 +157,24 @@ export default function PasswordFormComponent({
       >
         <Fade in={open}>
           <Box sx={style}>
-            <Typography id="transition-modal-title" variant="h6" component="h2">
-              Reset Password
-            </Typography>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Enter phone number to receive a verification code
-            </Typography>
+            <div className={classes.header}>
+              <Typography
+                id="transition-modal-title"
+                variant="h6"
+                component="h2"
+              >
+                Reset Password
+              </Typography>
+              <div className={classes.logoContainer}>
+                <Suspense fallback={<div></div>}>
+                  <LogoComponent />
+                </Suspense>
+              </div>
+              <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                Enter phone number to receive a verification code
+              </Typography>
+            </div>
+
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}

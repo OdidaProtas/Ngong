@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme: Theme) =>
     loadingBtnContainer: {
       marginTop: theme.spacing(3),
     },
+    header: {
+      textAlign: "center",
+    },
   })
 );
 

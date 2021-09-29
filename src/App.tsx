@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useReducer } from "react";
+import { Suspense, useEffect, useMemo, useReducer } from "react";
 import { AppNavigation } from "./navigation";
 import {
   AuthContext,
@@ -11,7 +11,7 @@ import reducer from "./state/authstate/AuthReducer";
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState) as any;
   const authContext: any = useMemo(() => authContextMemo(dispatch, state), []);
-  
+
   useEffect(() => {
     const bootstrap = () => bootstrapAsync(dispatch);
     bootstrap();
@@ -19,7 +19,9 @@ function App() {
 
   return (
     <AuthContext.Provider value={authContext}>
-      <AppNavigation />
+      <Suspense fallback={<div></div>}>
+        <AppNavigation />
+      </Suspense>
     </AuthContext.Provider>
   );
 }

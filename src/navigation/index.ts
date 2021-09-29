@@ -1,4 +1,6 @@
-import AppNavigation from "./AppNavigation";
-import DashboardNavigation from "./DashboardNavigation";
+import { lazy } from "react";
+
+const AppNavigation = lazy(() => import("./AppNavigation"));
+const DashboardNavigation = lazy(() => import("./DashboardNavigation"));
 
 export { AppNavigation, DashboardNavigation };

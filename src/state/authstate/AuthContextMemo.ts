@@ -1,8 +1,3 @@
-
-
-
-
-
 const authContextMemo = (dispatch: any, state: any) => ({
   signIn: async (data: any) => {
     localStorage.setItem("userToken", JSON.stringify(data));

@@ -15,8 +15,18 @@ const LoginValidationSchema = Yup.object().shape({
 });
 
 const fields = [
-  { label: "Your Phone Number", name: "phone", placeholder: "+254" },
-  { label: "Enter Pasword", name: "password", placeholder: "Enter Password" },
+  {
+    label: "Your Phone Number",
+    name: "phone",
+    placeholder: "+254",
+    type: "number",
+  },
+  {
+    label: "Enter Pasword",
+    name: "password",
+    placeholder: "Enter Password",
+    type: "password",
+  },
 ];
 
 const initalValues = {

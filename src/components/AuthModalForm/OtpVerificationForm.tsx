@@ -24,7 +24,7 @@ const style = {
 interface OtpVerificationFormInterface {
   open: boolean;
   toggle: any;
-  phone?: any;
+  phone: any;
 }
 
 export default function OtpVerificationForm({
@@ -57,6 +57,24 @@ export default function OtpVerificationForm({
     } else {
       setError(true);
     }
+  };
+
+  const resendOptions: any = {
+    method: "post",
+    context: "registration",
+    isAuthenticated: false,
+    endpoint: "/auth/verify/",
+    payload: {
+      phone: phone,
+    },
+  };
+
+  const requestResendOptions = () => {
+    processRequest({ ...resendOptions });
+  };
+
+  const resendOtp = () => {
+    processReq;
   };
 
   return (
@@ -116,7 +134,11 @@ const inputStyles = {
   width: "50px",
 };
 
-const ResetOtpBtn = () => {
+interface ResendBtnInterface {
+  resend: any;
+}
+
+const ResetOtpBtn = ({ resend }: ResendBtnInterface) => {
   const [state, setState] = useState(60);
 
   const { processRequest, data, loading, error } = useAxiosRequest();

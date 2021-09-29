@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     title: {
       textAlign: "center",
-      marginTop: theme.spacing(1),
+      marginTop: theme.spacing(5),
       fontFamily: "Poppins",
       fontWeight: "bold",
       letterSpacing: theme.spacing(0.4),
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       justifyContent: "center",
       position: "absolute",
-      bottom: 0,
+      bottom: 26,
       left: 170,
       [theme.breakpoints.down("lg")]: {
         left:0,

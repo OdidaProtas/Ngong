@@ -17,6 +17,7 @@ import CardComponent from "./CardComponent/CardComponent";
 import CustomerLocationComponent from "./CustomerLocationComponent/CustomerLocationComponent";
 import OtpVerificationForm from "./AuthModalForm/OtpVerificationForm";
 import SnackBarComponent from "./SnackBarComponent/SnackBarComponent";
+import LoadingBtnComponent from "./LoadingBtnComponent/LoadingBtnComponent";
 export {
   OnboardingComponent,
   StyledBackground,
@@ -37,4 +38,5 @@ export {
   CustomerLocationComponent,
   OtpVerificationForm,
   SnackBarComponent,
+  LoadingBtnComponent,
 };

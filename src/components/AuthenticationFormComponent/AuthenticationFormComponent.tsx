@@ -6,6 +6,7 @@ import loginDeco from "../../assets/images/loginBg.svg";
 import { Formik, Form } from "formik";
 import { useAxiosRequest } from "../../hooks";
 import {
+  LoadingBtnComponent,
   OtpVerificationForm,
   SignInWithGoogleComponent,
   SnackBarComponent,
@@ -14,6 +15,7 @@ import { useEffect, useState } from "react";
 
 import { useHistory } from "react-router-dom";
 import formatPhoneNumber from "../../constants/formatPhoneNumber";
+import PasswordFormComponent from "../PasswordFromComponent/PasswordFormComponent";
 
 interface DecoItemInterface {
   context: string;
@@ -65,6 +67,11 @@ export default function AuthenticationFormComponent({
   const [passContext, setPassContext] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
+  const [snackAlert, setSnackAlert] = useState({
+    severity: "error",
+    message: "",
+  });
+
   const toggleModal = () => setModalOpen((prevState: boolean) => !prevState);
   const togglePasswordModal = () =>
     setPasswordModalOpen((prevState: boolean) => !prevState);
@@ -96,8 +103,12 @@ export default function AuthenticationFormComponent({
   }, [error]);
 
   return (
-    <div style={{ height: "100vh" }}>
-      <OtpVerificationForm open={modalOpen} toggle={toggleModal} />
+    <div>
+      <OtpVerificationForm
+        phone={phoneNumber}
+        open={modalOpen}
+        toggle={toggleModal}
+      />
       {/* <PasswordFormComponent context="passwordReset" /> */}
       <SnackBarComponent
         toggle={toggleSnackBar}
@@ -123,7 +134,12 @@ export default function AuthenticationFormComponent({
           onSubmit={(values) => {
             const phoneNumber = formatPhoneNumber(values.phone);
             setPhoneNumber(phoneNumber.toString());
-            processRequest({ ...options, payload: values, });
+            processRequest({
+              ...options,
+              payload: { ...values, phone: phoneNumber },
+              toggleSnackBar: toggleSnackBar,
+              toggleModal: toggleModal,
+            });
           }}
         >
           {({ errors, touched, values, handleChange }) => (
@@ -157,7 +173,9 @@ export default function AuthenticationFormComponent({
                   </div>
                 );
               })}
-              {loading ? null : (
+              {loading ? (
+                <LoadingBtnComponent />
+              ) : (
                 <Button
                   className={classes.submitBtn}
                   size="small"

@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
         position: "relative",
         paddingLeft: theme.spacing(2),
         textAlign: "center",
-        paddingTop: 0
+        paddingTop: theme.spacing(3),
       },
     },
     textInput: {
@@ -57,6 +57,9 @@ const useStyles = makeStyles((theme: Theme) =>
       maxWidth: "100%",
       maxHeight: "100%",
       marginTop: -50,
+      [theme.breakpoints.down("lg")]: {
+        display: "none",
+      },
     },
   })
 );

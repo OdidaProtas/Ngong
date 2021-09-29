@@ -21,6 +21,9 @@ const RegistrationValidationSchema = Yup.object().shape({
   password: Yup.string()
     .required("No password provided.")
     .min(8, "Password is too short"),
+  terms: Yup.boolean()
+    .oneOf([true], "Message")
+    .required("Accept terms and conditions to continue"),
 });
 
 const fields = [

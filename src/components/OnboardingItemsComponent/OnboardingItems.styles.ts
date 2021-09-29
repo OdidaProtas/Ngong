@@ -10,8 +10,8 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: theme.spacing(3)
     },
     icon: {
-      height: 42,
-      width: 42,
+      height: 36,
+      width: 36,
     },
     text: {
       fontFamily: "Poppins",

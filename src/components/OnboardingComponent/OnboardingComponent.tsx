@@ -1,4 +1,5 @@
 import { Container, Typography } from "@mui/material";
+import { Suspense } from "react";
 import { LogoComponent } from "..";
 import {
   AiIcon,
@@ -47,23 +48,29 @@ export default function OnboardingComponent() {
           </Typography>
           <div>
             <div className={classes.logoContainer}>
-              <LogoComponent />
+              <Suspense fallback={<div></div>}>
+                <LogoComponent />
+              </Suspense>
             </div>
             <Container className={classes.onBoardingTextContainer}>
-              <p className={classes.onBoardingText}>{onboardingText}</p>
+              <Typography className={classes.onBoardingText}>
+                {onboardingText}
+              </Typography>
             </Container>
             <div className={classes.list}>
               <div>
                 {listItems.map((list: any, index: number) => (
-                  <OnboardingItemsComponent item={list} key={index} />
+                  <Suspense fallback={<div></div>}>
+                    <OnboardingItemsComponent item={list} key={index} />
+                  </Suspense>
                 ))}
               </div>
             </div>
             <div className={classes.footer}>
-              <Typography variant="body2" className={classes.footerLink}>
+              <Typography variant="caption" className={classes.footerLink}>
                 {termsText}
               </Typography>
-              <Typography variant="body2" className={classes.footerLink}>
+              <Typography variant="caption" className={classes.footerLink}>
                 {policyText}
               </Typography>
             </div>

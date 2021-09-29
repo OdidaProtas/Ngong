@@ -1,4 +1,12 @@
-import { Button, InputAdornment, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  InputAdornment,
+  TextField,
+  Typography,
+} from "@mui/material";
 import useStyles from "./AuthenticationFormComponent.styles.ts";
 
 import regDeco from "../../assets/images/registrationBg.svg";
@@ -10,12 +18,14 @@ import {
   OtpVerificationForm,
   SnackBarComponent,
 } from "..";
-import { Suspense, useContext, useEffect, useState } from "react";
+import { Suspense, useContext, useState } from "react";
 
 import { useHistory } from "react-router-dom";
 import formatPhoneNumber from "../../constants/formatPhoneNumber";
 import PasswordFormComponent from "../PasswordFromComponent/PasswordFormComponent";
 import { AuthContext } from "../../state";
+
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 interface DecoItemInterface {
   context: string;
@@ -27,10 +37,11 @@ const DecoItem = ({ context }: DecoItemInterface) => {
   return (
     <>
       <div className={isLogin ? classes.loginDecoContainer : ""}>
-        <img
-          src={isLogin ? loginDeco : regDeco}
+        <LazyLoadImage
           className={isLogin ? classes.decoSvg : classes.regSvg}
+          src={isLogin ? loginDeco : regDeco}
         />
+        <img />
       </div>
     </>
   );
@@ -94,27 +105,34 @@ export default function AuthenticationFormComponent({
 
   return (
     <div>
-      <OtpVerificationForm
-        phone={phoneNumber}
-        open={modalOpen}
-        toggle={toggleModal}
-        snackBarHandler={toggleSnackBar}
-        handleError={handleError}
-      />
-      <PasswordFormComponent
-        handleError={handleError}
-        open={passwordModalOpen}
-        context={passwordFormContext}
-        toggle={togglePasswordModal}
-        snackBarHandler={toggleSnackBar}
-        toggleContext={togglePasswordFormContext}
-      />
-      <SnackBarComponent
-        toggle={toggleSnackBar}
-        message={"An error occured"}
-        severity={"error"}
-        open={snackBar}
-      />
+      <Suspense fallback={<div></div>}>
+        <OtpVerificationForm
+          phone={phoneNumber}
+          open={modalOpen}
+          toggle={toggleModal}
+          snackBarHandler={toggleSnackBar}
+          handleError={handleError}
+        />
+      </Suspense>
+      <Suspense fallback={<div></div>}>
+        <PasswordFormComponent
+          handleError={handleError}
+          open={passwordModalOpen}
+          context={passwordFormContext}
+          toggle={togglePasswordModal}
+          snackBarHandler={toggleSnackBar}
+          toggleContext={togglePasswordFormContext}
+        />
+      </Suspense>
+      <Suspense fallback={<div></div>}>
+        <SnackBarComponent
+          toggle={toggleSnackBar}
+          message={"An error occured"}
+          severity={"error"}
+          open={snackBar}
+        />
+      </Suspense>
+
       <DecoItem context={context} />
       <div className={classes.root}>
         <Typography variant="h6" className={classes.title}>
@@ -129,7 +147,7 @@ export default function AuthenticationFormComponent({
           {subtitle}
         </Typography>
         <Formik
-          initialValues={initialValues}
+          initialValues={{ ...initialValues, terms: false }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
             const phoneNumber = formatPhoneNumber(values.phone);
@@ -173,6 +191,27 @@ export default function AuthenticationFormComponent({
                   </div>
                 );
               })}
+              <div>
+                <FormGroup
+                >
+                  <FormControlLabel
+                    // helperText={touched.terms && errors.terms}
+                    control={
+                      <Checkbox
+                        onChange={handleChange}
+                        name="terms"
+                        value={values.terms}
+                      />
+                    }
+                    label="I agree to terms & conditions"
+                  />
+                  {touched.terms && Boolean(errors.terms) ? (
+                    <Typography className={classes.helperTexterr} variant="caption">
+                      Accept terms and conditions to continue
+                    </Typography>
+                  ) : null}
+                </FormGroup>
+              </div>
               {loading ? (
                 <Suspense fallback={<div></div>}>
                   <LoadingBtnComponent />
@@ -192,14 +231,14 @@ export default function AuthenticationFormComponent({
                 <Typography
                   onClick={togglePasswordModal}
                   className={classes.forgotPasswordText}
+                  variant="body2"
                 >
-                  Forgot Password?{" "}
+                  Forgot Password?
                 </Typography>
               </div>
             </Form>
           )}
         </Formik>
-        {/* <SignInWithGoogleComponent context={context} title="Register" /> */}
       </div>
     </div>
   );

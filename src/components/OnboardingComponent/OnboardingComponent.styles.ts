@@ -5,10 +5,9 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     title: {
       textAlign: "center",
-      marginTop: theme.spacing(5),
+      marginTop: theme.spacing(3),
       fontFamily: "Poppins",
-      fontWeight: "bold",
-      letterSpacing: theme.spacing(0.4),
+      letterSpacing: theme.spacing(0.2),
       [theme.breakpoints.down("lg")]: {
         marginTop: theme.spacing(15),
       },
@@ -16,7 +15,6 @@ const useStyles = makeStyles((theme: Theme) =>
     logoContainer: {
       display: "flex",
       justifyContent: "center",
-      marginTop: theme.spacing(1),
     },
     onBoardingText: {
       textAlign: "center",
@@ -26,26 +24,27 @@ const useStyles = makeStyles((theme: Theme) =>
     list: {
       display: "flex",
       justifyContent: "center",
-      marginTop: theme.spacing(3),
-      paddingLeft: theme.spacing(4),
+      marginTop: theme.spacing(5),
+      paddingLeft: theme.spacing(6),
     },
     footer: {
       display: "flex",
       justifyContent: "center",
       position: "absolute",
       bottom: 26,
-      left: 170,
+      left: "15%",
       [theme.breakpoints.down("lg")]: {
-        left:0,
+        left: 0,
         textAlign: "center",
         position: "relative",
-        marginTop: theme.spacing(1)
+        marginTop: theme.spacing(1),
       },
     },
     footerLink: {
       textAlign: "center",
       fontFamily: "Poppins",
       margin: theme.spacing(1),
+      cursor: "pointer",
     },
     onBoardingTextContainer: {
       display: "flex",

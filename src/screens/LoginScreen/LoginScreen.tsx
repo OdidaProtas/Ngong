@@ -6,12 +6,16 @@ import {
 } from "../../components";
 import * as Yup from "yup";
 import phoneRegExp from "../../constants/phoneRegExp";
+import { Suspense } from "react";
 
 const LoginValidationSchema = Yup.object().shape({
   phone: Yup.string()
     .matches(phoneRegExp, "Could not validate phone number")
     .required("Phone Number is required"),
   password: Yup.string().required("Please enter your password"),
+  terms: Yup.boolean()
+    .oneOf([true], "Message")
+    .required("Accept terms and conditions to continue"),
 });
 
 const fields = [
@@ -46,20 +50,24 @@ export default function LoginScreen() {
     <div>
       <Grid container>
         <Grid item xs={12} lg={6}>
-          <OnboardingComponent />
+          <Suspense fallback={<div></div>}>
+            <OnboardingComponent />
+          </Suspense>
         </Grid>
         <Grid item xs={12} lg={6}>
           <StyledBackground backgroundImage>
-            <AuthenticationFormComponent
-              validationSchema={LoginValidationSchema}
-              context="login"
-              fields={fields}
-              initialValues={initalValues}
-              options={requestOptions}
-              title={"Sign In"}
-              subtitle={"New user? Create Account"}
-              btnText={"Login"}
-            />
+            <Suspense fallback={<div></div>}>
+              <AuthenticationFormComponent
+                validationSchema={LoginValidationSchema}
+                context="login"
+                fields={fields}
+                initialValues={initalValues}
+                options={requestOptions}
+                title={"Sign In"}
+                subtitle={"New user? Create Account"}
+                btnText={"Login"}
+              />
+            </Suspense>
           </StyledBackground>
         </Grid>
       </Grid>

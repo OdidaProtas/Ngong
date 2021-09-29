@@ -8,7 +8,6 @@ import { useAxiosRequest } from "../../hooks";
 import {
   LoadingBtnComponent,
   OtpVerificationForm,
-  SignInWithGoogleComponent,
   SnackBarComponent,
 } from "..";
 import { useEffect, useState } from "react";
@@ -66,11 +65,9 @@ export default function AuthenticationFormComponent({
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
 
-
   const toggleModal = () => setModalOpen((prevState: boolean) => !prevState);
   const togglePasswordModal = () =>
     setPasswordModalOpen((prevState: boolean) => !prevState);
-
 
   const handleNavigation = () => {
     const isLogin = context === "login";
@@ -85,12 +82,27 @@ export default function AuthenticationFormComponent({
   const [passwordFormContext, setPasswordFormContxt] =
     useState("forgotPassword");
 
+  const handleSuccess = () => {
+    const isLogin = context === "login";
+    if (!isLogin) toggleModal();
+    else handleLogin();
+  };
+
+  const handleError = () => {
+    toggleSnackBar();
+  };
+
+  const handleLogin = () => {
+    console.log("handling login");
+  };
+
   return (
     <div>
       <OtpVerificationForm
         phone={phoneNumber}
         open={modalOpen}
         toggle={toggleModal}
+        snackBarHandler={toggleSnackBar}
       />
       <PasswordFormComponent
         open={passwordModalOpen}
@@ -125,8 +137,8 @@ export default function AuthenticationFormComponent({
             processRequest({
               ...options,
               payload: { ...values, phone: phoneNumber },
-              toggleSnackBar: toggleSnackBar,
-              toggleModal: toggleModal,
+              errorHandler: handleError,
+              successHandler: handleSuccess,
             });
           }}
         >

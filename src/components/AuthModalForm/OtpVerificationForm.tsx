@@ -25,12 +25,14 @@ interface OtpVerificationFormInterface {
   open: boolean;
   toggle: any;
   phone: any;
+  snackBarHandler: any;
 }
 
 export default function OtpVerificationForm({
   open,
   toggle,
   phone,
+  snackBarHandler,
 }: OtpVerificationFormInterface) {
   const classes = useStyles();
   const [state, setState] = useState({ otp: "" });
@@ -70,7 +72,7 @@ export default function OtpVerificationForm({
   };
 
   const requestResendOptions = () => {
-    processRequest({ ...resendOptions });
+    processRequest({ ...resendOptions, toggleSnackBar: snackBarHandler });
   };
 
   return (

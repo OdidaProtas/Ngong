@@ -8,8 +8,8 @@ export interface UseAxiosRequestInterface {
   endpoint: string;
   isAuthenticated: boolean;
   payload?: any;
-  toggleSnackBar?: any;
-  toggleModal?: any;
+  errorHandler?: any;
+  successHandler: any;
 }
 
 export default function useAxiosRequest() {
@@ -19,17 +19,17 @@ export default function useAxiosRequest() {
 
   const processRequest = async (options: UseAxiosRequestInterface) => {
     setLoading(true);
-    const { method, endpoint, payload, toggleSnackBar, toggleModal } = options;
+    const { method, endpoint, payload, errorHandler, successHandler } = options;
     const promise = axiosInstance[method](endpoint, payload);
     const [res, err] = await refTryRefactor(promise);
     if (res) {
       setData(res.data);
-      toggleModal();
+      successHandler();
       setLoading(false);
     } else {
       setError(true);
       setLoading(false);
-      toggleSnackBar();
+      errorHandler();
     }
   };
   useEffect(() => {

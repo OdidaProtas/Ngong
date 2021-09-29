@@ -12,6 +12,7 @@ import { Button, InputAdornment, TextField } from "@mui/material";
 import useStyles from "./PasswordFromComponent.styles";
 import { useAxiosRequest } from "../../hooks";
 import { LoadingBtnComponent } from "..";
+import formatPhoneNumber from "../../constants/formatPhoneNumber";
 
 const style = {
   position: "absolute" as "absolute",
@@ -150,9 +151,13 @@ export default function PasswordFormComponent({
               validationSchema={validationSchema}
               onSubmit={(values) => {
                 // same shape as initial values
+                let phoneNumber;
+                if (values.phone) {
+                  phoneNumber = formatPhoneNumber(values.phone);
+                }
                 processRequest({
                   ...requestOptions[context],
-                  payload: values,
+                  payload: { ...values, phone: phoneNumber },
                   toggleSnackBar: snackBarHandler,
                 });
               }}

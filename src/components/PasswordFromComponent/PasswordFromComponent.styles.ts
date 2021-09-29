@@ -18,6 +18,12 @@ const useStyles = makeStyles((theme: Theme) =>
     resendOtpBtn: {
       marginTop: theme.spacing(3),
     },
+    textInput: {
+      marginTop: theme.spacing(3),
+    },
+    btn: {
+      marginTop: theme.spacing(3),
+    },
   })
 );
 

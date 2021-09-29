@@ -25,6 +25,7 @@ export default function SnackBarComponent({
         autoHideDuration={2000}
         onClose={toggle}
         message={message}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       >
         <Alert onClose={toggle} severity={severity} sx={{ width: "100%" }}>
           {message}

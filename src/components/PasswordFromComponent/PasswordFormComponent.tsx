@@ -4,8 +4,13 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Typography from "@mui/material/Typography";
-import * as Yup from "yup";
 import phoneRegExp from "../../constants/phoneRegExp";
+
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import { Button, InputAdornment, TextField } from "@mui/material";
+import useStyles from "./PasswordFromComponent.styles";
+import { useAxiosRequest } from "../../hooks";
 
 const style = {
   position: "absolute" as "absolute",
@@ -49,24 +54,57 @@ const validationSchemas: any = {
 const passwordFormFields: any = {
   changePassword: {
     fields: [
-      { name: "newPassword", label: "New Password" },
-      { name: "currentPassword", label: "Current Password" },
+      { name: "newPassword", label: "New Password", type: "password" },
+      { name: "currentPassword", label: "Current Password", type: "password" },
     ],
+    initialValues: {
+      newPassword: "",
+      currentPassword: "",
+    },
   },
   forgotPassword: {
-    fields: [{ name: "phone", label: "Enter phone number" }],
+    fields: [{ name: "phone", label: "Enter phone number", type: "number" }],
+    initialValues: {
+      phone: "",
+    },
   },
   resetPassword: {
     fields: [
-      { name: "phone", label: "Enter Phone Number" },
-      { name: "code", label: "Verification Code" },
-      { name: "password", label: "New Password" },
+      { name: "phone", label: "Enter Phone Number", type: "number" },
+      { name: "code", label: "Verification Code", type: "number" },
+      { name: "password", label: "New Password", type: "number" },
     ],
+    initialValues: {
+      phone: "",
+      code: "",
+      password: "",
+    },
+  },
+};
+
+const requestOptions: any = {
+  forgotPassword: {
+    method: "post",
+    context: "forgot-password",
+    isAuthenticated: false,
+    endpoint: "/auth/forgot-password/",
+  },
+  resetPassword: {
+    method: "post",
+    context: "registration",
+    isAuthenticated: false,
+    endpoint: "/auth/reset-password/",
+  },
+  changePassword: {
+    method: "post",
+    context: "registration",
+    isAuthenticated: false,
+    endpoint: "/auth/change-password/",
   },
 };
 
 interface PasswordFormInterface {
-  context: string;
+  context: any;
 }
 
 export default function PasswordFormComponent({
@@ -74,10 +112,12 @@ export default function PasswordFormComponent({
 }: PasswordFormInterface) {
   const handleClose = () => {};
 
-  const data: any = passwordFormFields[context];
-  const validationSchema = validationSchemas[context];
+  const { processRequest, data, loading, error } = useAxiosRequest();
 
-  const { fields } = data;
+  const classes = useStyles();
+
+  const { fields, initialValues } = passwordFormFields[context];
+  const validationSchema = validationSchemas[context];
 
   return (
     <div>
@@ -98,8 +138,63 @@ export default function PasswordFormComponent({
               Reset Password
             </Typography>
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+              Enter phone number to receive a verification code
             </Typography>
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={(values) => {
+                // same shape as initial values
+                processRequest({
+                  ...requestOptions[context],
+                  payload: values,
+                });
+                console.log(values, context);
+              }}
+            >
+              {({ errors, touched, values, handleChange }) => (
+                <Form>
+                  {fields.map((field: any, index: number) => {
+                    const { name, label, type } = field;
+                    console.log(name);
+                    return (
+                      <TextField
+                        key={index}
+                        fullWidth
+                        size="small"
+                        name={name}
+                        className={classes.textInput}
+                        label={label}
+                        error={touched[name] && Boolean(errors[name])}
+                        value={values[name]}
+                        onChange={handleChange}
+                        helperText={touched[name] && errors[name]}
+                        type={type}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              {name === "password " ? (
+                                <Typography variant="caption">Show</Typography>
+                              ) : null}
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    );
+                  })}
+                  <div>
+                    <Button
+                      className={classes.btn}
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                    >
+                      Submit
+                    </Button>
+                  </div>
+                </Form>
+              )}
+            </Formik>
           </Box>
         </Fade>
       </Modal>

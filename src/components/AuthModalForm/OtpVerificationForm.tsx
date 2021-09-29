@@ -73,10 +73,6 @@ export default function OtpVerificationForm({
     processRequest({ ...resendOptions });
   };
 
-  const resendOtp = () => {
-    processReq;
-  };
-
   return (
     <div>
       <Modal
@@ -120,7 +116,7 @@ export default function OtpVerificationForm({
               Submit
             </Button>
             <div className={classes.resendOtpBtn}>
-              <ResetOtpBtn />
+              <ResetOtpBtn resend={requestResendOptions} />
             </div>
           </Box>
         </Fade>
@@ -154,10 +150,6 @@ const ResetOtpBtn = ({ resend }: ResendBtnInterface) => {
     phone: "",
   };
 
-  const handleResend = () => {
-    processRequest({ ...requestOptions, payload: payload });
-  };
-
   useEffect(() => {
     const interval = setInterval(() => {
       if (state > 0) {
@@ -167,10 +159,14 @@ const ResetOtpBtn = ({ resend }: ResendBtnInterface) => {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [state]);
+
+  const handleResend = () => {
+    resend();
+  };
 
   return (
-    <Button fullWidth size="small" disabled={state > 0}>
+    <Button onClick={handleResend} fullWidth size="small" disabled={state > 0}>
       {state > 0 ? `Resend in ${state} Seconds` : "Resend Code"}
     </Button>
   );

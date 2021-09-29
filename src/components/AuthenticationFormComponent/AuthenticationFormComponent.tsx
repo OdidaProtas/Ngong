@@ -102,6 +102,8 @@ export default function AuthenticationFormComponent({
     // toggleSnackBar();
   }, [error]);
 
+  const [passwordFormContext, setPasswordFormContxt] = useState("forgotPassword")
+
   return (
     <div>
       <OtpVerificationForm
@@ -109,7 +111,7 @@ export default function AuthenticationFormComponent({
         open={modalOpen}
         toggle={toggleModal}
       />
-      {/* <PasswordFormComponent context="passwordReset" /> */}
+      <PasswordFormComponent context={passwordFormContext} />
       <SnackBarComponent
         toggle={toggleSnackBar}
         message={"An error occured"}

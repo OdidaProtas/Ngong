@@ -10,7 +10,7 @@ import {
   OtpVerificationForm,
   SnackBarComponent,
 } from "..";
-import { useContext, useEffect, useState } from "react";
+import { Suspense, useContext, useEffect, useState } from "react";
 
 import { useHistory } from "react-router-dom";
 import formatPhoneNumber from "../../constants/formatPhoneNumber";
@@ -174,7 +174,9 @@ export default function AuthenticationFormComponent({
                 );
               })}
               {loading ? (
-                <LoadingBtnComponent />
+                <Suspense fallback={<div></div>}>
+                  <LoadingBtnComponent />
+                </Suspense>
               ) : (
                 <Button
                   className={classes.submitBtn}

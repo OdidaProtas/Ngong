@@ -14,6 +14,7 @@ import { useAxiosRequest } from "../../hooks";
 import { LoadingBtnComponent } from "..";
 import formatPhoneNumber from "../../constants/formatPhoneNumber";
 import { useHistory } from "react-router";
+import { Suspense } from "react";
 
 const style = {
   position: "absolute" as "absolute",
@@ -212,7 +213,9 @@ export default function PasswordFormComponent({
                   <div>
                     {loading ? (
                       <div className={classes.loadingBtnContainer}>
-                        <LoadingBtnComponent />
+                        <Suspense fallback={<div></div>}>
+                          <LoadingBtnComponent />
+                        </Suspense>
                       </div>
                     ) : (
                       <Button

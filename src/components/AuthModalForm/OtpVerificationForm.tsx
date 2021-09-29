@@ -9,7 +9,7 @@ import OtpInput from "react-otp-input";
 import { LoadingBtnComponent, LogoComponent } from "..";
 import { Button } from "@mui/material";
 import { useAxiosRequest } from "../../hooks";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 
 const style = {
@@ -122,7 +122,9 @@ export default function OtpVerificationForm({
             </div>
             {loading ? (
               <div className={classes.loadingBtnContainer}>
-                <LoadingBtnComponent />
+                <Suspense fallback={<div></div>}>
+                  <LoadingBtnComponent />
+                </Suspense>
               </div>
             ) : (
               <Button

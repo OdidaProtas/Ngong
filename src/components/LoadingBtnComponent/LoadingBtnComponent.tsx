@@ -1,12 +1,17 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Button, CircularProgress, Theme, withStyles } from "@mui/material";
+import Button from "@mui/material/Button/Button";
+import { lazy, Suspense } from "react";
+
+const CircularProgress = lazy(
+  () => import("@mui/material/CircularProgress/CircularProgress")
+);
 
 export default function LoadingBtnComponent() {
   return (
     <div>
       <Button fullWidth size="small" variant="contained" disabled>
-        <CircularProgress size={20} />
+        <Suspense fallback={<div></div>}>
+          <CircularProgress size={20} />
+        </Suspense>
       </Button>
     </div>
   );

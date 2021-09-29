@@ -1,3 +1,4 @@
+import { lazy } from "react";
 import StyledBackground from "./StyledBackgroundComponent/StyledBackground";
 import OnboardingComponent from "./OnboardingComponent/OnboardingComponent";
 import LogoComponent from "./LogoComponent/LogoComponent";
@@ -17,7 +18,9 @@ import CardComponent from "./CardComponent/CardComponent";
 import CustomerLocationComponent from "./CustomerLocationComponent/CustomerLocationComponent";
 import OtpVerificationForm from "./AuthModalForm/OtpVerificationForm";
 import SnackBarComponent from "./SnackBarComponent/SnackBarComponent";
-import LoadingBtnComponent from "./LoadingBtnComponent/LoadingBtnComponent";
+const LoadingBtnComponent = lazy(
+  () => import("./LoadingBtnComponent/LoadingBtnComponent")
+);
 export {
   OnboardingComponent,
   StyledBackground,

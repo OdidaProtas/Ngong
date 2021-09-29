@@ -13,6 +13,7 @@ import useStyles from "./PasswordFromComponent.styles";
 import { useAxiosRequest } from "../../hooks";
 import { LoadingBtnComponent } from "..";
 import formatPhoneNumber from "../../constants/formatPhoneNumber";
+import { useHistory } from "react-router";
 
 const style = {
   position: "absolute" as "absolute",
@@ -111,6 +112,7 @@ interface PasswordFormInterface {
   toggle: any;
   snackBarHandler: any;
   handleError: any;
+  toggleContext: any;
 }
 
 export default function PasswordFormComponent({
@@ -118,13 +120,26 @@ export default function PasswordFormComponent({
   open,
   toggle,
   handleError,
+  toggleContext,
 }: PasswordFormInterface) {
   const { processRequest, data, loading, error } = useAxiosRequest();
 
   const classes = useStyles();
+  const history = useHistory();
 
   const { fields, initialValues } = passwordFormFields[context];
   const validationSchema = validationSchemas[context];
+
+  const handleSuccess = () => {
+    switch (context) {
+      case "forgotPassword":
+        toggleContext("resetPassword");
+      case "resetPassword":
+        history.push("/login");
+      default:
+        toggle();
+    }
+  };
 
   return (
     <div>
@@ -160,6 +175,7 @@ export default function PasswordFormComponent({
                   ...requestOptions[context],
                   payload: { ...values, phone: phoneNumber },
                   errorHandler: handleError,
+                  successHandler: handleSuccess,
                 });
               }}
             >

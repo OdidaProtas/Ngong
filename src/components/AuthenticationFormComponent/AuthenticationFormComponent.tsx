@@ -96,6 +96,10 @@ export default function AuthenticationFormComponent({
     console.log("handling error ");
   };
 
+  const togglePasswordFormContext = (context: string) => {
+    setPasswordFormContxt(context);
+  };
+
   return (
     <div>
       <OtpVerificationForm
@@ -111,6 +115,7 @@ export default function AuthenticationFormComponent({
         context={passwordFormContext}
         toggle={togglePasswordModal}
         snackBarHandler={toggleSnackBar}
+        toggleContext={togglePasswordFormContext}
       />
       <SnackBarComponent
         toggle={toggleSnackBar}

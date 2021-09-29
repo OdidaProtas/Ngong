@@ -6,7 +6,7 @@ import Fade from "@mui/material/Fade";
 import Typography from "@mui/material/Typography";
 import useStyles from "./OtpVerificationForm.styles";
 import OtpInput from "react-otp-input";
-import { LogoComponent } from "..";
+import { LoadingBtnComponent, LogoComponent } from "..";
 import { Button } from "@mui/material";
 import { useAxiosRequest } from "../../hooks";
 import { useEffect, useState } from "react";
@@ -107,14 +107,21 @@ export default function OtpVerificationForm({
                 inputStyle={inputStyles}
               />
             </div>
-            <Button
-              variant="contained"
-              fullWidth
-              size="small"
-              onClick={handleSubmit}
-            >
-              Submit
-            </Button>
+            {loading ? (
+              <div className={classes.loadingBtnContainer}>
+                <LoadingBtnComponent />
+              </div>
+            ) : (
+              <Button
+                variant="contained"
+                fullWidth
+                size="small"
+                onClick={handleSubmit}
+              >
+                Submit
+              </Button>
+            )}
+
             <div className={classes.resendOtpBtn}>
               <ResetOtpBtn resend={requestResendOptions} />
             </div>

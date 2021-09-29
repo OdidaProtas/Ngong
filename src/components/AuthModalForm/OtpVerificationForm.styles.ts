@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme: Theme) =>
     resendOtpBtn: {
       marginTop: theme.spacing(3),
     },
+    loadingBtnContainer: {
+      marginTop: theme.spacing(3),
+    },
   })
 );
 

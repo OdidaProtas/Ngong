@@ -11,6 +11,7 @@ import * as Yup from "yup";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import useStyles from "./PasswordFromComponent.styles";
 import { useAxiosRequest } from "../../hooks";
+import { LoadingBtnComponent } from "..";
 
 const style = {
   position: "absolute" as "absolute",
@@ -105,13 +106,17 @@ const requestOptions: any = {
 
 interface PasswordFormInterface {
   context: any;
+  open: boolean;
+  toggle: any;
+  snackBarHandler: any;
 }
 
 export default function PasswordFormComponent({
   context,
+  open,
+  toggle,
+  snackBarHandler,
 }: PasswordFormInterface) {
-  const handleClose = () => {};
-
   const { processRequest, data, loading, error } = useAxiosRequest();
 
   const classes = useStyles();
@@ -124,15 +129,15 @@ export default function PasswordFormComponent({
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        open={true}
-        onClose={handleClose}
+        open={open}
+        onClose={toggle}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,
         }}
       >
-        <Fade in>
+        <Fade in={toggle}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2">
               Reset Password
@@ -148,8 +153,8 @@ export default function PasswordFormComponent({
                 processRequest({
                   ...requestOptions[context],
                   payload: values,
+                  toggleSnackBar: snackBarHandler,
                 });
-                console.log(values, context);
               }}
             >
               {({ errors, touched, values, handleChange }) => (
@@ -183,14 +188,20 @@ export default function PasswordFormComponent({
                     );
                   })}
                   <div>
-                    <Button
-                      className={classes.btn}
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                    >
-                      Submit
-                    </Button>
+                    {loading ? (
+                      <div className={classes.loadingBtnContainer}>
+                        <LoadingBtnComponent />
+                      </div>
+                    ) : (
+                      <Button
+                        className={classes.btn}
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                      >
+                        Submit
+                      </Button>
+                    )}
                   </div>
                 </Form>
               )}

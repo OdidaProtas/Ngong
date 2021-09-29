@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme: Theme) =>
     btn: {
       marginTop: theme.spacing(3),
     },
+    loadingBtnContainer: {
+      marginTop: theme.spacing(3),
+    },
   })
 );
 

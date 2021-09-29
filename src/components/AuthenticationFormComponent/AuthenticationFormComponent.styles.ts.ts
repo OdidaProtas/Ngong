@@ -61,6 +61,11 @@ const useStyles = makeStyles((theme: Theme) =>
         display: "none",
       },
     },
+    forgotPasswordText:{
+      cursor:"pointer",
+      textAlign:"right",
+      marginTop: theme.spacing(3)
+    }
   })
 );
 

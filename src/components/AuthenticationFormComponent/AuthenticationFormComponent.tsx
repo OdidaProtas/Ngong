@@ -64,29 +64,13 @@ export default function AuthenticationFormComponent({
 
   const [modalOpen, setModalOpen] = useState(false);
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
-  const [passContext, setPassContext] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  const [snackAlert, setSnackAlert] = useState({
-    severity: "error",
-    message: "",
-  });
 
   const toggleModal = () => setModalOpen((prevState: boolean) => !prevState);
   const togglePasswordModal = () =>
     setPasswordModalOpen((prevState: boolean) => !prevState);
 
-  // request opt verification
-  const handleOtp = (value: any) => {};
-
-  useEffect(() => {
-    const modal = () => {
-      if (data) {
-        // toggleModal();
-      }
-    };
-    modal();
-  }, [data]);
 
   const handleNavigation = () => {
     const isLogin = context === "login";
@@ -98,11 +82,8 @@ export default function AuthenticationFormComponent({
     setSnackBar((prevState) => !prevState);
   };
 
-  useEffect(() => {
-    // toggleSnackBar();
-  }, [error]);
-
-  const [passwordFormContext, setPasswordFormContxt] = useState("forgotPassword")
+  const [passwordFormContext, setPasswordFormContxt] =
+    useState("forgotPassword");
 
   return (
     <div>
@@ -111,7 +92,12 @@ export default function AuthenticationFormComponent({
         open={modalOpen}
         toggle={toggleModal}
       />
-      <PasswordFormComponent context={passwordFormContext} />
+      <PasswordFormComponent
+        open={passwordModalOpen}
+        context={passwordFormContext}
+        toggle={togglePasswordModal}
+        snackBarHandler={toggleSnackBar}
+      />
       <SnackBarComponent
         toggle={toggleSnackBar}
         message={"An error occured"}
@@ -188,10 +174,18 @@ export default function AuthenticationFormComponent({
                   {btnText}
                 </Button>
               )}
+              <div>
+                <Typography
+                  onClick={togglePasswordModal}
+                  className={classes.forgotPasswordText}
+                >
+                  Forgot Password?{" "}
+                </Typography>
+              </div>
             </Form>
           )}
         </Formik>
-        <SignInWithGoogleComponent context={context} title="Register" />
+        {/* <SignInWithGoogleComponent context={context} title="Register" /> */}
       </div>
     </div>
   );

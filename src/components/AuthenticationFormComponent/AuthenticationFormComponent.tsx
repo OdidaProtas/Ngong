@@ -10,11 +10,12 @@ import {
   OtpVerificationForm,
   SnackBarComponent,
 } from "..";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { useHistory } from "react-router-dom";
 import formatPhoneNumber from "../../constants/formatPhoneNumber";
 import PasswordFormComponent from "../PasswordFromComponent/PasswordFormComponent";
+import { AuthContext } from "../../state";
 
 interface DecoItemInterface {
   context: string;
@@ -58,47 +59,38 @@ export default function AuthenticationFormComponent({
 }: RegistrationFormInterface) {
   const classes = useStyles();
   const history = useHistory();
-  // hook to handle network requests
-  const { processRequest, data, loading, error } = useAxiosRequest();
-
+  const isLogin = context === "login";
+  const { signIn }: any = useContext(AuthContext);
   const [modalOpen, setModalOpen] = useState(false);
-  const [passwordModalOpen, setPasswordModalOpen] = useState(false);
+  const [snackBar, setSnackBar] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [passwordModalOpen, setPasswordModalOpen] = useState(false);
+
+  // hook to handle network requests
+  const { processRequest, loading } = useAxiosRequest();
 
   const toggleModal = () => setModalOpen((prevState: boolean) => !prevState);
   const togglePasswordModal = () =>
     setPasswordModalOpen((prevState: boolean) => !prevState);
 
+  const handleLogin = (token: string) => signIn(token);
+  const handleError = () => toggleSnackBar();
+  const toggleSnackBar = () => setSnackBar((prevState) => !prevState);
   const handleNavigation = () => {
-    const isLogin = context === "login";
     history.push(isLogin ? "/signup" : "/login");
-  };
-
-  const [snackBar, setSnackBar] = useState(false);
-  const toggleSnackBar = () => {
-    setSnackBar((prevState) => !prevState);
   };
 
   const [passwordFormContext, setPasswordFormContxt] =
     useState("forgotPassword");
 
-  const handleSuccess = () => {
+  const handleSuccess = (token: string) => {
     const isLogin = context === "login";
     if (!isLogin) toggleModal();
-    else handleLogin();
+    else handleLogin(token);
   };
 
-  const handleError = () => {
-    toggleSnackBar();
-  };
-
-  const handleLogin = () => {
-    console.log("handling error ");
-  };
-
-  const togglePasswordFormContext = (context: string) => {
+  const togglePasswordFormContext = (context: string) =>
     setPasswordFormContxt(context);
-  };
 
   return (
     <div>
@@ -128,6 +120,7 @@ export default function AuthenticationFormComponent({
         <Typography variant="h6" className={classes.title}>
           {title}
         </Typography>
+
         <Typography
           onClick={handleNavigation}
           className={classes.helperText}
@@ -170,7 +163,7 @@ export default function AuthenticationFormComponent({
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position="end">
-                            {name === "password " ? (
+                            {type === "password " ? (
                               <Typography variant="caption">Show</Typography>
                             ) : null}
                           </InputAdornment>

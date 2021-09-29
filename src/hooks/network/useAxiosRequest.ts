@@ -21,7 +21,7 @@ export default function useAxiosRequest() {
     setLoading(true);
     const { method, endpoint, payload, errorHandler, successHandler } = options;
     const promise = axiosInstance[method](endpoint, payload);
-    const [res, err] = await refTryRefactor(promise);
+    const [res] = await refTryRefactor(promise);
     if (res) {
       setData(res.data);
       successHandler();

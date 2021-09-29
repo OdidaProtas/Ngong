@@ -1,13 +1,14 @@
-import { Component } from "react";
+import { Component, useContext } from "react";
 import { Redirect, Route } from "react-router-dom";
+import { AuthContext } from "../state";
 
 export default function ProtectedRoute({ component: Component, ...rest }: any) {
-  const isAuthenticated = !!localStorage.getItem("userToken");
+  const { isLoggedIn } = useContext(AuthContext);
   return (
     <Route
       {...rest}
       render={(props) =>
-        isAuthenticated ? (
+        isLoggedIn ? (
           <Component {...rest} {...props} />
         ) : (
           <Redirect to="/login" />
@@ -16,4 +17,3 @@ export default function ProtectedRoute({ component: Component, ...rest }: any) {
     />
   );
 }
- 

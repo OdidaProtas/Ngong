@@ -2,12 +2,10 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
-import {
-  NavbarComponent,
-  DrawerComponent,
-} from "../../components";
+import { NavbarComponent, DrawerComponent } from "../../components";
 import { Container } from "@mui/material";
 import { DashboardNavigation } from "../../navigation";
+import { Suspense } from "react";
 
 const drawerWidth = 240;
 
@@ -39,7 +37,9 @@ export default function HomeScreen(props: Props) {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
         <Container>
-          <DashboardNavigation/>
+          <Suspense fallback={<div>Loading...</div>}>
+            <DashboardNavigation />
+          </Suspense>
         </Container>
       </Box>
     </Box>

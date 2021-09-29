@@ -8,7 +8,7 @@ export interface UseAxiosRequestInterface {
   endpoint: string;
   isAuthenticated: boolean;
   payload?: any;
-  errorHandler?: any;
+  errorHandler: any;
   successHandler: any;
 }
 

@@ -10,6 +10,7 @@ import { LoadingBtnComponent, LogoComponent } from "..";
 import { Button } from "@mui/material";
 import { useAxiosRequest } from "../../hooks";
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 
 const style = {
   position: "absolute" as "absolute",
@@ -26,6 +27,7 @@ interface OtpVerificationFormInterface {
   toggle: any;
   phone: any;
   snackBarHandler: any;
+  handleError: any;
 }
 
 export default function OtpVerificationForm({
@@ -33,11 +35,13 @@ export default function OtpVerificationForm({
   toggle,
   phone,
   snackBarHandler,
+  handleError,
 }: OtpVerificationFormInterface) {
   const classes = useStyles();
   const [state, setState] = useState({ otp: "" });
   const [err, setError] = useState(false);
   const handleChange = (otp: any) => setState({ otp } as any);
+  const history = useHistory();
 
   const { processRequest, data, loading, error } = useAxiosRequest();
 
@@ -53,9 +57,16 @@ export default function OtpVerificationForm({
     phone: phone,
   };
 
+  const handleSuccess = () => history.push("/login");
+
   const handleSubmit = () => {
     if (state.otp.length === 6) {
-      processRequest({ ...requestOptions, payload: payload });
+      processRequest({
+        ...requestOptions,
+        payload: payload,
+        errorHandler: handleError,
+        successHandler: handleSuccess,
+      });
     } else {
       setError(true);
     }

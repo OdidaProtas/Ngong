@@ -93,7 +93,7 @@ export default function AuthenticationFormComponent({
   };
 
   const handleLogin = () => {
-    console.log("handling login");
+    console.log("handling error ");
   };
 
   return (
@@ -103,8 +103,10 @@ export default function AuthenticationFormComponent({
         open={modalOpen}
         toggle={toggleModal}
         snackBarHandler={toggleSnackBar}
+        handleError={handleError}
       />
       <PasswordFormComponent
+        handleError={handleError}
         open={passwordModalOpen}
         context={passwordFormContext}
         toggle={togglePasswordModal}

@@ -110,13 +110,14 @@ interface PasswordFormInterface {
   open: boolean;
   toggle: any;
   snackBarHandler: any;
+  handleError: any;
 }
 
 export default function PasswordFormComponent({
   context,
   open,
   toggle,
-  snackBarHandler,
+  handleError,
 }: PasswordFormInterface) {
   const { processRequest, data, loading, error } = useAxiosRequest();
 
@@ -158,7 +159,7 @@ export default function PasswordFormComponent({
                 processRequest({
                   ...requestOptions[context],
                   payload: { ...values, phone: phoneNumber },
-                  toggleSnackBar: snackBarHandler,
+                  errorHandler: handleError,
                 });
               }}
             >

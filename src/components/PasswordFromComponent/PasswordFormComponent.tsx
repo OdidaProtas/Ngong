@@ -155,7 +155,7 @@ export default function PasswordFormComponent({
           timeout: 500,
         }}
       >
-        <Fade in={toggle}>
+        <Fade in={open}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2">
               Reset Password

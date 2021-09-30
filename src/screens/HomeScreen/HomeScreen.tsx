@@ -27,18 +27,23 @@ export default function HomeScreen(props: Props) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <NavbarComponent handleDrawerToggle={handleDrawerToggle} />
-      <DrawerComponent
-        container={container}
-        mobileOpen={mobileOpen}
-        handleDrawerToggle={handleDrawerToggle}
-        drawerWidth={drawerWidth}
-      />
+      <Suspense fallback={<div></div>}>
+        <NavbarComponent handleDrawerToggle={handleDrawerToggle} />
+      </Suspense>
+      <Suspense fallback={<div></div>}>
+        <DrawerComponent
+          container={container}
+          mobileOpen={mobileOpen}
+          handleDrawerToggle={handleDrawerToggle}
+          drawerWidth={drawerWidth}
+        />
+      </Suspense>
+
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
         <Container>
           <Suspense fallback={<div>Loading...</div>}>
-            <DashboardNavigation />
+          <DashboardNavigation />
           </Suspense>
         </Container>
       </Box>

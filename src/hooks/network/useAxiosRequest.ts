@@ -32,11 +32,5 @@ export default function useAxiosRequest() {
       errorHandler();
     }
   };
-  useEffect(() => {
-    return () => {
-      setError(false);
-      setData(null);
-    };
-  }, [loading, data, error]);
   return { processRequest, data, loading, error };
 }

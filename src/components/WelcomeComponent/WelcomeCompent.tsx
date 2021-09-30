@@ -1,4 +1,5 @@
 import { Grid, Typography } from "@mui/material";
+import { Suspense } from "react";
 import { CallToActionComponent, DateComponent } from "..";
 
 import HeroImage from "../../assets/images/startup.svg";
@@ -10,7 +11,9 @@ export default function WelcomeComponent() {
   return (
     <>
       <div className={classes.dateContainer}>
-        <DateComponent />
+        <Suspense fallback={<div></div>}>
+          <DateComponent />
+        </Suspense>
       </div>
       <Grid container>
         <Grid item xs={12} lg={6}>
@@ -25,9 +28,9 @@ export default function WelcomeComponent() {
           <img src={HeroImage} className={classes.img} alt="" />
         </Grid>
       </Grid>
-      <div>
+      <Suspense fallback={<div></div>}>
         <CallToActionComponent />
-      </div>
+      </Suspense>
       <div className={classes.hero2Container}>
         <DateComponent />
         <img className={classes.hero2} src={Hero2Image} alt="" />

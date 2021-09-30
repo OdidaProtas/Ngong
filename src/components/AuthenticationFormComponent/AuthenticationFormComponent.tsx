@@ -80,13 +80,13 @@ export default function AuthenticationFormComponent({
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
 
   // hook to handle network requests
-  const { processRequest, loading } = useAxiosRequest();
+  const { processRequest, loading, data }: any = useAxiosRequest();
 
   const toggleModal = () => setModalOpen((prevState: boolean) => !prevState);
   const togglePasswordModal = () =>
     setPasswordModalOpen((prevState: boolean) => !prevState);
 
-  const handleLogin = (token: string) => signIn(token);
+  const handleLogin = () => signIn(data.jwt);
   const handleError = () => toggleSnackBar();
   const toggleSnackBar = () => setSnackBar((prevState) => !prevState);
   const handleNavigation = () => {
@@ -99,11 +99,18 @@ export default function AuthenticationFormComponent({
   const handleSuccess = (token: string) => {
     const isLogin = context === "login";
     if (!isLogin) toggleModal();
-    else handleLogin(token);
+    // else handleLogin();
   };
 
   const togglePasswordFormContext = (context: string) =>
     setPasswordFormContxt(context);
+
+  useEffect(() => {
+    if (data && isLogin) {
+      signIn(data.jwt);
+      history.push("/");
+    }
+  }, [data]);
 
   return (
     <div>

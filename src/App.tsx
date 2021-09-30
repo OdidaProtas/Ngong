@@ -18,7 +18,7 @@ function App() {
   }, []);
 
   return (
-    <AuthContext.Provider value={authContext}>
+    <AuthContext.Provider value={{ ...authContext, state }}>
       <Suspense fallback={<div>Loading...</div>}>
         <AppNavigation />
       </Suspense>

@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import useStyles from "./AuthenticationFormComponent.styles.ts";
-
+import { useEffect } from "react";
 import regDeco from "../../assets/images/registrationBg.svg";
 import loginDeco from "../../assets/images/loginBg.svg";
 import { Formik, Form } from "formik";
@@ -16,8 +16,10 @@ import { useAxiosRequest } from "../../hooks";
 import {
   LoadingBtnComponent,
   OtpVerificationForm,
+  SignInWithGoogleComponent,
   SnackBarComponent,
 } from "..";
+
 import { Suspense, useContext, useState } from "react";
 
 import { useHistory } from "react-router-dom";
@@ -192,8 +194,7 @@ export default function AuthenticationFormComponent({
                 );
               })}
               <div>
-                <FormGroup
-                >
+                <FormGroup>
                   <FormControlLabel
                     // helperText={touched.terms && errors.terms}
                     control={
@@ -206,7 +207,10 @@ export default function AuthenticationFormComponent({
                     label="I agree to terms & conditions"
                   />
                   {touched.terms && Boolean(errors.terms) ? (
-                    <Typography className={classes.helperTexterr} variant="caption">
+                    <Typography
+                      className={classes.helperTexterr}
+                      variant="caption"
+                    >
                       Accept terms and conditions to continue
                     </Typography>
                   ) : null}
@@ -239,6 +243,9 @@ export default function AuthenticationFormComponent({
             </Form>
           )}
         </Formik>
+        <Suspense fallback={<div></div>}>
+          <SignInWithGoogleComponent context={context} />
+        </Suspense>
       </div>
     </div>
   );

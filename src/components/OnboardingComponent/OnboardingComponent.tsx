@@ -60,8 +60,8 @@ export default function OnboardingComponent() {
             <div className={classes.list}>
               <div>
                 {listItems.map((list: any, index: number) => (
-                  <Suspense fallback={<div></div>}>
-                    <OnboardingItemsComponent item={list} key={index} />
+                  <Suspense key={index} fallback={<div></div>}>
+                    <OnboardingItemsComponent item={list} />
                   </Suspense>
                 ))}
               </div>

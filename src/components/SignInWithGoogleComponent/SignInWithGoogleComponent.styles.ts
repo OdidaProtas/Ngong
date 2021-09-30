@@ -5,7 +5,7 @@ import colors from "../../constants/Themes/colors";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      marginTop: theme.spacing(5),
+      marginTop: theme.spacing(2),
       backgroundColor: "white",
       display: "flex",
       alignItems: "center",

@@ -22,7 +22,10 @@ const drawerItems = [
   {
     title: "Businesses",
     icon: <StoreIcon fontSize="small" />,
-    items: [],
+    items: [
+      { title: "My Business" },
+      { title: "New Business" },
+    ],
   },
 ];
 

@@ -43,7 +43,7 @@ export default function HomeScreen(props: Props) {
         <Toolbar />
         <Container>
           <Suspense fallback={<div>Loading...</div>}>
-          <DashboardNavigation />
+          {/* <DashboardNavigation /> */}
           </Suspense>
         </Container>
       </Box>

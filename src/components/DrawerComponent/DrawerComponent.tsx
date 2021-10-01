@@ -21,8 +21,7 @@ const DrawerContainer = () => {
           return <DrawerItemComponent key={idx} item={item} />;
         })}
       </div>
-
-      <Divider />
+    <Divider />
       <div>
         <Typography
           variant="body2"

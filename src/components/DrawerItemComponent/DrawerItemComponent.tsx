@@ -6,6 +6,12 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import colors from "../../constants/Themes/colors";
 import useStyles from "./DrawerItemComponent.styles";
 
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import StarIcon from "@mui/icons-material/Star";
+
 interface DrawerItemComponentInterface {
   item: any;
 }
@@ -27,14 +33,22 @@ export default function DrawerItemComponent({
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <div style={{ marginRight: "6px" }}>{icon}</div>
-          <Typography className={classes.title} variant="caption">{title}</Typography>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>{icon}</ListItemIcon>
+              <ListItemText primary={title} />
+            </ListItemButton>
+          </ListItem>
         </AccordionSummary>
         <AccordionDetails>
           {items.map((li: any, idx: number) => (
-            <li className={classes.listItems} key={idx}>
-              <Typography className={classes.subListItems} variant="caption">{li.title}</Typography>
-            </li>
+            <Typography
+              key={idx}
+              variant="body2"
+              className={classes.subListItems}
+            >
+              {li.title}
+            </Typography>
           ))}
         </AccordionDetails>
       </Accordion>

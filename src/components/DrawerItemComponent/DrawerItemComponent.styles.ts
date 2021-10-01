@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     subListItems: {
       fontFamily: "Poppins",
+      marginLeft: theme.spacing(5),
+      marginBottom: theme.spacing(1),
+      cursor: "pointer",
     },
   })
 );

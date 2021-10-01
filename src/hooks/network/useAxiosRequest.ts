@@ -28,8 +28,8 @@ export default function useAxiosRequest() {
       setLoading(false);
     } else {
       setError(true);
-      setLoading(false);
       errorHandler();
+      setLoading(false);
     }
   };
   return { processRequest, data, loading, error };

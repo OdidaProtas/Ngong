@@ -250,9 +250,9 @@ export default function AuthenticationFormComponent({
             </Form>
           )}
         </Formik>
-        <Suspense fallback={<div></div>}>
+        {/* <Suspense fallback={<div></div>}>
           <SignInWithGoogleComponent context={context} />
-        </Suspense>
+        </Suspense> */}
       </div>
     </div>
   );

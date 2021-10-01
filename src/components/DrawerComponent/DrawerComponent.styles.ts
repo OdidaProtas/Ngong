@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "center",
     },
     drawerItemsContainer: {
-      paddingLeft: theme.spacing(3),
+      // paddingLeft: theme.spacing(),
     },
     sectionTitle: {
       fontFamily: "Poppins",

@@ -5,7 +5,8 @@ import Toolbar from "@mui/material/Toolbar";
 import { NavbarComponent, DrawerComponent } from "../../components";
 import { Container } from "@mui/material";
 import { DashboardNavigation } from "../../navigation";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
+import { useAxiosRequest } from "../../hooks";
 
 const drawerWidth = 240;
 
@@ -16,6 +17,28 @@ interface Props {
 export default function HomeScreen(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { processRequest, data } = useAxiosRequest();
+
+  const requestOptions: any = {
+    method: "get",
+    context: "businesses",
+    isAuthenticated: true,
+    endpoint: "/businesses",
+  };
+
+  const errorHandler = () => {
+    alert("error");
+  };
+  const successHandler = () => {
+    alert("success");
+  };
+
+  useEffect(() => {
+    processRequest({ ...requestOptions, errorHandler, successHandler });
+  }, []);
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -50,3 +73,5 @@ export default function HomeScreen(props: Props) {
     </Box>
   );
 }
+
+

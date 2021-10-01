@@ -4,12 +4,12 @@ import {
   AuthContext,
   authContextMemo,
   bootstrapAsync,
-  initialState,
+  initialAuthState,
 } from "./state/authstate";
 import reducer from "./state/authstate/AuthReducer";
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState) as any;
+  const [state, dispatch] = useReducer(reducer, initialAuthState) as any;
   const authContext: any = useMemo(() => authContextMemo(dispatch, state), []);
 
   useEffect(() => {

@@ -5,4 +5,11 @@ const RegistrationScreen = lazy(
   () => import("./RegistrationScreen/RegistrationScreen")
 );
 const HomeScreen = lazy(() => import("./HomeScreen/HomeScreen"));
-export { RegistrationScreen, LoginScreen, HomeScreen, NotFoundScreen };
+import BusinessFormScreen from "./BusinessFormScreen/BusinessFormScreen";
+export {
+  RegistrationScreen,
+  LoginScreen,
+  HomeScreen,
+  NotFoundScreen,
+  BusinessFormScreen,
+};

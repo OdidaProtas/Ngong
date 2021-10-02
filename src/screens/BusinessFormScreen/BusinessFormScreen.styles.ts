@@ -12,6 +12,16 @@ const useStyles = makeStyles((theme: Theme) =>
     button: {
       marginTop: theme.spacing(2),
     },
+    uploadBtn:{
+        padding: theme.spacing(1),
+        backgroundColor:"gray",
+        marginTop: theme.spacing(2)
+    },
+    uploadBtnContainer:{
+        marginTop: theme.spacing(2),
+        cursor:"pointer",
+        borderRadius:"4px"
+    }
   })
 );
 

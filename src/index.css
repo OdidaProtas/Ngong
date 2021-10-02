@@ -37,3 +37,6 @@ body {
   border-radius: 9px;
 }
 
+input[type="file"] {
+  display: none;
+}

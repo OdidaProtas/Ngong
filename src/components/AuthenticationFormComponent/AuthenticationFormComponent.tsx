@@ -16,7 +16,6 @@ import { useAxiosRequest } from "../../hooks";
 import {
   LoadingBtnComponent,
   OtpVerificationForm,
-  SignInWithGoogleComponent,
   SnackBarComponent,
 } from "..";
 

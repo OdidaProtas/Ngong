@@ -35,18 +35,20 @@ interface StepTwoInterface {
   controls: any;
   handleSubmit: any;
   next: any;
+  handleStepChange: any;
 }
 
 export default function StepTwo({
   controls,
   handleSubmit,
   next,
+  handleStepChange,
 }: StepTwoInterface) {
   const classes = useStyles();
   return (
     <div>
       <Typography className={classes.subtitle}>Location Details</Typography>
-      <div style={{marginBottom: "12px"}}>
+      <div style={{ marginBottom: "12px" }}>
         <Typography className={classes.helper} variant="caption">
           You can update later
         </Typography>
@@ -57,6 +59,7 @@ export default function StepTwo({
         onSubmit={(values) => {
           const phoneNumber = formatPhoneNumber(parseInt(values.businessPhone));
           console.log(values);
+          handleStepChange("location", values);
           handleSubmit(values);
           next();
         }}

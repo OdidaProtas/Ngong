@@ -49,12 +49,31 @@ const Controls = ({ step, previous, next }: ControlsInterface) => {
 export default function MultistepFormComponent() {
   const classes = useStyles();
   const [step, setStep] = useState(1);
+
+  const [state, setState] = useState({
+    identity: {
+      name: "",
+      description: "",
+      productType: "",
+    },
+    location: {
+      locatuon: "",
+      locationDetails: "",
+      latitude: "",
+      longitude: "",
+    },
+    contact: {},
+  });
+
+  const handleStepChange = (step: any, data: any) => {
+    setState((prevState) => ({ ...prevState, [step]: data }));
+    console.log(state);
+  };
+
   const isFinal = step === 3;
   const previous = () => setStep((prev) => prev - 1);
   const next = () => setStep((prev) => prev + 1);
-  const handleSubmit = (value: any) => {
-    console.log(value);
-  };
+  const handleSubmit = (value: any) => {};
   return (
     <div>
       <Typography className={classes.title} variant="h5">
@@ -67,6 +86,7 @@ export default function MultistepFormComponent() {
             <StepOne
               next={next}
               handleSubmit={handleSubmit}
+              handleStepChange={handleStepChange}
               controls={(props: any) => (
                 <Controls
                   next={next}
@@ -81,6 +101,7 @@ export default function MultistepFormComponent() {
             <StepTwo
               next={next}
               handleSubmit={handleSubmit}
+              handleStepChange={handleStepChange}
               controls={(props: any) => (
                 <Controls
                   next={next}
@@ -94,6 +115,7 @@ export default function MultistepFormComponent() {
           {step === 3 ? (
             <StepThree
               handleSubmit={handleSubmit}
+              handleStepChange={handleStepChange}
               controls={(props: any) => (
                 <Controls
                   next={next}

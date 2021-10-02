@@ -38,9 +38,15 @@ interface StepOneInterface {
   controls: any;
   handleSubmit: any;
   next: any;
+  handleStepChange: any;
 }
 
-export default function StepOne({ controls, handleSubmit, next }: StepOneInterface) {
+export default function StepOne({
+  controls,
+  handleSubmit,
+  next,
+  handleStepChange,
+}: StepOneInterface) {
   const classes = useStyles();
   return (
     <div>
@@ -50,14 +56,14 @@ export default function StepOne({ controls, handleSubmit, next }: StepOneInterfa
         validationSchema={validationSchema}
         onSubmit={(values) => {
           const phoneNumber = formatPhoneNumber(parseInt(values.businessPhone));
+          handleStepChange("identity", values);
           handleSubmit(values);
-          next()
+          next();
         }}
       >
         {({ errors, touched, values, handleChange }) => (
           <Form>
             {fields.map((field: any, index: number) => {
-              console.log(field);
               const { name, label, placeholder, type }: any = field;
               return (
                 <div key={index}>

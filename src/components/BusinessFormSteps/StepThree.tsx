@@ -9,10 +9,8 @@ import TextField from "@mui/material/TextField";
 import useStyles from "./BusinessFormSteps.styles";
 
 const fields: any = [
-  { name: "name", type: "text", label: "Location" },
-  { name: "description", type: "text", label: "Location Details" },
-  { name: "productType", type: "text", label: "Latitude" },
-  { name: "productType", type: "text", label: "Longitude" },
+  { name: "name", type: "number", label: "Business Phone" },
+  { name: "description", type: "email", label: "Bussiness Email" },
 ];
 
 const validationSchema = Yup.object().shape({
@@ -34,30 +32,33 @@ const initialValues: any = {
 interface StepThreeInterface {
   controls: any;
   handleSubmit: any;
+  handleStepChange: any;
 }
 
 export default function StepThree({
   controls,
   handleSubmit,
+  handleStepChange,
 }: StepThreeInterface) {
   const classes = useStyles();
   return (
     <div>
       <Typography className={classes.subtitle}>Contact Details</Typography>
-      <Typography className={classes.helper} variant="caption">You can update later</Typography>
+      <Typography className={classes.helper} variant="caption">
+        You can update later
+      </Typography>
       <Formik
         initialValues={{ ...initialValues }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
           const phoneNumber = formatPhoneNumber(parseInt(values.businessPhone));
-          console.log(values);
+          handleStepChange("contact", values);
           handleSubmit(values);
         }}
       >
         {({ errors, touched, values, handleChange }) => (
           <Form>
             {fields.map((field: any, index: number) => {
-              console.log(field);
               const { name, label, placeholder, type }: any = field;
               return (
                 <div key={index}>

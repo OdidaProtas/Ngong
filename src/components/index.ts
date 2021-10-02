@@ -2,7 +2,9 @@ import { lazy } from "react";
 const NavbarComponent = lazy(() => import("./NavbarComponent/NavbarComponent"));
 const DrawerComponent = lazy(() => import("./DrawerComponent/DrawerComponent"));
 const LogoComponent = lazy(() => import("./LogoComponent/LogoComponent"));
-
+const MultiStepForm = lazy(
+  () => import("../components/BusinessFormSteps/MultistepFormComponent")
+);
 const StyledBackground = lazy(
   () => import("./StyledBackgroundComponent/StyledBackground")
 );
@@ -70,4 +72,5 @@ export {
   OtpVerificationForm,
   SnackBarComponent,
   LoadingBtnComponent,
+  MultiStepForm,
 };

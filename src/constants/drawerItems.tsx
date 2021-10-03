@@ -12,19 +12,19 @@ const drawerItems = [
     title: "Insights",
     icon: <InsightsIcon fontSize="small" />,
     items: [
-      { title: "Overview" },
-      { title: "Sales Insights" },
-      { title: "Customer Insights" },
-      { title: "Churn Rate Insights" },
-      { title: "Revenue Insights" },
+      { title: "Overview", to: "/overview" },
+      { title: "Sales Insights", to: "/sales-insights" },
+      { title: "Customer Insights", to: "/customer-insights" },
+      { title: "Churn Rate Insights", to: "/churn-rate-insights" },
+      { title: "Revenue Insights", to: "/revenue-insights" },
     ],
   },
   {
     title: "Businesses",
     icon: <StoreIcon fontSize="small" />,
     items: [
-      { title: "My Business" },
-      { title: "New Business" },
+      { title: "My Business", to: "/my-businesses" },
+      { title: "New Business", to: "/new-businesses" },
     ],
   },
 ];

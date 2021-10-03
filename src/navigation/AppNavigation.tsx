@@ -8,12 +8,10 @@ import {
 } from "../screens";
 import ProtectedRoute from "./ProtectedRoute";
 
-
 export default function AppNavigation() {
   return (
     <Router>
       <Switch>
-        <ProtectedRoute exact path="/*" component={HomeScreen} />
         <Route exact path="/signup">
           <Suspense fallback={<div>Loading...</div>}>
             <RegistrationScreen />
@@ -24,6 +22,7 @@ export default function AppNavigation() {
             <LoginScreen />
           </Suspense>
         </Route>
+        <ProtectedRoute exact path="/*" component={HomeScreen} />
         <Route path="**">
           <Suspense fallback={<div>Loading...</div>}>
             <NotFoundScreen />

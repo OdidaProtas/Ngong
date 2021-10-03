@@ -21,7 +21,7 @@ const DrawerContainer = () => {
           return <DrawerItemComponent key={idx} item={item} />;
         })}
       </div>
-    <Divider />
+    {/* <Divider />
       <div>
         <Typography
           variant="body2"
@@ -32,7 +32,7 @@ const DrawerContainer = () => {
         {sections.map((item: any, idx: number) => {
           return <DrawerItemComponent key={idx} item={item} />;
         })}
-      </div>
+      </div> */}
     </div>
   );
 };

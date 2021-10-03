@@ -34,7 +34,7 @@ const data = {
 export default function MostSellingChart() {
   const classess = useStyles();
   return (
-    <CardComponent>
+    <div>
       <div className={classess.root}>
         <div className="header">
           <Typography variant="h6" className="title">
@@ -46,6 +46,6 @@ export default function MostSellingChart() {
           data={data}
         />
       </div>
-    </CardComponent>
+    </div>
   );
 }

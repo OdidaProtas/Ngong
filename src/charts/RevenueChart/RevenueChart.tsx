@@ -32,17 +32,15 @@ const options: any = {
 export default function RevenueChart() {
   const classes = useStyles();
   return (
-    <CardComponent>
-      <div className={classes.root}>
-        <div>
-          <div className="header">
-            <Typography className="title" variant="h6">
-              Revenue
-            </Typography>
-          </div>
-          <Line data={data} options={options} />
+    <div className={classes.root}>
+      <div>
+        <div className="header">
+          <Typography className="title" variant="h6">
+            Revenue
+          </Typography>
         </div>
+        <Line data={data} options={options} />
       </div>
-    </CardComponent>
+    </div>
   );
 }

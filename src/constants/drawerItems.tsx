@@ -24,7 +24,7 @@ const drawerItems = [
     icon: <StoreIcon fontSize="small" />,
     items: [
       { title: "My Business", to: "/my-businesses" },
-      { title: "New Business", to: "/new-businesses" },
+      { title: "New Business", to: "/new-business" },
     ],
   },
 ];

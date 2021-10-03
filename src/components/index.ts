@@ -51,6 +51,8 @@ const SnackBarComponent = lazy(
 const LoadingBtnComponent = lazy(
   () => import("./LoadingBtnComponent/LoadingBtnComponent")
 );
+
+import BusinessItemComponent from "./BusinessItemComponent/BusinessItemComponent";
 export {
   OnboardingComponent,
   StyledBackground,
@@ -73,4 +75,5 @@ export {
   SnackBarComponent,
   LoadingBtnComponent,
   MultiStepForm,
+  BusinessItemComponent,
 };

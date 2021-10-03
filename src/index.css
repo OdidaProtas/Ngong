@@ -40,3 +40,7 @@ body {
 input[type="file"] {
   display: none;
 }
+
+* {
+  font-family: "Poppins";
+}

@@ -7,10 +7,9 @@ import colors from "../../constants/Themes/colors";
 import useStyles from "./DrawerItemComponent.styles";
 
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import StarIcon from "@mui/icons-material/Star";
+import { useHistory, useRouteMatch } from "react-router";
 
 interface DrawerItemComponentInterface {
   item: any;
@@ -21,8 +20,14 @@ export default function DrawerItemComponent({
 }: DrawerItemComponentInterface) {
   const { title, icon, items } = item;
   const classes = useStyles();
+  const history = useHistory();
+
+  const handleNavigation = (to: string) => {
+    history.push(to);
+  };
+
   return (
-    <div style={{ marginBottom: "3px" }}>
+    <div>
       <Accordion
         elevation={0}
         disableGutters
@@ -34,22 +39,24 @@ export default function DrawerItemComponent({
           id="panel1a-header"
         >
           <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{icon}</ListItemIcon>
-              <ListItemText primary={title} />
-            </ListItemButton>
+            <ListItemIcon>{icon}</ListItemIcon>
+            <ListItemText primary={title} />
           </ListItem>
         </AccordionSummary>
         <AccordionDetails>
-          {items.map((li: any, idx: number) => (
-            <Typography
-              key={idx}
-              variant="body2"
-              className={classes.subListItems}
-            >
-              {li.title}
-            </Typography>
-          ))}
+          {items.map((li: any, idx: number) => {
+            const { title, to } = li;
+            return (
+              <Typography
+                key={idx}
+                variant="body2"
+                onClick={() => handleNavigation(to)}
+                className={classes.subListItems}
+              >
+                {title}
+              </Typography>
+            );
+          })}
         </AccordionDetails>
       </Accordion>
     </div>

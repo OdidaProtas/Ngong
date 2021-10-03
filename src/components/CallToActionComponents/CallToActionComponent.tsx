@@ -1,4 +1,4 @@
-import { Button, Container, Grid, Typography } from "@mui/material";
+import { Button, Container, Grid, Paper, Typography } from "@mui/material";
 import React from "react";
 import CardComponent from "../CardComponent/CardComponent";
 import useStyles from "./CallToActionComponent.styles";
@@ -43,9 +43,9 @@ export default function CallToActionComponent() {
         <Grid container spacing={3}>
           {cards.map((card: any, idx: number) => (
             <Grid item xs key={idx}>
-              <CardComponent>
+              <>
                 <CardItems item={card} />
-              </CardComponent>
+              </>
             </Grid>
           ))}
         </Grid>

@@ -5,18 +5,16 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     title: {
       fontFamily: "Poppins",
-      marginLeft: theme.spacing(1),
-      marginTop: theme.spacing(0.2),
     },
     listItems: {
       cursor: "pointer",
-      marginLeft: theme.spacing(3),
+      fontFamily: "Poppins",
     },
     subListItems: {
       fontFamily: "Poppins",
-      marginLeft: theme.spacing(5),
-      marginBottom: theme.spacing(1),
+      marginLeft: theme.spacing(7),
       cursor: "pointer",
+      marginBottom: theme.spacing(2)
     },
   })
 );

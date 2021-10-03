@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
       maxWidth: "50%",
     },
     dateContainer: {
-      margin: theme.spacing(3),
+      // margin: theme.spacing(3),
     },
   })
 );

@@ -5,10 +5,13 @@ import StepOne from "./StepOne";
 import StepThree from "./StepThree";
 import StepTwo from "./StepTwo";
 
+import { useHistory } from "react-router";
+
 import LinearProgress, {
   LinearProgressProps,
 } from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
+import { useAxiosRequest } from "../../hooks";
 
 interface MultistepFormComponentInterface {
   identityStep: any;
@@ -48,7 +51,10 @@ const Controls = ({ step, previous, next }: ControlsInterface) => {
 
 export default function MultistepFormComponent() {
   const classes = useStyles();
+  const history = useHistory();
   const [step, setStep] = useState(1);
+
+  const { processRequest, loading, data } = useAxiosRequest();
 
   const [state, setState] = useState({
     identity: {
@@ -57,23 +63,32 @@ export default function MultistepFormComponent() {
       productType: "",
     },
     location: {
-      locatuon: "",
+      location: "",
       locationDetails: "",
       latitude: "",
       longitude: "",
     },
-    contact: {},
+    contact: {
+      email: "",
+      phone: "",
+    },
   });
 
   const handleStepChange = (step: any, data: any) => {
     setState((prevState) => ({ ...prevState, [step]: data }));
-    console.log(state);
   };
 
   const isFinal = step === 3;
   const previous = () => setStep((prev) => prev - 1);
   const next = () => setStep((prev) => prev + 1);
-  const handleSubmit = (value: any) => {};
+
+  const handleSubmit = (value: any) => {
+    const payload = [state.identity, state.location, state.contact];
+
+    console.log(payload);
+
+    if (isFinal) history.push("/business/1");
+  };
   return (
     <div>
       <Typography className={classes.title} variant="h5">

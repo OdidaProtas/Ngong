@@ -58,7 +58,6 @@ export default function StepTwo({
         validationSchema={validationSchema}
         onSubmit={(values) => {
           const phoneNumber = formatPhoneNumber(parseInt(values.businessPhone));
-          console.log(values);
           handleStepChange("location", values);
           handleSubmit(values);
           next();
@@ -67,7 +66,6 @@ export default function StepTwo({
         {({ errors, touched, values, handleChange }) => (
           <Form>
             {fields.map((field: any, index: number) => {
-              console.log(field);
               const { name, label, placeholder, type }: any = field;
               return (
                 <div key={index}>

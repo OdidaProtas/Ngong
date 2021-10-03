@@ -10,8 +10,8 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       backgroundColor: colors.accent,
       minHeight: "100vh",
-      padding: "3px",
-      overflow: "hidden",
+      // padding: "3px",
+      // overflow: "hidden",
     },
     logoContainer: {
       display: "flex",

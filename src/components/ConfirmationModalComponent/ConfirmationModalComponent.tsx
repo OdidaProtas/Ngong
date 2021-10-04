@@ -5,7 +5,7 @@ import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Typography from "@mui/material/Typography";
 import useStyles from "./ConfirmationModalComponent.styles";
-import {  LogoComponent } from "..";
+import { LogoComponent } from "..";
 import { Button } from "@mui/material";
 
 const style = {
@@ -18,12 +18,17 @@ const style = {
   p: 4,
 };
 
-interface OtpVerificationFormInterface {
+interface ConfirmationModalComponentInterface {
   open: boolean;
   toggle: any;
+  title: string;
 }
 
-export default function ConfirmationModalComponent() {
+export default function ConfirmationModalComponent({
+  open,
+  toggle,
+  title,
+}: ConfirmationModalComponentInterface) {
   const classes = useStyles();
 
   return (
@@ -31,22 +36,27 @@ export default function ConfirmationModalComponent() {
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        open={false}
-        // onClose={toggle}
+        open={open}
+        onClose={toggle}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,
         }}
       >
-        <Fade in={false}>
+        <Fade in={open}>
           <Box sx={style} className={classes.root}>
             <div className={classes.logoContainer}>
               <LogoComponent />
             </div>
-            <Typography id="transition-modal-title" variant="h6" component="h2">
+            <Typography
+              id="transition-modal-title"
+              variant="body1"
+              component="h2"
+            >
               Confirm action
             </Typography>
+            <Typography variant="body2">{title}</Typography>
             <Button className={classes.btn} size="small">
               Cancel
             </Button>

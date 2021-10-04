@@ -4,9 +4,11 @@ import useStyles from "./BusinessDetailsScreen.styles";
 import EditIconButton from "../../components/EditBusinessDetailsModal/EditBusinessDetailsModal";
 import Image from "../../assets/images/crochet.jpg";
 import ConfirmationModalComponent from "../../components/ConfirmationModalComponent/ConfirmationModalComponent";
+import useModalControls from "../../hooks/modals/useModalControls";
 
 export default function BusinessDetailsScreen() {
   const classes = useStyles();
+  const { open, toggle } = useModalControls();
 
   return (
     <div>
@@ -111,12 +113,17 @@ export default function BusinessDetailsScreen() {
               >
                 Set as Default
               </Button>
-              <ConfirmationModalComponent />
+              <ConfirmationModalComponent
+                title="Delete Business? This action is permanent and cannot be undone"
+                toggle={toggle}
+                open={open}
+              />
               <Button
                 color="error"
                 className={classes.deleteBtn}
                 variant="contained"
                 fullWidth
+                onClick={toggle}
               >
                 Delete Business
               </Button>

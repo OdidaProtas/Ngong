@@ -7,26 +7,21 @@ import formatPhoneNumber from "../../constants/formatPhoneNumber";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import useStyles from "./BusinessFormSteps.styles";
+import phoneRegExp from "../../constants/phoneRegExp";
 
-const fields: any = [
-  { name: "name", type: "number", label: "Business Phone" },
-  { name: "description", type: "email", label: "Bussiness Email" },
+export const fields: any = [
+  { name: "phone", type: "number", label: "Business Phone" },
+  { name: "email", type: "email", label: "Bussiness Email" },
 ];
 
-const validationSchema = Yup.object().shape({
-  name: Yup.string().min(1, "Name too short").max(72, "Name too long"),
-  productType: Yup.string()
-    .min(2, "Product type too short")
-    .max(72, "Product type too short"),
-  description: Yup.string()
-    .min(12, "The description is too short.")
-    .max(300, "The description is too long"),
+export const validationSchema = Yup.object().shape({
+  phone: Yup.string().matches(phoneRegExp, "Could not validate phone number"),
+  email: Yup.string().email("Email address is invalid"),
 });
 
 const initialValues: any = {
-  name: "",
-  description: "",
-  productType: "",
+  phone: "",
+  email: "",
 };
 
 interface StepThreeInterface {

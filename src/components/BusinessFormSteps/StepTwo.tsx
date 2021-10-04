@@ -8,21 +8,16 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import useStyles from "./BusinessFormSteps.styles";
 
-const fields: any = [
-  { name: "name", type: "text", label: "Location" },
-  { name: "description", type: "text", label: "Location Details" },
-  { name: "productType", type: "text", label: "Latitude" },
-  { name: "productType", type: "text", label: "Longitude" },
+export const fields: any = [
+  { name: "location", type: "text", label: "Location" },
+  { name: "locationDetails", type: "text", label: "Location Details" },
 ];
 
-const validationSchema = Yup.object().shape({
-  name: Yup.string().min(1, "Name too short").max(72, "Name too long"),
-  productType: Yup.string()
-    .min(2, "Product type too short")
-    .max(72, "Product type too short"),
-  description: Yup.string()
-    .min(12, "The description is too short.")
-    .max(300, "The description is too long"),
+export const validationSchema = Yup.object().shape({
+  name: Yup.string().min(1, "Location too short").max(72, "Location too long"),
+  locationDetails: Yup.string()
+    .min(2, "Location details  too short")
+    .max(72, "Location details type too short"),
 });
 
 const initialValues: any = {

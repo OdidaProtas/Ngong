@@ -3,21 +3,6 @@ import { createStyles, makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    image: {
-      maxWidth: "50%",
-    },
-    imageContainer: {
-      marginTop: theme.spacing(2),
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    sectionTitle: {
-      fontWeight: "bold",
-    },
-    infoTitle: {
-      // marginTop: theme.spacing(2)
-    },
     editIcon: {
       display: "flex",
       justifyContent: "flex-end",

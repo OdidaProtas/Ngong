@@ -1,11 +1,9 @@
-import { Divider, Typography, Grid } from "@mui/material";
-import React from "react";
-import useStyles from "./BusinessDetailsScreen.styles";
-
-import Image from "../../assets/images/crochet.jpg";
+import { Divider, Grid, Button, Typography } from "@mui/material";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-
-import EditIcon from "@mui/icons-material/Edit";
+import useStyles from "./BusinessDetailsScreen.styles";
+import EditIconButton from "../../components/EditBusinessDetailsModal/EditBusinessDetailsModal";
+import Image from "../../assets/images/crochet.jpg";
+import ConfirmationModalComponent from "../../components/ConfirmationModalComponent/ConfirmationModalComponent";
 
 export default function BusinessDetailsScreen() {
   const classes = useStyles();
@@ -23,7 +21,14 @@ export default function BusinessDetailsScreen() {
               <Typography variant="body2" className={classes.sectionTitle}>
                 General Information
               </Typography>
-              <EditIconButton />
+              <EditIconButton
+                innitialState={{
+                  name: "Name",
+                  descriptition: "description",
+                  productType: "Clothing and apparel",
+                }}
+                context="identity"
+              />
             </div>
             <Divider />
             <div className={classes.bodyTitleContainer}>
@@ -51,7 +56,13 @@ export default function BusinessDetailsScreen() {
               <Typography variant="body2" className={classes.sectionTitle}>
                 Contact Information
               </Typography>
-              <EditIconButton />
+              <EditIconButton
+                innitialState={{
+                  phone: "+254793871876",
+                  email: "bryodiiidah@gmail.com",
+                }}
+                context="contact"
+              />
             </div>
             <Divider />
             <div className={classes.bodyTitleContainer}>
@@ -70,7 +81,13 @@ export default function BusinessDetailsScreen() {
               <Typography variant="body2" className={classes.sectionTitle}>
                 Location Information
               </Typography>
-              <EditIconButton />
+              <EditIconButton
+                innitialState={{
+                  location: "Nairobi, Kenya",
+                  locationDetails: "Chandaria Drive",
+                }}
+                context="location"
+              />
             </div>
             <Divider />
             <div className={classes.bodyTitleContainer}>
@@ -85,6 +102,25 @@ export default function BusinessDetailsScreen() {
               </Typography>
             </div>
             <Typography>Chandaria Drive</Typography>
+            <Divider />
+            <div className={classes.deleteContainer}>
+              <Button
+                className={classes.deleteBtn}
+                variant="contained"
+                fullWidth
+              >
+                Set as Default
+              </Button>
+              <ConfirmationModalComponent />
+              <Button
+                color="error"
+                className={classes.deleteBtn}
+                variant="contained"
+                fullWidth
+              >
+                Delete Business
+              </Button>
+            </div>
           </Grid>
           <Grid item xs alignItems="center">
             <div className={classes.imageContainer}>
@@ -100,12 +136,3 @@ export default function BusinessDetailsScreen() {
     </div>
   );
 }
-
-const EditIconButton = () => {
-  const classes = useStyles();
-  return (
-    <div className={classes.editIcon}>
-      <Typography variant="body2">Edit</Typography>
-    </div>
-  );
-};

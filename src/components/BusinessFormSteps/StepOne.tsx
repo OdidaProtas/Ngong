@@ -8,13 +8,13 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import useStyles from "./BusinessFormSteps.styles";
 
-const fields: any = [
+export const fields: any = [
   { name: "name", type: "text", label: "Business Name" },
   { name: "description", type: "text", label: "Description" },
   { name: "productType", type: "text", label: "Product Type" },
 ];
 
-const validationSchema = Yup.object().shape({
+export const validationSchema = Yup.object().shape({
   name: Yup.string()
     .min(1, "Name too short")
     .max(72, "Name too long")

@@ -196,7 +196,6 @@ export default function PasswordFormComponent({
                 <Form>
                   {fields.map((field: any, index: number) => {
                     const { name, label, type } = field;
-                    console.log(name);
                     return (
                       <TextField
                         key={index}

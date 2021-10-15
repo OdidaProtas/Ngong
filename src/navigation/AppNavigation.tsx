@@ -17,9 +17,9 @@ export default function AppNavigation() {
         <Typography variant="h4" color="secondary">
           Coming soon...
         </Typography>
-        {/* <Button sx={{ marginTop: "18px", textTransform: "none" }}>
-          Early access
-        </Button> */}
+        <Typography sx={{marginTop:"50px"}} variant="h6" color="secondary">
+          Selling online or in person? stay tuned
+        </Typography>
       </div>
     </div>
   );

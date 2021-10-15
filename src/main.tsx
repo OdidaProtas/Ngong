@@ -5,7 +5,7 @@ import "./index.css";
 const App = lazy(() => import("./App"));
 
 import { ThemeProvider } from "@mui/system";
-import theme from "./constants/Themes/themes";
+import { theme } from "./constants";
 
 ReactDOM.render(
   <React.StrictMode>

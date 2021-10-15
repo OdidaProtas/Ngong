@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import refTryRefactor from "../../constants/refTryRefractor";
+import { refTryRefactor } from "../../constants";
 import { axiosInstance } from "../../state";
 
 export interface UseAxiosRequestInterface {

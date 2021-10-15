@@ -1,16 +1,11 @@
 import axios from "axios";
 
 const endpoint = "https://api-stage.mkononi.biz";
-const userToken = localStorage.getItem("userToken")?.replace(/^"(.+(?="$))"$/, '$1');
-
-const headers = {
-  Authorization: userToken,
-};
+const userToken = localStorage.getItem("userToken");
 
 const axiosInstance = axios.create({
   baseURL: endpoint,
   timeout: 15000,
-  // headers: headers,
 });
 
 axiosInstance.interceptors.request.use(

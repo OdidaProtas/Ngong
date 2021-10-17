@@ -18,6 +18,8 @@ import Typography from "@mui/material/Typography";
 import { LogoComponent } from "../../SharedComponents/";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 
+import { useRouteMatch, useHistory } from "react-router";
+
 import { analyticsItems, drawerItems } from "./dataArray";
 
 const drawerWidth = 240;
@@ -33,21 +35,32 @@ interface Props {
 
 export default function DashboardDrawerAppBar(props: Props) {
   const { window, children } = props;
+  let { url } = useRouteMatch();
+  const history = useHistory();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  const handleNavigation = (path: string) => {
+    history.push(`${url}/${path}`);
+    handleDrawerToggle();
+  };
+
   const drawer = (
-    <div style={{backgroundColor:"#e9ecef", minHeight:"100vh"}}>
+    <div style={{ backgroundColor: "#e9ecef", minHeight: "100vh" }}>
       <Toolbar>
         <LogoComponent />
       </Toolbar>
       <Divider />
       <List>
         {drawerItems.map((item: any, index: number) => (
-          <ListItem button key={index}>
+          <ListItem
+            onClick={() => handleNavigation(item.path)}
+            button
+            key={index}
+          >
             <ListItemIcon>{<item.icon />}</ListItemIcon>
             <ListItemText primary={item.title} />
           </ListItem>
@@ -56,7 +69,11 @@ export default function DashboardDrawerAppBar(props: Props) {
       <Divider />
       <List>
         {analyticsItems.map((item: any, index: number) => (
-          <ListItem button key={index}>
+          <ListItem
+            onClick={() => handleNavigation(item.path)}
+            button
+            key={index}
+          >
             <ListItemIcon>{<item.icon />}</ListItemIcon>
             <ListItemText primary={item.title} />
           </ListItem>
@@ -65,7 +82,11 @@ export default function DashboardDrawerAppBar(props: Props) {
       <Divider />
       <List>
         {["Sales Channels"].map((text, index) => (
-          <ListItem button key={text}>
+          <ListItem
+            onClick={() => handleNavigation("sales-channels")}
+            button
+            key={text}
+          >
             <ListItemIcon>
               <StorefrontIcon />
             </ListItemIcon>
@@ -76,7 +97,11 @@ export default function DashboardDrawerAppBar(props: Props) {
       <Divider />
       <List>
         {["Settings"].map((text, index) => (
-          <ListItem button key={text}>
+          <ListItem
+            onClick={() => handleNavigation("settings")}
+            button
+            key={text}
+          >
             <ListItemIcon>
               <SettingsIcon />
             </ListItemIcon>
@@ -162,7 +187,7 @@ export default function DashboardDrawerAppBar(props: Props) {
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           backgroundColor: "#e9ecef",
-          minHeight:"100vh"
+          minHeight: "100vh",
         }}
       >
         <Toolbar />

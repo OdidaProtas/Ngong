@@ -1,56 +1,102 @@
 import {
-    AffiliateScreen,
-    DashboardScreen,
-    HomeScreen,
-    NotFoundScreen,
-    SignInScreen,
-    SignUpScreen,
-  } from "../../screens";
-  
-  const navigationOptions = [
-    {
-      name: "HomeScreen",
-      isProtected: false,
-      path: "/",
-      isExact: true,
-      component: HomeScreen,
-    },
-    {
-      name: "SignUpScreen",
-      isProtected: false,
-      path: "/signup",
-      isExact: true,
-      component: SignUpScreen,
-    },
-    {
-      name: "SignInScreen",
-      isProtected: false,
-      path: "/signin",
-      isExact: true,
-      component: SignInScreen,
-    },
-    {
-      name: "AffiliateScreen",
-      isProtected: false,
-      path: "/affiliate",
-      isExact: true,
-      component: AffiliateScreen,
-    },
-    {
-      name: "DashboardScreen",
-      isProtected: true,
-      path: "/dashboard",
-      isExact: true,
-      component: DashboardScreen,
-    },
-    {
-      name: "NotFoundScreen",
-      isProtected: false,
-      path: "**",
-      isExact: false,
-      component: NotFoundScreen,
-    },
-  ];
-  
-  export default navigationOptions;
-  
+  Affiliates,
+  Customers,
+  Discounts,
+  Insights,
+  Marketing,
+  Orders,
+  OverviewComponent,
+  Products,
+  Reports,
+  Sales,
+  Settings,
+} from "../../components/DashboardComponents";
+
+const navigationOptions = [
+  {
+    name: "overview",
+    isProtected: false,
+    url: "",
+    isExact: true,
+    component: OverviewComponent,
+  },
+  {
+    name: "products",
+    isProtected: false,
+    url: "products",
+    isExact: true,
+    component: Products,
+  },
+  {
+    name: "orders",
+    isProtected: false,
+    url: "orders",
+    isExact: true,
+    component: Orders,
+  },
+  {
+    name: "customers",
+    isProtected: false,
+    url: "customers",
+    isExact: true,
+    component: Customers,
+  },
+  {
+    name: "marketing",
+    isProtected: false,
+    url: "marketing",
+    isExact: true,
+    component: Marketing,
+  },
+  {
+    name: "discounts",
+    isProtected: false,
+    url: "discounts",
+    isExact: true,
+    component: Discounts,
+  },
+  {
+    name: "affiliates",
+    isProtected: false,
+    url: "affiliates",
+    isExact: true,
+    component: Affiliates,
+  },
+  {
+    name: "overview",
+    isProtected: false,
+    url: "overview",
+    isExact: true,
+    component: OverviewComponent,
+  },
+  {
+    name: "insights",
+    isProtected: false,
+    url: "insights",
+    isExact: true,
+    component: Insights,
+  },
+  {
+    name: "reports",
+    isProtected: false,
+    url: "reports",
+    isExact: true,
+    component: Reports,
+  },
+  {
+    name: "sales",
+    isProtected: false,
+    url: "sales-channels",
+    isExact: true,
+    component: Sales,
+  },
+  {
+    name: "settings",
+    isProtected: false,
+    url: "settings",
+    isExact: true,
+    component: Settings,
+  },
+];
+
+export default navigationOptions;

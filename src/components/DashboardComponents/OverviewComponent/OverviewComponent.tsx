@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import { DateSalutationComponent } from "../../SharedComponents";
 
 export default function OverviewComponent() {
-    return (
-        <div>
-            over
-        </div>
-    )
+  return (
+    <div>
+      {/* <DateSalutationComponent /> */}
+      overview
+    </div>
+  );
 }
+    

@@ -45,6 +45,7 @@ export default function FormComponent({
                     size="small"
                     name={name}
                     label={label}
+                    sx={styles.textInput}
                     error={touched[name] && Boolean(errors[name])}
                     value={values[name]}
                     onChange={handleChange}
@@ -73,4 +74,10 @@ export default function FormComponent({
       </Suspense>
     </div>
   );
+}
+
+const styles: any = {
+  textInput:{
+    marginBottom:"10px"
+  }
 }

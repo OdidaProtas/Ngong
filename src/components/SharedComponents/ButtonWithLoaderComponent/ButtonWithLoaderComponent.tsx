@@ -22,7 +22,7 @@ export default function ButtonWithLoaderComponent({
           </Suspense>
         </Button>
       ) : (
-        <Button fullWidth variant="contained" size="small" type="submit">
+        <Button disableElevation fullWidth variant="contained" size="small" type="submit">
           Submit
         </Button>
       )}

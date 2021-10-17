@@ -2,18 +2,23 @@
 import { Component, useContext } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { StateContext } from "../../state/appstate";
+import { useRouteMatch } from "react-router";
 
 export default function ProtectedRoute({ component: Component, ...rest }: any) {
   const { getAppState }: any = useContext(StateContext);
   const { businesses } = getAppState();
-  console.log('====================================');
+  const { path, url } = useRouteMatch();
+  const hasBusinesses = businesses.length > 0;
   console.log(businesses);
-  console.log('====================================');
   return (
     <Route
       {...rest}
       render={(props) =>
-        true ? <Component {...rest} {...props} /> : <Redirect to="/signin" />
+        false ? (
+          <Component {...rest} {...props} />
+        ) : (
+          <Redirect to={`${path}/setup`} />
+        )
       }
     />
   );

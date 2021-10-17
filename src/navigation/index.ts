@@ -3,5 +3,11 @@ import ProtectedRoute from "./ProtectedRoute";
 
 import AppNavigation from "./AppNavigation/AppNavigation";
 import DashboardNavigation from "./DashboardNavigation/DashboardNavigation";
-
-export { AppNavigation, BusinessNavigation, ProtectedRoute , DashboardNavigation};
+import BusinessForm from "../components/DashboardComponents/BusinessForm/BusinessForm";
+export {
+  BusinessForm,
+  AppNavigation,
+  BusinessNavigation,
+  ProtectedRoute,
+  DashboardNavigation,
+};

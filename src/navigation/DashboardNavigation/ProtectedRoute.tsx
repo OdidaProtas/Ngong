@@ -1,11 +1,14 @@
 5;
 import { Component, useContext } from "react";
 import { Redirect, Route } from "react-router-dom";
-import { AuthContext } from "../state";
+import { StateContext } from "../../state/appstate";
 
 export default function ProtectedRoute({ component: Component, ...rest }: any) {
-  const { getAuthState }: any = useContext(AuthContext);
-  const { isLoggedIn } = getAuthState();
+  const { getAppState }: any = useContext(StateContext);
+  const { businesses } = getAppState();
+  console.log('====================================');
+  console.log(businesses);
+  console.log('====================================');
   return (
     <Route
       {...rest}

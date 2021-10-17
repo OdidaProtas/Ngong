@@ -39,7 +39,7 @@ const navigationOptions = [
   {
     name: "DashboardScreen",
     isProtected: true,
-    path: "/dashboard/:id",
+    path: "/dashboard",
     isExact: true,
     component: DashboardScreen,
   },

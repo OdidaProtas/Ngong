@@ -1,12 +1,14 @@
 import React from "react";
 
-export default function DashboardScreen() {
+import { DashboardDrawerAppBar } from "../../components/DashboardComponents";
+import { DashboardNavigation } from "../../navigation";
+
+export default function DashboardScreen({ match }: any) {
   return (
     <div>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore et at
-      itaque reprehenderit. Eveniet exercitationem doloremque consectetur.
-      Laudantium ipsa fuga nemo quis, quae incidunt sit assumenda earum impedit
-      facere mollitia!
+      <DashboardDrawerAppBar>
+        <DashboardNavigation match={match} />
+      </DashboardDrawerAppBar>
     </div>
   );
 }

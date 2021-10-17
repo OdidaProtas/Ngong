@@ -2,7 +2,7 @@ import {
   AuthContext,
   authContextMemo,
   authReducer,
-  bootstrapAsync,
+  bootstrapAuthAsync,
 } from "./authstate";
 import axiosInstance from "./data/axiosInstance";
 
@@ -11,5 +11,5 @@ export {
   AuthContext,
   authContextMemo,
   authReducer,
-  bootstrapAsync,
+  bootstrapAuthAsync,
 };

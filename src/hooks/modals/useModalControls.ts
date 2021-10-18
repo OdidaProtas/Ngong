@@ -7,3 +7,4 @@ export default function useModalControls() {
 
   return {open, toggle};
 }
+ 

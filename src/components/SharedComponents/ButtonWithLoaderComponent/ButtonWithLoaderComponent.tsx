@@ -7,10 +7,12 @@ const CircularProgress = lazy(
 
 interface ButtonAndLoaderComponentInterface {
   loading: boolean;
+  title: string;
 }
 
 export default function ButtonWithLoaderComponent({
   loading,
+  title,
 }: ButtonAndLoaderComponentInterface) {
   const classes = useStyles();
   return (
@@ -22,8 +24,18 @@ export default function ButtonWithLoaderComponent({
           </Suspense>
         </Button>
       ) : (
-        <Button disableElevation fullWidth variant="contained" size="small" type="submit">
-          Submit
+        <Button
+          disableElevation
+          fullWidth
+          variant="contained"
+          size="small"
+          type="submit"
+          color="secondary"
+          sx={{
+            textTransform:"none"
+          }}
+        >
+          {title}
         </Button>
       )}
     </div>

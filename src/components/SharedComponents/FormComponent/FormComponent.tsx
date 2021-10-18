@@ -2,8 +2,6 @@ import { Button, Divider, TextField } from "@mui/material";
 import React, { Suspense } from "react";
 import { SnackBarComponent, ButtonWithLoaderComponent } from "..";
 
-
-
 // import useStyles from "../LogoComponent/LogoComponent.styles";
 import { Formik, Form } from "formik";
 import { SnackBarComponentInterface } from "../SnackBarComponent/SnackBarComponent";
@@ -15,6 +13,7 @@ interface FormComponentInterface {
   handleSubmit: any;
   loading: boolean;
   snackBarOptions: SnackBarComponentInterface;
+  btnTitle: string;
 }
 
 export default function FormComponent({
@@ -24,8 +23,9 @@ export default function FormComponent({
   handleSubmit,
   loading,
   snackBarOptions,
+  btnTitle,
 }: FormComponentInterface) {
-//   const classes = useStyles();
+  //   const classes = useStyles();
   const { message, severity, open, handleClose } = snackBarOptions;
   return (
     <div>
@@ -57,7 +57,7 @@ export default function FormComponent({
             })}
             <div>
               <Suspense fallback={<div></div>}>
-                <ButtonWithLoaderComponent loading={loading} />
+                <ButtonWithLoaderComponent title={btnTitle} loading={loading} />
               </Suspense>
             </div>
             <Divider />
@@ -77,7 +77,7 @@ export default function FormComponent({
 }
 
 const styles: any = {
-  textInput:{
-    marginBottom:"10px"
-  }
-}
+  textInput: {
+    marginBottom: "10px",
+  },
+};

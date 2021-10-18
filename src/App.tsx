@@ -16,6 +16,10 @@ import {
 } from "./state/authstate";
 import reducer from "./state/authstate/AuthReducer";
 
+import { useAuthState } from "react-firebase-hooks/auth";
+
+import { auth } from "./state/firebase/firebase";
+
 function App() {
   const [appState, stateDispatch]: any = useReducer(stateReducer, initialState);
   const [authState, authDispatch]: any = useReducer(reducer, initialAuthState);
@@ -23,6 +27,8 @@ function App() {
     () => authContextMemo(authDispatch, authState),
     []
   );
+
+  const [user] = useAuthState(auth);
 
   const appContext: any = useMemo(
     () => stateContextMemo(stateDispatch, appState),
@@ -40,7 +46,7 @@ function App() {
   const getAppState = () => appState;
 
   return (
-    <AuthContext.Provider value={{ ...authContext, getAuthState }}>
+    <AuthContext.Provider value={{ ...authContext, getAuthState, user }}>
       <StateContext.Provider value={{ ...appContext, getAppState }}>
         <Suspense fallback={<div>Loading...</div>}>
           <AppNavigation />

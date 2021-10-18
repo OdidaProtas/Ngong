@@ -1,4 +1,5 @@
 import * as Yup from "yup";
+import { phoneRegExp } from "../../../constants";
 
 const fields: any = [
   {
@@ -29,19 +30,23 @@ const fields: any = [
 
 const validationSchema: any = Yup.object().shape({
   name: Yup.string()
-    .min(2, "Business Name is too short")
-    .required("Business name is required"),
-  email: Yup.string()
-    .min(2, "Description is too short")
-    .required("Description is required"),
-  phone: Yup.string().required("Location details is required"),
+    .min(2, "Too Short")
+    .max(50, "Name too long")
+    .required("Name is required"),
+  phone: Yup.string()
+    .matches(phoneRegExp, "Could not validate phone number")
+    .required("Phone number is required"),
+  email: Yup.string().email("Invalid Email").required("Email is required"),
+  password: Yup.string()
+    .required("No password provided.")
+    .min(8, "Password is too short"),
 });
 
 const initialState = {
   name: "",
   email: "",
   phone: "",
-  password:""
+  password: "",
 };
 
 export { fields, validationSchema, initialState };

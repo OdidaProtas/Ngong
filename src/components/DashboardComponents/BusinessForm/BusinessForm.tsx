@@ -29,8 +29,7 @@ export default function BusinessForm() {
                 severity: "error",
                 message: "An error occured",
                 handleClose: handleClose,
-              }}
-            />
+              }} btnTitle={"Submit"}            />
           </Grid>
         </Grid>
       </div>

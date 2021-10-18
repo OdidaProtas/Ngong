@@ -8,7 +8,8 @@ export default function HomeCreateStore() {
   const { loading } = useAxiosRequest();
   const handleClose = () => {};
   const handleSubmit = (value: any) => {
-    console.log(value);
+    const { phone } = value;
+    console.log(phone);
   };
   return (
     <div>

@@ -2,7 +2,8 @@ import { createContext } from "react";
 
 export const initialState = {
   user: null,
-  businesses: [],
+  stores: null,
+  hasStore: false,
 };
 
 const StateContext = createContext(initialState);

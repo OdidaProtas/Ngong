@@ -3,18 +3,22 @@ import { Component, useContext } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { StateContext } from "../../state/appstate";
 import { useRouteMatch } from "react-router";
+import { AuthContext } from "../../state";
 
-export default function ProtectedRoute({ component: Component, ...rest }: any) {
+export default function DashProtectedRoute({
+  component: Component,
+  ...rest
+}: any) {
   const { getAppState }: any = useContext(StateContext);
-  const { businesses } = getAppState();
+  const { profileLoading } = useContext(AuthContext) as any;
+  const { hasStore, stores } = getAppState();
   const { path, url } = useRouteMatch();
-  const hasBusinesses = businesses.length > 0;
-  console.log(businesses);
+  if (stores === null) return <div>Loading...</div>;
   return (
     <Route
       {...rest}
       render={(props) =>
-        false ? (
+        hasStore ? (
           <Component {...rest} {...props} />
         ) : (
           <Redirect to={`${path}/setup`} />

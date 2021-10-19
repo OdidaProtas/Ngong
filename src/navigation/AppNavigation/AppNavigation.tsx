@@ -1,4 +1,3 @@
-
 import { Suspense } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ProtectedRoute } from "..";
@@ -12,12 +11,14 @@ export default function BusinessNavigation() {
           const { component, isExact, path, isProtected } = nav;
           if (isProtected)
             return (
-              <ProtectedRoute
-                key={idx}
-                component={component}
-                exact={isExact}
-                path={path}
-              />
+              <Suspense fallback={<div></div>}>
+                <ProtectedRoute
+                  key={idx}
+                  component={component}
+                  exact={isExact}
+                  path={path}
+                />
+              </Suspense>
             );
           return (
             <Route

@@ -1,7 +1,7 @@
 import InsightsIcon from "@mui/icons-material/Insights";
 import AssessmentIcon from "@mui/icons-material/Assessment";
 import SummarizeIcon from "@mui/icons-material/Summarize";
-import LinkIcon from "@mui/icons-material/Link";
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import PeopleIcon from "@mui/icons-material/People";
@@ -28,6 +28,11 @@ const analyticsItems: any = [
 
 const drawerItems: any = [
   {
+    title: "Home",
+    icon: HomeRoundedIcon,
+    path: "",
+  },
+  {
     title: "Products",
     icon: LocalOfferIcon,
     path: "products",
@@ -51,11 +56,6 @@ const drawerItems: any = [
     title: "Discounts",
     icon: LoyaltyIcon,
     path: "discounts",
-  },
-  {
-    title: "Affiliates",
-    icon: LinkIcon,
-    path: "affiliates",
   },
 ];
 

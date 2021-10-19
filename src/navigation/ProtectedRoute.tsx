@@ -6,6 +6,7 @@ import { AuthContext } from "../state";
 export default function ProtectedRoute({ component: Component, ...rest }: any) {
   const { getAuthState }: any = useContext(AuthContext);
   const { isLoggedIn } = getAuthState();
+  
   return (
     <Route
       {...rest}

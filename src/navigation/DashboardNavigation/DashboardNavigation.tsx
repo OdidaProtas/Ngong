@@ -6,13 +6,15 @@ import {
   Redirect,
   useRouteMatch,
 } from "react-router-dom";
-import { BusinessForm, ProtectedRoute } from "..";
+import { BusinessForm } from "..";
 import { OverviewComponent } from "../../components/DashboardComponents";
 import { DateSalutationComponent } from "../../components/SharedComponents";
 import navigationOptions from "./DashboardNavigationSchema";
+import DashProtectedRoute from "./DashProtectedRoute";
 
 export default function DashboardNavigation() {
   const { path, url } = useRouteMatch();
+
 
   return (
     <div>
@@ -21,7 +23,7 @@ export default function DashboardNavigation() {
         {navigationOptions.map((options: any, idx: number) => {
           const { url, component } = options;
           return (
-            <ProtectedRoute
+            <DashProtectedRoute
               key={idx}
               component={component}
               exact
@@ -29,6 +31,7 @@ export default function DashboardNavigation() {
             />
           );
         })}
+        <Route path={`${path}/setup`} component={BusinessForm}/>
         <Route path="**">
           <h4>Url not configured</h4>
         </Route>

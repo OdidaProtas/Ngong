@@ -138,7 +138,7 @@ export default function DashboardDrawerAppBar(props: Props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Cake Shop
+            {/* Cake Shop */}
           </Typography>
         </Toolbar>
       </AppBar>

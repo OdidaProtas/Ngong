@@ -42,7 +42,6 @@ export default function FormComponent({
                 <div key={index}>
                   <TextField
                     fullWidth
-                    size="small"
                     name={name}
                     label={label}
                     sx={styles.textInput}

@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useMemo, useReducer } from "react";
+import { Suspense, useEffect, useMemo, useReducer, useState } from "react";
 
 import { AppNavigation } from "./navigation";
 import {
@@ -18,17 +18,18 @@ import reducer from "./state/authstate/AuthReducer";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import { auth } from "./state/firebase/firebase";
+import { auth, firestore } from "./state/firebase/firebase";
 
 function App() {
   const [appState, stateDispatch]: any = useReducer(stateReducer, initialState);
   const [authState, authDispatch]: any = useReducer(reducer, initialAuthState);
+  const [profile, setProfile]: any = useState(null);
   const authContext: any = useMemo(
     () => authContextMemo(authDispatch, authState),
     []
   );
 
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
 
   const appContext: any = useMemo(
     () => stateContextMemo(stateDispatch, appState),
@@ -42,12 +43,57 @@ function App() {
     bootstrapState();
   }, []);
 
+  useEffect(() => {
+    updateAuth();
+    updateStores();
+  }, [user, appState.hasStore]);
+
   const getAuthState = () => authState;
   const getAppState = () => appState;
 
+  const updateAuth = async () => {
+    if (user) {
+      const query = await firestore
+        .collection("users")
+        .where("uid", "==", user.uid)
+        .get();
+      if (query.docs.length > 0) {
+        setProfile(query.docs[0].data());
+      } else {
+        setProfile({ hasProfile: false });
+      }
+    }
+  };
+
+  const addStore = () => {
+    stateDispatch({ type: "HAS_STORE" });
+  };
+
+  const updateStores = async () => {
+    if (user) {
+      const query = await firestore
+        .collection("stores")
+        .where("uid", "==", user.uid)
+        .get();
+      if (query.docs.length > 0) {
+        stateDispatch({ type: "HAS_STORE", payload: query.docs[0].data() });
+      }else{
+        stateDispatch({ type: "HAS_STORE", payload: [] });
+      }
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ ...authContext, getAuthState, user }}>
-      <StateContext.Provider value={{ ...appContext, getAppState }}>
+    <AuthContext.Provider
+      value={{
+        ...authContext,
+        getAuthState,
+        user,
+        profile,
+        profileLoading: loading,
+      }}
+    >
+      <StateContext.Provider value={{ ...appContext, getAppState, addStore }}>
         <Suspense fallback={<div>Loading...</div>}>
           <AppNavigation />
         </Suspense>

@@ -5,6 +5,17 @@ const stateReducer = (state: any, action: any) => {
         ...state,
         businesses: [],
       };
+
+    case "HAS_STORE":
+      return {
+        ...state,
+        hasStore: true,
+        stores: action.payload,
+      };
+    default:
+      return {
+        ...state,
+      };
   }
 };
 

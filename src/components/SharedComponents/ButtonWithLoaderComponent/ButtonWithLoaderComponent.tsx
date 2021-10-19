@@ -18,9 +18,9 @@ export default function ButtonWithLoaderComponent({
   return (
     <div className={classes.root}>
       {loading ? (
-        <Button fullWidth size="small" variant="contained" disabled>
+        <Button fullWidth variant="contained" disabled>
           <Suspense fallback={<div></div>}>
-            <CircularProgress size={20} />
+            <CircularProgress size={26} />
           </Suspense>
         </Button>
       ) : (
@@ -28,7 +28,6 @@ export default function ButtonWithLoaderComponent({
           disableElevation
           fullWidth
           variant="contained"
-          size="small"
           type="submit"
           color="secondary"
           sx={{

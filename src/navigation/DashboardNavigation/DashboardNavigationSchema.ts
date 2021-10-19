@@ -11,6 +11,7 @@ import {
   Sales,
   Settings,
 } from "../../components/DashboardComponents";
+import { HomeLandingPage } from "../../components/HomeComponents";
 
 const navigationOptions = [
   {
@@ -18,7 +19,7 @@ const navigationOptions = [
     isProtected: false,
     url: "",
     isExact: true,
-    component: OverviewComponent,
+    component: HomeLandingPage,
   },
   {
     name: "products",

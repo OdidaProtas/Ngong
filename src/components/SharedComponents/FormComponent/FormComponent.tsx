@@ -30,7 +30,7 @@ export default function FormComponent({
   return (
     <div>
       <Formik
-        validationSchema={validationShema}
+        validationSchema={validationShema}  
         initialValues={initialState}
         onSubmit={handleSubmit}
       >

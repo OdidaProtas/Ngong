@@ -25,21 +25,21 @@ const navigationOptions = [
     name: "products",
     isProtected: false,
     url: "products",
-    isExact: true,
+    isExact: false,
     component: Products,
   },
   {
     name: "orders",
     isProtected: false,
     url: "orders",
-    isExact: true,
+    isExact: false,
     component: Orders,
   },
   {
     name: "customers",
     isProtected: false,
     url: "customers",
-    isExact: true,
+    isExact: false,
     component: Customers,
   },
   {
@@ -53,7 +53,7 @@ const navigationOptions = [
     name: "discounts",
     isProtected: false,
     url: "discounts",
-    isExact: true,
+    isExact: false,
     component: Discounts,
   },
   {

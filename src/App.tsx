@@ -54,7 +54,7 @@ function App() {
   const updateAuth = async () => {
     if (user) {
       const query = await firestore
-        .collection("users")
+        .collection("profiles")
         .where("uid", "==", user.uid)
         .get();
       if (query.docs.length > 0) {
@@ -76,9 +76,9 @@ function App() {
         .where("uid", "==", user.uid)
         .get();
       if (query.docs.length > 0) {
-        stateDispatch({ type: "HAS_STORE", payload: query.docs[0].data() });
+      stateDispatch({ type: "HAS_STORE", payload: query.docs[0].data() });
       }else{
-        stateDispatch({ type: "HAS_STORE", payload: [] });
+        stateDispatch({ type: "NO_STORE",});
       }
     }
   };

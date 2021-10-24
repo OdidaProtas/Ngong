@@ -93,9 +93,9 @@ export default function HomeScreen() {
               color="secondary"
               variant="contained"
               sx={styles["btn"]}
-              onClick={toggle}
+              onClick={()=>history.push("/signin/new")}
             >
-              Early access
+              Get Started
             </Button>
           )}
         </div>

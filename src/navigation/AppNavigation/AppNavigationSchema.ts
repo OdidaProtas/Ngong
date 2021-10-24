@@ -5,6 +5,7 @@ import {
   NotFoundScreen,
   SignInScreen,
   SignUpScreen,
+  StoreSelectionScreen,
 } from "../../screens";
 
 const navigationOptions = [
@@ -18,7 +19,7 @@ const navigationOptions = [
   {
     name: "SignUpScreen",
     isProtected: false,
-    path: "/signup",
+    path: "/signup",    
     isExact: true,
     component: SignUpScreen,
   },
@@ -26,7 +27,7 @@ const navigationOptions = [
     name: "SignInScreen",
     isProtected: false,
     path: "/signin",
-    isExact: true,
+    isExact: false,
     component: SignInScreen,
   },
   {
@@ -42,6 +43,13 @@ const navigationOptions = [
     path: "/admin",
     isExact: false,
     component: DashboardScreen,
+  },
+  {
+    name: "Account",
+    isProtected: false,
+    path: "/store-login",
+    isExact: false,
+    component: StoreSelectionScreen,
   },
   {
     name: "NotFoundScreen",

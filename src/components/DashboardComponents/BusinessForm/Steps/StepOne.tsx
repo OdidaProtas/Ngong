@@ -39,29 +39,32 @@ export default function StepOne() {
   const handleSubmit = (e: any) => {
     setLoading(true);
     e.preventDefault();
+    const value = {
+      hasStore,
+      currentRevenue,
+      industry,
+      hasProfile: true,
+    };
+    const id = user.uid;
     firestore
-      .collection("users")
-      .doc(user.uid)
-      .set({
-        hasStore,
-        currentRevenue,
-        industry,
-        hasProfile: true,
+      .collection("profiles")
+      .add({
+        ...value,
+        uid: id,
       })
-      .then(() => {
+      .then((docRef) => {
         setLoading(false);
         next();
       })
-      .catch((e: any) => {
+      .catch((error) => {
         setLoading(false);
-        console.log(e);
+        console.error("Error adding document: ", error);
       });
-      // setLoading(false)
   };
 
   return (
     <div>
-    STEP ONE
+      {/* STEP ONE */}
       <form onSubmit={handleSubmit}>
         <Box sx={{ minWidth: 120, marginTop: "30px" }}>
           <FormControl required fullWidth>
@@ -139,7 +142,7 @@ export default function StepOne() {
             marginTop: "36px",
           }}
         >
-         <ButtonWithLoaderComponent loading={loading} title={"Next"}/>
+          <ButtonWithLoaderComponent loading={loading} title={"Next"} />
         </div>
       </form>
     </div>

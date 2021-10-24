@@ -23,20 +23,22 @@ export default function StepTwo() {
   };
   const handleSubmit = (value: any) => {
     setLoading(true);
+    const id = user.uid;
     firestore
       .collection("stores")
-      .doc(user.uid)
-      .set(value)
-      .then(() => {
+      .add({
+        ...value,
+        uid: id,
+      })
+      .then((docRef) => {
+        addStore();
         setLoading(false);
         next();
       })
-      .catch((e: any) => {
+      .catch((error) => {
         setLoading(false);
-        console.log(e);
+        console.error("Error adding document: ", error);
       });
-    next();
-    addStore();
   };
 
   const next = () => {

@@ -12,6 +12,11 @@ const stateReducer = (state: any, action: any) => {
         hasStore: true,
         stores: action.payload,
       };
+     case "NO_STORE":
+        return {
+          ...state,
+          stores: [],
+        };
     default:
       return {
         ...state,

@@ -1,5 +1,4 @@
 import { lazy } from "react";
-import BusinessNavigation from "./BusinessNavigation";
 import ProtectedRoute from "./ProtectedRoute";
 
 import AppNavigation from "./AppNavigation/AppNavigation";
@@ -10,7 +9,6 @@ import BusinessForm from "../components/DashboardComponents/BusinessForm/Busines
 export {
   BusinessForm,
   AppNavigation,
-  BusinessNavigation,
   ProtectedRoute,
   DashboardNavigation,
 };

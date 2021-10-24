@@ -18,9 +18,12 @@ import Typography from "@mui/material/Typography";
 import { LogoComponent } from "../../SharedComponents/";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 
-import { useRouteMatch, useHistory } from "react-router";
+import { useRouteMatch, useHistory, useLocation } from "react-router";
 
 import { analyticsItems, drawerItems } from "./dataArray";
+import { StateContext } from "../../../state/appstate";
+import Avatar from "@mui/material/Avatar";
+import AccountMenu from "../../SharedComponents/AccountMenu/AccountMenu";
 
 const drawerWidth = 240;
 
@@ -35,18 +38,27 @@ interface Props {
 
 export default function DashboardDrawerAppBar(props: Props) {
   const { window, children } = props;
-  let { url } = useRouteMatch();
+  let { url, path } = useRouteMatch();
   const history = useHistory();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const { getAppState } = React.useContext(StateContext) as any;
+  const { stores, hasStores } = getAppState();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const handleNavigation = (path: string) => {
-    history.push(`${url}/${path}`);
+  const handleNavigation = (newU: string) => {
+    if (path === "") {
+      history.push(`${url}`);
+    } else {
+      history.push(`${url}/${newU}`);
+    }
     handleDrawerToggle();
   };
+
+  const { pathname } = useLocation();
 
   const drawer = (
     <div style={{ backgroundColor: "#e9ecef", minHeight: "100vh" }}>
@@ -60,6 +72,7 @@ export default function DashboardDrawerAppBar(props: Props) {
             onClick={() => handleNavigation(item.path)}
             button
             key={index}
+            selected={pathname.includes(item.path)}
           >
             <ListItemIcon>{<item.icon />}</ListItemIcon>
             <ListItemText primary={item.title} />
@@ -73,6 +86,7 @@ export default function DashboardDrawerAppBar(props: Props) {
             onClick={() => handleNavigation(item.path)}
             button
             key={index}
+            selected={pathname.includes(item.path)}
           >
             <ListItemIcon>{<item.icon />}</ListItemIcon>
             <ListItemText primary={item.title} />
@@ -86,6 +100,7 @@ export default function DashboardDrawerAppBar(props: Props) {
             onClick={() => handleNavigation("sales-channels")}
             button
             key={text}
+            selected={pathname.includes("sales-channels")}
           >
             <ListItemIcon>
               <StorefrontIcon />
@@ -101,6 +116,7 @@ export default function DashboardDrawerAppBar(props: Props) {
             onClick={() => handleNavigation("settings")}
             button
             key={text}
+            selected={pathname.includes("settings")}
           >
             <ListItemIcon>
               <SettingsIcon />
@@ -138,8 +154,11 @@ export default function DashboardDrawerAppBar(props: Props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            {/* Cake Shop */}
+            {stores ? stores.store : "Setup store"}
           </Typography>
+          <div style={{position:"absolute", right:20}}>
+            <AccountMenu />
+          </div>
         </Toolbar>
       </AppBar>
       <Box

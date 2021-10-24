@@ -6,11 +6,18 @@ const App = lazy(() => import("./App"));
 
 import { ThemeProvider } from "@mui/system";
 import { theme } from "./constants";
+import Loader from "./components/SharedComponents/Loader/Loader";
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense
+        fallback={
+          <div>
+            <Loader />
+          </div>
+        }
+      >
         <App />
       </Suspense>
     </ThemeProvider>

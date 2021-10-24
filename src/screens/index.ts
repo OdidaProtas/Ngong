@@ -1,11 +1,15 @@
-import HomeScreen from "./HomeScreen/HomeScreen";
-import SignInScreen from "./SignInScreen/SignInScreen";
+import { lazy } from "react";
+
 import SignUpScreen from "./SignUpScreen/SignUpScreen";
 import DashboardScreen from "./DashboardScreen'/DashboardScreen";
 import NotFoundScreen from "./NotFoundScreen/NotFoundScreen";
 import AffiliateScreen from "./AffiliateScreen/AffiliateScreen";
 import MarketScreen from "./MarketScreen/MarketScreen";
 import ShopScreen from "./ShopScreen/ShopScreen";
+import StoreSelectionScreen from "./StoreSelectionScreen/StoreSelectionScreen";
+
+const HomeScreen = lazy(() => import("./HomeScreen/HomeScreen"));
+const SignInScreen = lazy(() => import("./SignInScreen/SignInScreen"));
 
 export {
   HomeScreen,
@@ -16,4 +20,5 @@ export {
   AffiliateScreen,
   MarketScreen,
   ShopScreen,
+  StoreSelectionScreen,
 };

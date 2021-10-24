@@ -21,12 +21,12 @@ export default function DashboardNavigation() {
       {/* <DateSalutationComponent /> */}
       <Switch>
         {navigationOptions.map((options: any, idx: number) => {
-          const { url, component } = options;
+          const { url, component , isExact} = options;
           return (
             <DashProtectedRoute
               key={idx}
               component={component}
-              exact
+              exact={isExact}
               path={`${path}/${url}`}
             />
           );

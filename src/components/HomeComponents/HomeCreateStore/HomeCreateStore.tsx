@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography/Typography";
 import TextField from "@mui/material/TextField/TextField";
 import Button from "@mui/material/Button/Button";
 import { SnackBarComponent } from "../../SharedComponents";
+import useSnackBar from "../../../hooks/modals/useSnackBar";
 
 export default function HomeCreateStore() {
   // const { loading } = useAxiosRequest();
@@ -22,8 +23,12 @@ export default function HomeCreateStore() {
   const [final, setfinal]: any = useState("");
   const [otp, setotp] = useState("");
 
+  const { open, toggle, toggleOn, msg, severity } = useSnackBar();
+
+
   const handleClose = () => {};
   const handleSubmit = (value: any) => {
+    console.log(value);
     setLoading(true);
     const { phone } = value;
     const formatted: any = formatPhoneNumber(parseInt(phone));
@@ -33,7 +38,6 @@ export default function HomeCreateStore() {
       .signInWithPhoneNumber(formatted, verify)
       .then((result) => {
         setfinal(result);
-
         alert("code sent");
         setshow(true);
       })
@@ -55,9 +59,16 @@ export default function HomeCreateStore() {
         alert("Wrong code");
       });
   };
+
+
   return (
     <div>
-      <SnackBarComponent open={false} severity={undefined} message={""} handleClose={undefined}/>
+      <SnackBarComponent
+        open={open}
+        severity={severity}
+        message={msg}
+        handleClose={toggle}
+      />
       <div style={{ display: !show ? "block" : "none" }}>
         {!loading ? (
           <FormComponent

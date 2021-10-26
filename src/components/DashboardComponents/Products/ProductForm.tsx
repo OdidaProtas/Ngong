@@ -13,81 +13,84 @@ import Inventoryform from "./Inventoryform";
 import ShippingForm from "./ShippingForm";
 import ProductStatus from "./ProductFormWidgets/ProductStatus";
 import OrganizationWidgets from "./ProductFormWidgets/OrganizationWidgets";
+import Container from "@mui/material/Container";
 
 export default function ProductForm() {
   const history = useHistory();
 
   return (
     <div>
-      <IconButton
-        onClick={() => history.goBack()}
-        sx={{ marginRight: "18px", mr: 3 }}
-      >
-        <ArrowBackIosIcon />
-      </IconButton>
-      ADD PRODUCT
+      <Box sx={{ mb: 3}}>
+        <IconButton
+          onClick={() => history.goBack()}
+          sx={{ marginRight: "18px", mr: 3 }}
+        >
+          <ArrowBackIosIcon />
+        </IconButton>
+        ADD PRODUCT
+      </Box>
       <div>
-        <Divider sx={{ mt: 1, mb: 3 }} />
-
         <Grid container spacing={2}>
           <Grid item xs={12} lg={8}>
-            <Box
-              sx={{ bgcolor: "background.paper", p: 4, borderRadius: "4px" }}
-            >
-              <TextField
-                sx={{ mb: 3 }}
-                label="Title"
-                fullWidth
-                placeholder="Example: Pishori Rice"
-              />
-              <DescriptionEditor />
-            </Box>
-            <Box
-              sx={{
-                bgcolor: "background.paper",
-                p: 4,
-                borderRadius: "4px",
-                mt: 3,
-              }}
-            >
-              <MediaPicker />
-            </Box>
-            <Box
-              sx={{
-                bgcolor: "background.paper",
-                p: 4,
-                borderRadius: "4px",
-                mt: 3,
-              }}
-            >
-              PRICING
-              <Pricing />
-            </Box>
-            <Divider />
-            <Box
-              sx={{
-                bgcolor: "background.paper",
-                p: 4,
-                borderRadius: "4px",
-                mt: 3,
-              }}
-            >
-              INVENTORY
-              <Inventoryform />
-            </Box>
-            <Divider />
-            <Box
-              sx={{
-                bgcolor: "background.paper",
-                p: 4,
-                borderRadius: "4px",
-                mt: 3,
-              }}
-            >
-              SHIPPING
-              <ShippingForm />
-            </Box>
-            <Divider />
+            <div>
+              <Box
+                sx={{ bgcolor: "background.paper", p: 4, borderRadius: "4px" }}
+              >
+                <TextField
+                  sx={{ mb: 3 }}
+                  label="Title"
+                  fullWidth
+                  placeholder="Example: Pishori Rice"
+                />
+                <DescriptionEditor />
+              </Box>
+              <Box
+                sx={{
+                  bgcolor: "background.paper",
+                  p: 4,
+                  borderRadius: "4px",
+                  mt: 3,
+                }}
+              >
+                <MediaPicker />
+              </Box>
+              <Box
+                sx={{
+                  bgcolor: "background.paper",
+                  p: 4,
+                  borderRadius: "4px",
+                  mt: 3,
+                }}
+              >
+                PRICING
+                <Pricing />
+              </Box>
+              <Divider />
+              <Box
+                sx={{
+                  bgcolor: "background.paper",
+                  p: 4,
+                  borderRadius: "4px",
+                  mt: 3,
+                }}
+              >
+                INVENTORY
+                <Inventoryform />
+              </Box>
+              <Divider />
+              <Box
+                sx={{
+                  bgcolor: "background.paper",
+                  p: 4,
+                  borderRadius: "4px",
+                  mt: 3,
+                }}
+              >
+                SHIPPING
+                <ShippingForm />
+              </Box>
+              <Divider />
+            </div>
           </Grid>
           <Grid item xs={12} lg={4}>
             <Box

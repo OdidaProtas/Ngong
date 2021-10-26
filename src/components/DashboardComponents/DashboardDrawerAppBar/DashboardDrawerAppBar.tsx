@@ -24,6 +24,8 @@ import { analyticsItems, drawerItems } from "./dataArray";
 import { StateContext } from "../../../state/appstate";
 import Avatar from "@mui/material/Avatar";
 import AccountMenu from "../../SharedComponents/AccountMenu/AccountMenu";
+import Container from "@mui/material/Container";
+import { AuthContext } from "../../../state";
 
 const drawerWidth = 240;
 
@@ -42,16 +44,20 @@ export default function DashboardDrawerAppBar(props: Props) {
   const history = useHistory();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const { getAppState } = React.useContext(StateContext) as any;
-  const { stores, hasStores } = getAppState();
+  const { myStores } = React.useContext(StateContext) as any;
+  const {
+    authState: {
+      user: { id },
+    },
+  }: any = React.useContext(AuthContext);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
   const handleNavigation = (newU: string) => {
-    if (path === "") {
-      history.push(`${url}`);
+    if (newU === "") {
+      history.push(`/admin/${id}`);
     } else {
       history.push(`${url}/${newU}`);
     }
@@ -67,17 +73,19 @@ export default function DashboardDrawerAppBar(props: Props) {
       </Toolbar>
       <Divider />
       <List>
-        {drawerItems.map((item: any, index: number) => (
-          <ListItem
-            onClick={() => handleNavigation(item.path)}
-            button
-            key={index}
-            selected={pathname.includes(item.path)}
-          >
-            <ListItemIcon>{<item.icon />}</ListItemIcon>
-            <ListItemText primary={item.title} />
-          </ListItem>
-        ))}
+        {drawerItems.map((item: any, index: number) => {
+          return (
+            <ListItem
+              onClick={() => handleNavigation(item.path)}
+              button
+              key={index}
+              selected={pathname.includes(item.path)}
+            >
+              <ListItemIcon>{<item.icon />}</ListItemIcon>
+              <ListItemText primary={item.title} />
+            </ListItem>
+          );
+        })}
       </List>
       <Divider />
       <List>
@@ -154,9 +162,9 @@ export default function DashboardDrawerAppBar(props: Props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            {stores ? stores.store : "Setup store"}
+            {myStores ? "setup indeed" : "Setup store"}
           </Typography>
-          <div style={{position:"absolute", right:20}}>
+          <div style={{ position: "absolute", right: 20 }}>
             <AccountMenu />
           </div>
         </Toolbar>
@@ -210,7 +218,7 @@ export default function DashboardDrawerAppBar(props: Props) {
         }}
       >
         <Toolbar />
-        {children}
+        <Container>{children}</Container>
       </Box>
     </Box>
   );

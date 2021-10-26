@@ -1,8 +1,6 @@
-import firebase from "firebase";
 import React, { useState } from "react";
 import formatPhoneNumber from "../../../constants/helpers/formatPhoneNumber";
 import { useAxiosRequest } from "../../../hooks";
-import { auth } from "../../../state/firebase/firebase";
 import FormComponent from "../../SharedComponents/FormComponent/FormComponent";
 
 import { useHistory } from "react-router";
@@ -33,18 +31,6 @@ export default function HomeCreateStore() {
     const { phone } = value;
     const formatted: any = formatPhoneNumber(parseInt(phone));
 
-    let verify = new firebase.auth.RecaptchaVerifier("recaptcha-container");
-    auth
-      .signInWithPhoneNumber(formatted, verify)
-      .then((result) => {
-        setfinal(result);
-        alert("code sent");
-        setshow(true);
-      })
-      .catch((err) => {
-        alert(err);
-        window.location.reload();
-      });
   };
 
   const ValidateOtp = () => {

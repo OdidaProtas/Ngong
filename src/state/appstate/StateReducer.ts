@@ -1,22 +1,23 @@
 const stateReducer = (state: any, action: any) => {
   switch (action.type) {
-    case "BUSINESSES":
+    case "ADD_NEW_STORE":
+      const stores = state.myStores;
+      stores.push(action.payload);
       return {
         ...state,
-        businesses: [],
+        myStores: stores,
       };
 
-    case "HAS_STORE":
+    case "ADD_MY_STORES":
       return {
         ...state,
-        hasStore: true,
-        stores: action.payload,
+        myStores: action.payload,
       };
-     case "NO_STORE":
-        return {
-          ...state,
-          stores: [],
-        };
+    case "NO_STORE":
+      return {
+        ...state,
+        stores: [],
+      };
     default:
       return {
         ...state,

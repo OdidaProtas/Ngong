@@ -13,26 +13,28 @@ import useModalControls from "../../hooks/modals/useModalControls";
 import { ModalDialog } from "../../components/SharedComponents";
 import { AuthContext } from "../../state";
 import { useHistory } from "react-router";
-import { auth } from "../../state/firebase/firebase";
+import AccountMenu from "../../components/SharedComponents/AccountMenu/AccountMenu";
+import Loader from "../../components/SharedComponents/Loader/Loader";
 
 const ModalTitle = "Get started with Protus. Register a store";
 
 export default function HomeScreen() {
   const { open, toggle } = useModalControls();
-  const { user } = useContext(AuthContext) as any;
+  const {
+    authState: { isLoggedIn, loaded, user },
+  }: any = useContext(AuthContext);
   const history = useHistory();
-  const signOut = () => {
-    auth.signOut();
-  };
+  const signOut = () => {};
+
   return (
     <>
       {/* <HoimeNavBar /> */}
       {/* <Toolbar> */}
       <div style={{ textAlign: "right", padding: "6px" }}>
-        {user ? (
-          <Button onClick={signOut} sx={{ textTransform: "none" }} size="small">
-            Logout
-          </Button>
+        {isLoggedIn ? (
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <AccountMenu />
+          </div>
         ) : (
           <Button
             onClick={() => history.push("/signin")}
@@ -75,16 +77,16 @@ export default function HomeScreen() {
             Think bigger.
           </Typography>
           {/* <TextField placeholder="Email address" fullWidth type="email" /> */}
-          {user ? (
+          {isLoggedIn ? (
             <Button
               size="small"
               disableElevation
               color="secondary"
               variant="contained"
               sx={styles["btn"]}
-              onClick={() => history.push("/admin")}
+              onClick={() => history.push(`/store-login/${user?.id}`)}
             >
-              Go to store admin
+              My stores
             </Button>
           ) : (
             <Button
@@ -93,7 +95,7 @@ export default function HomeScreen() {
               color="secondary"
               variant="contained"
               sx={styles["btn"]}
-              onClick={()=>history.push("/signin/new")}
+              onClick={() => history.push("/signin/new")}
             >
               Get Started
             </Button>

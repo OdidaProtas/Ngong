@@ -8,12 +8,12 @@ import { useContext } from "react";
 import { StateContext } from "../../../state/appstate";
 
 export default function DateSalutationComponent() {
-  const { getAppState } = useContext(StateContext) as any;
-  const { stores }: any = getAppState();
+  const { myStores } = useContext(StateContext) as any;
+  // const { stores }: any = getAppState();
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Typography variant="h6">Welcome, {stores ? stores.name : ""}</Typography>
+      {/* <Typography variant="h6">Welcome, {stores ? stores.name : ""}</Typography> */}
       {/* <Typography sx={sx["title"]} variant="h5">
         Overview Dashboard
       </Typography> */}

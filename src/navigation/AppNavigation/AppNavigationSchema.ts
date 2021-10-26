@@ -19,7 +19,7 @@ const navigationOptions = [
   {
     name: "SignUpScreen",
     isProtected: false,
-    path: "/signup",    
+    path: "/signup",
     isExact: true,
     component: SignUpScreen,
   },
@@ -40,14 +40,14 @@ const navigationOptions = [
   {
     name: "DashboardScreen",
     isProtected: true,
-    path: "/admin",
+    path: "/admin/:id",
     isExact: false,
     component: DashboardScreen,
   },
   {
     name: "Account",
     isProtected: false,
-    path: "/store-login",
+    path: "/store-login/:id",
     isExact: false,
     component: StoreSelectionScreen,
   },

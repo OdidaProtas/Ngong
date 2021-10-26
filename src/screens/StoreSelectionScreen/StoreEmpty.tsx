@@ -6,7 +6,7 @@ import { useHistory, useRouteMatch } from "react-router";
 import storeAdd from "../../assets/images/store_add.png";
 
 export default function StoreEmpty() {
-  const { path } = useRouteMatch();
+  const { url } = useRouteMatch();
   const history = useHistory();
   return (
     <div
@@ -32,7 +32,7 @@ export default function StoreEmpty() {
             variant="contained"
             color="error"
             sx={{ textTransform: "none", mt: 5 }}
-            onClick={() => history.push(`${path}/new`)}
+            onClick={() => history.push(`${url}/new`)}
           >
             Create a store
           </Button>

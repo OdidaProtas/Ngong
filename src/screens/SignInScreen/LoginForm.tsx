@@ -2,28 +2,61 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import React, { useState } from "react";
-import { useHistory, useRouteMatch } from "react-router";
+import jwtDecode from "jwt-decode";
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory, useParams, useRouteMatch } from "react-router";
 import { ButtonWithLoaderComponent } from "../../components/SharedComponents";
+import { useAxiosRequest } from "../../hooks";
+import { AuthContext, axiosInstance } from "../../state";
+import SignInContext from "./state";
 
 export default function LoginForm() {
   const { url } = useRouteMatch();
   const history = useHistory();
 
-  const [email, setEmail] = useState("");
+  const { signIn } = useContext(AuthContext) as any;
+
+  const { email, stateDispatch }: any = useContext(SignInContext);
+  const { processRequest, data, loading }: any = useAxiosRequest();
+
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    history.push("/store-login")
+    const requestOptions = {
+      method: "post",
+      endpoint: `/login/`,
+      payload: {
+        email,
+        password,
+      },
+    };
+    processRequest(requestOptions);
   };
 
-  const handleChange = (e: any) => setEmail(e.target.value);
+  useEffect(() => {
+    if (data) {
+      signIn(data);
+      const user: any = jwtDecode(data);
+      history.push(`/store-login/${user.id}`);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (email === "" || email === undefined || email === null) {
+      history.push("/signin");
+    }
+  }, []);
+
+  const handleChange = (e: any) => setPassword(e.target.value);
 
   return (
     <div>
       <Box sx={{ mt: 5 }}>
         <Typography variant="h6">LOGIN</Typography>
-        <Typography>You must be signed in to continue</Typography>
+        <Typography sx={{ mt: 1 }}>
+          You must be signed in to continue
+        </Typography>
         <br />
         <Box
           sx={{
@@ -34,9 +67,13 @@ export default function LoginForm() {
         >
           <form onSubmit={handleSubmit} style={{ width: "100%" }}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography sx={{ mt: 2 }}>odida.protas@gmail.com</Typography>
-              <Button sx={{ textTransform: "none", mt: 2 }} color="secondary">
-                Change email
+              <Typography sx={{ mt: 1 }}>{email}</Typography>
+              <Button
+                onClick={() => history.push("/signin")}
+                sx={{ textTransform: "none", mt: 1 }}
+                color="secondary"
+              >
+                Change
               </Button>
             </div>
             <TextField
@@ -56,7 +93,7 @@ export default function LoginForm() {
               Forgot Password
             </Button>
             <Box sx={{ mt: 2 }}>
-              <ButtonWithLoaderComponent loading={false} title="Continue" />
+              <ButtonWithLoaderComponent loading={loading} title="Continue" />
               <Button
                 type="button"
                 onClick={() => {

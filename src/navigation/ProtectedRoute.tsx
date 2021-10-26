@@ -1,17 +1,24 @@
 5;
-import { Component, useContext } from "react";
+import { Component, useContext, useEffect } from "react";
 import { Redirect, Route } from "react-router-dom";
+import Loader from "../components/SharedComponents/Loader/Loader";
 import { AuthContext } from "../state";
 
 export default function ProtectedRoute({ component: Component, ...rest }: any) {
-  const { getAuthState }: any = useContext(AuthContext);
-  const { isLoggedIn } = getAuthState();
-  
+  const { authState }: any = useContext(AuthContext);
+  const { loaded, isLoggedIn } = authState;
+
+  if (!loaded) return <Loader />;
+
   return (
     <Route
-      {...rest}
+      {...rest} 
       render={(props) =>
-        true ? <Component {...rest} {...props} /> : <Redirect to="/signin" />
+        isLoggedIn ? (
+          <Component {...rest} {...props} />
+        ) : (
+          <Redirect to="/signin" />
+        )
       }
     />
   );

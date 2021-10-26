@@ -1,7 +1,9 @@
 import axios from "axios";
 
-const endpoint = "https://api-stage.mkononi.biz";
+const endpoint = "https://warm-meadow-66799.herokuapp.com";
 const userToken = localStorage.getItem("userToken");
+
+// 
 
 const axiosInstance = axios.create({
   baseURL: endpoint,
@@ -9,8 +11,8 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-  (config) => {    
-    config.headers.common["Authorization"] = userToken;
+  (config) => {
+    config.headers.common["access_token"] = JSON.parse(userToken);
     return config;
   },
   (error) => {
@@ -19,3 +21,4 @@ axiosInstance.interceptors.request.use(
 );
 
 export default axiosInstance;
+

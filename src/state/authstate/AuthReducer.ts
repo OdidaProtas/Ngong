@@ -5,18 +5,21 @@ const authReducer = (state: any, action: any) => {
         ...state,
         user: action.payload,
         isLoggedIn: true,
+        loaded: true,
       };
     case "SIGN_OUT":
       return {
         ...state,
         user: null,
         isLoggedIn: false,
+        loaded: false,
       };
     case "RESTORE_TOKEN":
       return {
         ...state,
-        user: action.payload,
         isLoggedIn: true,
+        loaded: true,
+        user: action.payload,
       };
   }
 };

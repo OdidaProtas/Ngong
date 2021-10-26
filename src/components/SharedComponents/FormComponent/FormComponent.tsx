@@ -25,18 +25,18 @@ export default function FormComponent({
   snackBarOptions,
   btnTitle,
 }: FormComponentInterface) {
-  //   const classes = useStyles();
   const { message, severity, open, handleClose } = snackBarOptions;
+
   return (
     <div>
       <Formik
-        validationSchema={validationShema}  
+        validationSchema={validationShema}
         initialValues={initialState}
         onSubmit={handleSubmit}
       >
         {({ errors, touched, values, handleChange }) => (
           <Form>
-            {fields.map((field: any, index: number) => {
+            {/* {fields.map((field: any, index: number) => {
               const { name, type, label } = field;
               return (
                 <div key={index}>
@@ -53,7 +53,7 @@ export default function FormComponent({
                   />
                 </div>
               );
-            })}
+            })} */}
             <div>
               <Suspense fallback={<div></div>}>
                 <ButtonWithLoaderComponent title={btnTitle} loading={loading} />

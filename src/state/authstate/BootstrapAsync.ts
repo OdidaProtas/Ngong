@@ -1,3 +1,5 @@
+import jwt_decode from "jwt-decode";
+
 export default function bootstrapAsync(dispatch: any) {
   let userToken;
 
@@ -8,6 +10,7 @@ export default function bootstrapAsync(dispatch: any) {
   }
 
   if (userToken) {
-    dispatch({ type: "RESTORE_TOKEN", payload: userToken });
+    const user = jwt_decode(JSON.parse(userToken));
+    dispatch({ type: "RESTORE_TOKEN", payload: user });
   }
 }

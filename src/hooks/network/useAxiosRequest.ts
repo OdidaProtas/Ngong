@@ -3,13 +3,11 @@ import { refTryRefactor } from "../../constants";
 import { axiosInstance } from "../../state";
 
 export interface UseAxiosRequestInterface {
-  context: string;
+  context?: string;
   method: "post" | "patch" | "get" | "put" | "delete";
   endpoint: string;
-  isAuthenticated: boolean;
+  isAuthenticated?: boolean;
   payload?: any;
-  errorHandler: any;
-  successHandler: any;
 }
 
 export default function useAxiosRequest() {
@@ -19,16 +17,15 @@ export default function useAxiosRequest() {
 
   const processRequest = async (options: UseAxiosRequestInterface) => {
     setLoading(true);
-    const { method, endpoint, payload, errorHandler, successHandler } = options;
+    const { method, endpoint, payload} = options;
+    axiosInstance[method](endpoint, payload)
     const promise = axiosInstance[method](endpoint, payload);
-    const [res] = await refTryRefactor(promise);
+    const [res, err] = await refTryRefactor(promise);
     if (res) {
       setData(res.data);
-      successHandler();
       setLoading(false);
     } else {
       setError(true);
-      errorHandler();
       setLoading(false);
     }
   };

@@ -9,7 +9,6 @@ import IconButton from "@mui/material/IconButton";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { StateContext } from "../../../../state/appstate";
 import { AuthContext } from "../../../../state";
-import { firestore } from "../../../../state/firebase/firebase";
 
 export default function StepTwo() {
   const history = useHistory();
@@ -24,21 +23,6 @@ export default function StepTwo() {
   const handleSubmit = (value: any) => {
     setLoading(true);
     const id = user.uid;
-    firestore
-      .collection("stores")
-      .add({
-        ...value,
-        uid: id,
-      })
-      .then((docRef) => {
-        addStore();
-        setLoading(false);
-        next();
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.error("Error adding document: ", error);
-      });
   };
 
   const next = () => {

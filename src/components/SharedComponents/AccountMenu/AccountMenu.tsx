@@ -11,7 +11,10 @@ import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
-import { auth } from "../../../state/firebase/firebase";
+import { AuthContext } from "../../../state";
+import { useHistory } from "react-router";
+import StorefrontIcon from "@mui/icons-material/Storefront";
+import { StateContext } from "../../../state/appstate";
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -22,12 +25,35 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const {
+    signOut,
+    authState: { user, loaded },
+  }: any = React.useContext(AuthContext);
+
+  const {stateDispatch}:any = React.useContext(StateContext)
+
+  const history = useHistory();
+
+  if (!loaded) return <Avatar />;
+
+  const { firstName, lastName, email, id }: any = user;
+
+  const handleSignIn = () => {
+    signOut();
+    stateDispatch({type:"ADD_MY_STORES", payload:null})
+    history.push("/");
+  };
+
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Account settings">
           <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar sx={{ width: 36, height: 36 }}>
+              {firstName[0]}
+              {lastName[0]}
+            </Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -66,10 +92,25 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem>
-          <Avatar /> Profile
+          <Avatar sx={{ width: 42, height: 42 }} />
+          <Box>
+            <Typography color="secondary" variant="h6">
+              {firstName} {lastName}
+            </Typography>
+            <Typography color="secondary" variant="body2">
+              {email}
+            </Typography>
+          </Box>
         </MenuItem>
-        <MenuItem>
+        <Divider> </Divider>
+        {/* <MenuItem>
           <Avatar /> My account
+        </MenuItem> */}
+        <MenuItem onClick={() => history.push(`/store-login/${id}`)}>
+          <Avatar>
+            <StorefrontIcon />
+          </Avatar>
+          My Stores
         </MenuItem>
         <Divider />
         <MenuItem>
@@ -84,7 +125,7 @@ export default function AccountMenu() {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={() => auth.signOut()}>
+        <MenuItem onClick={() => handleSignIn()}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

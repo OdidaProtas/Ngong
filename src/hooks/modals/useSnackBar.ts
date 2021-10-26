@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function useSnackBar() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [severity, setSeverity] = useState("");
   const [msg, setMsg] = useState("");
 

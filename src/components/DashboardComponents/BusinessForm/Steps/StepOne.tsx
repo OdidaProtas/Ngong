@@ -7,7 +7,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useHistory, useRouteMatch } from "react-router";
-import { firestore } from "../../../../state/firebase/firebase";
 import { AuthContext } from "../../../../state";
 import { ButtonWithLoaderComponent } from "../../../SharedComponents";
 
@@ -46,20 +45,6 @@ export default function StepOne() {
       hasProfile: true,
     };
     const id = user.uid;
-    firestore
-      .collection("profiles")
-      .add({
-        ...value,
-        uid: id,
-      })
-      .then((docRef) => {
-        setLoading(false);
-        next();
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.error("Error adding document: ", error);
-      });
   };
 
   return (

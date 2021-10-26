@@ -10,14 +10,10 @@ export default function DashProtectedRoute({
   component: Component,
   ...rest
 }: any) {
-  const { getAppState }: any = useContext(StateContext);
   const { profileLoading, user } = useContext(AuthContext) as any;
-  const { hasStore, stores } = getAppState();
   const { path, url } = useRouteMatch();
 
   if (profileLoading) return <TablesSkeleton />;
-  // if (!user) return <Redirect to={`/signin`} />;
-  // if (stores === null) return <TablesSkeleton />;
 
   return (
     <Route

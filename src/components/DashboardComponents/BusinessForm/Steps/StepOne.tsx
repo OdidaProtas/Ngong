@@ -9,6 +9,20 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useHistory, useRouteMatch } from "react-router";
 import { AuthContext } from "../../../../state";
 import { ButtonWithLoaderComponent } from "../../../SharedComponents";
+import { getCountNames, getSubcouties } from "../../../../state/data/locations";
+import Grid from "@mui/material/Grid";
+import NativeSelect from "@mui/material/NativeSelect";
+
+import kenya from "../../../../assets/images/kenya.jpg";
+import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
+import categories from "../../../../state/data/categories";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import FormGroup from "@mui/material/FormGroup";
+import Container from "@mui/material/Container";
+import { Form, Formik } from "formik";
+import storeSchema from "./validationSchema";
 
 export default function StepOne() {
   const history = useHistory();
@@ -19,117 +33,176 @@ export default function StepOne() {
     history.push(`${url}/step-two`);
   };
 
-  const [hasStore, setHasStore] = React.useState("");
-  const [currentRevenue, setCurrentRevenue] = React.useState("");
-  const [industry, setIndustry] = React.useState("");
+  const counties = getCountNames();
 
-  const handleStoreChange = (event: SelectChangeEvent) => {
-    setHasStore(event.target.value as string);
-  };
-
-  const handleRevenueChange = (event: SelectChangeEvent) => {
-    setCurrentRevenue(event.target.value as string);
-  };
-
-  const handleIndustryChange = (event: SelectChangeEvent) => {
-    setIndustry(event.target.value as string);
-  };
-
-  const handleSubmit = (e: any) => {
-    setLoading(true);
-    e.preventDefault();
-    const value = {
-      hasStore,
-      currentRevenue,
-      industry,
-      hasProfile: true,
-    };
-    const id = user.uid;
-  };
+  const subcounties = getSubcouties("county");
 
   return (
-    <div>
+    <Container>
       {/* STEP ONE */}
-      <form onSubmit={handleSubmit}>
-        <Box sx={{ minWidth: 120, marginTop: "30px" }}>
-          <FormControl required fullWidth>
-            <InputLabel id="demo-simple-select-label">
-              Are you already selling?
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={hasStore}
-              label="Are you already selling?"
-              onChange={handleStoreChange}
-            >
-              <MenuItem value={"true"}>I'm not selling products yet</MenuItem>
-              <MenuItem value={"false"}>
-                I'm selling in a different way
-              </MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
 
-        <Box sx={{ minWidth: 120, marginTop: "30px" }}>
-          <FormControl required fullWidth>
-            <InputLabel id="demo-simple-select-label-2">
-              What is your current revenue?
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label-2"
-              id="demo-simple-select-2"
-              value={currentRevenue}
-              label="What is your current revenue?"
-              onChange={handleRevenueChange}
-            >
-              <MenuItem value={"5000"}>0 - Kes 5000</MenuItem>
-              <MenuItem value={"10000"}>Kes 5, 001 - Kes 10, 000</MenuItem>
-              <MenuItem value={"50000"}>Kes 10, 001 - Kes 50, 000</MenuItem>
-              <MenuItem value={"60000"}>Kes 50, 000 Plus (+) </MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
+      <Formik
+        initialValues={{
+          industry: "",
+          subCounty: "",
+          county: "",
+          address: "",
+          apartmemt: "",
+          phoneNumber: "",
+          isRegistered: false,
+        }}
+        validationSchema={storeSchema}
+        onSubmit={(values) => {
+          console.log(values);
+        }}
+      >
+        {({ errors, touched, values, handleChange }) => (
+          <Form>
+            <Box sx={{ minWidth: 120, marginTop: "30px" }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label-3">
+                  What industry will you be operating in?
+                </InputLabel>
+                <Select
+                  name="industry"
+                  labelId="demo-simple-select-label-3"
+                  id="demo-simple-select-3"
+                  value={values.industry}
+                  error={touched.industry && Boolean(errors.industry)}
+                  label="What industry will you be operating in?"
+                  onChange={handleChange}
+                >
+                  {categories.map((category) => (
+                    <MenuItem key={category} value={category}>
+                      {category}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
+            <Grid container spacing={2}>
+              <Grid sx={{ mt: 2 }} item xs={6}>
+                <FormControl fullWidth>
+                  <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                    County
+                  </InputLabel>
+                  <NativeSelect
+                    variant="outlined"
+                    onChange={handleChange}
+                    error={touched.county && Boolean(errors.county)}
+                    value={values.county}
+                    inputProps={{
+                      name: "county",
+                      id: "uncontrolled-native",
+                    }}
+                  >
+                    <option></option>
+                    {counties.map((county: string) => (
+                      <option key={county} value={county}>
+                        {county}
+                      </option>
+                    ))}
+                  </NativeSelect>
+                </FormControl>
+              </Grid>
+              <Grid item xs={6}>
+                <Box
+                  sx={{
+                    display: values.county === "" ? "none" : "block",
+                    mt: 2,
+                  }}
+                >
+                  <FormControl fullWidth variant="standard">
+                    <InputLabel
+                      variant="standard"
+                      htmlFor="uncontrolled-native2"
+                    >
+                      Subcounty
+                    </InputLabel>
+                    <NativeSelect
+                      onChange={handleChange}
+                      value={values.subCounty}
+                      error={touched.subCounty && Boolean(errors.subCounty)}
+                      inputProps={{
+                        name: "subCounty",
+                        id: "uncontrolled-native2",
+                      }}
+                    >
+                      <option></option>
+                      {getSubcouties(values.county).map((sub: any) => (
+                        <option key={sub} value={sub}>
+                          {sub}
+                        </option>
+                      ))}
+                    </NativeSelect>
+                  </FormControl>
+                </Box>
+              </Grid>
+            </Grid>
+            <Box sx={{ mt: 3 }}>
+              <TextField
+                name={"address"}
+                onChange={handleChange}
+                value={values.address}
+                helperText={touched.address && errors.address}
+                error={touched.address && Boolean(errors.address)}
+                label="Address"
+                placeholder="Enter your address "
+                fullWidth
+              />
+            </Box>
+            <Box sx={{ mt: 3 }}>
+              <TextField
+                label="Apartment"
+                name="apartment"
+                value={values.apartmemt}
+                helperText={touched.apartmemt && errors.apartmemt}
+                error={touched.apartmemt && Boolean(errors.apartmemt)}
+                onChange={handleChange}
+                placeholder="Apartment, Suite, etc... "
+                fullWidth
+              />
+            </Box>
+            <Box sx={{ mt: 3 }}>
+              <TextField
+                name="phoneNumber"
+                onChange={handleChange}
+                value={values.phoneNumber}
+                helperText={touched.phoneNumber && errors.phoneNumber}
+                error={touched.phoneNumber && Boolean(errors.phoneNumber)}
+                label="Phone number"
+                placeholder="07 "
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <img height="20" src={kenya} alt="" />
+                    </InputAdornment>
+                  ),
+                }}
+                fullWidth
+              />
+            </Box>
 
-        <Box sx={{ minWidth: 120, marginTop: "30px" }}>
-          <FormControl required fullWidth>
-            <InputLabel id="demo-simple-select-label-3">
-              What industry will you be operating in?
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label-3"
-              id="demo-simple-select-3"
-              value={industry}
-              label="What industry will you be operating in?"
-              onChange={handleIndustryChange}
-            >
-              <MenuItem value={"beauty"}>Beauty</MenuItem>
-              <MenuItem value={"clothing"}>Clothing</MenuItem>
-              <MenuItem value={"electronics"}>Electronics</MenuItem>
-              <MenuItem value={"furniture"}>Furniture</MenuItem>
-              <MenuItem value={"jewelry"}>Jewelry</MenuItem>
-              <MenuItem value={"painting"}>Painting</MenuItem>
-              <MenuItem value={"photography"}>Photography</MenuItem>
-              <MenuItem value={"restaurants"}>Restaurants</MenuItem>
-              <MenuItem value={"groceries"}>Groceries</MenuItem>
-              <MenuItem value={"otherfood"}>Other Food and Drinks</MenuItem>
-              <MenuItem value={"sports"}>Sports</MenuItem>
-              <MenuItem value={"toys"}>Toys</MenuItem>
-              <MenuItem value={"services"}>Services</MenuItem>
-              <MenuItem value={"other"}>Other</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginTop: "36px",
-          }}
-        >
-          <ButtonWithLoaderComponent loading={loading} title={"Next"} />
-        </div>
-      </form>
-    </div>
+            <FormGroup>
+              <FormControlLabel
+                sx={{ mt: 2 }}
+                control={
+                  <Checkbox
+                    name="isRegistered"
+                    onChange={handleChange}
+                    value={values.isRegistered}
+                    color="secondary"
+                  />
+                }
+                label="This is a registered business"
+              />
+            </FormGroup>
+            <Box sx={{ mt: 3 }}>
+              <ButtonWithLoaderComponent loading={loading} title={"Next"} />
+            </Box>
+          </Form>
+        )}
+      </Formik>
+    </Container>
   );
 }

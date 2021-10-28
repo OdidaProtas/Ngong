@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const endpoint = "https://warm-meadow-66799.herokuapp.com";
+const endpoint = "http://localhost:5000";
 const userToken = localStorage.getItem("userToken");
 
-// 
+// https://warm-meadow-66799.herokuapp.com
 
 const axiosInstance = axios.create({
   baseURL: endpoint,

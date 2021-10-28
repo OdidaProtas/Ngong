@@ -15,13 +15,16 @@ import {
 } from "../../components/SharedComponents";
 import { useAxiosRequest } from "../../hooks";
 import useSnackBar from "../../hooks/modals/useSnackBar";
+import { axiosInstance } from "../../state";
 import { initialSignUpState, signUpValidationSchema } from "./form";
 
 export default function SignupForm() {
   const { url } = useRouteMatch();
   const history = useHistory();
 
-  const { processRequest, data, loading, error }: any = useAxiosRequest();
+  const [loading, setLoading] = useState(false);
+
+  const { processRequest, data, error }: any = useAxiosRequest();
   const { open, toggle, toggleOn, msg, severity } = useSnackBar();
 
   const handleError = () => {
@@ -34,25 +37,18 @@ export default function SignupForm() {
   const handleSuccess = () => {};
 
   const handleSubmit = (values: any) => {
-    processRequest({
-      method: "post",
-      payload: values,
-      endpoint: "/users/",
-      errorHandler: handleError,
-      successHandler: handleSuccess,
-    });
-  };
-
-
-  useEffect(() => {
-    if (data) {
-      toggleOn({
-        m: "Your account has been created",
-        sev: "success",
+    setLoading(true);
+    axiosInstance
+      .post("/users", values)
+      .then((res) => {
+        setLoading(false);  
+        history.push(`/signin`);
+      })
+      .catch((e) => {
+        setLoading(false);
+        console.log(e);
       });
-      history.push(`/signin`);
-    }
-  }, [data]);
+  };
 
   return (
     <div>

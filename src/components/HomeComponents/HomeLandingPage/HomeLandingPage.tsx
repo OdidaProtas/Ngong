@@ -1,3 +1,4 @@
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography/Typography";
 import React from "react";
 import { DateSalutationComponent } from "../../SharedComponents";
@@ -8,7 +9,9 @@ export default function HomeLandingPage() {
     <div>
       <DateSalutationComponent />
       <div>
-        <Typography sx={{marginTop:"72px"}} variant="h4">Get started</Typography>
+        <Typography sx={{ marginTop: "72px" }} variant="h4">
+          Get started
+        </Typography>
       </div>
       <VerticalTabs />
     </div>

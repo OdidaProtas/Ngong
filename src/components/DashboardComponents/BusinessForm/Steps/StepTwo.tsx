@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { StateContext } from "../../../../state/appstate";
 import { AuthContext } from "../../../../state";
+import { getCountNames, getSubcouties } from "../../../../state/data/locations";
 
 export default function StepTwo() {
   const history = useHistory();
@@ -29,10 +30,14 @@ export default function StepTwo() {
     history.push("/admin");
   };
 
+  const counties = getCountNames();
+
+  console.log(getSubcouties(counties[0]));
+
   const handleClose = () => {};
   return (
     <div>
-      <div style={{ marginBottom: "18px" }}>STEP TWO</div>
+      <div style={{ marginBottom: "18px" }}>YOUR STORE ADDRESS</div>
       <FormComponent
         fields={fields}
         validationShema={validationSchema}
@@ -47,11 +52,6 @@ export default function StepTwo() {
           handleClose: handleClose,
         }}
       />
-      {/* <div style={{margin:"10px", textAlign:"center"}}>
-        <IconButton onClick={previous}>
-          <ArrowBackIosIcon />
-        </IconButton>
-      </div> */}
     </div>
   );
 }

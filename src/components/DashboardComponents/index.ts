@@ -1,15 +1,21 @@
-import DashboardDrawerAppBar from "./DashboardDrawerAppBar/DashboardDrawerAppBar";
-import OverviewComponent from "./OverviewComponent/OverviewComponent";
-import Products from "./Products/Products";
-import Orders from "./Orders/Orders";
-import Customers from "./Customers/Customers";
-import Marketing from "./Marketing/Marketing";
-import Discounts from "./Discounts/Discounts";
-import Affiliates from "./Affiliates/Affiliates";
-import Insights from "./Insights/Insights";
-import Reports from "./Reports/Reports";
-import Sales from "./Sales/Sales";
-import Settings from "./Settings/Settings";
+import { lazy } from "react";
+
+const DashboardDrawerAppBar = lazy(
+  () => import("./DashboardDrawerAppBar/DashboardDrawerAppBar")
+);
+const OverviewComponent = lazy(
+  () => import("./OverviewComponent/OverviewComponent")
+);
+const Products = lazy(() => import("./Products/Products"));
+const Orders = lazy(() => import("./Orders/Orders"));
+const Customers = lazy(() => import("./Customers/Customers"));
+const Marketing = lazy(() => import("./Marketing/Marketing"));
+const Discounts = lazy(() => import("./Discounts/Discounts"));
+const Affiliates = lazy(() => import("./Affiliates/Affiliates"));
+const Insights = lazy(() => import("./Insights/Insights"));
+const Reports = lazy(() => import("./Reports/Reports"));
+const Sales = lazy(() => import("./Sales/Sales"));
+const Settings = lazy(() => import("./Settings/Settings"));
 export {
   DashboardDrawerAppBar,
   OverviewComponent,

@@ -109,8 +109,8 @@ export default function HomeScreen() {
 const styles: any = {
   btn: {
     textTransform: "none",
-    marginTop: "1pc",
-    marginBottom: "15pc",
+    mt: 1,
+    mb: 1,
   },
   root: {
     display: "flex",
@@ -118,6 +118,7 @@ const styles: any = {
     alignItems: "center",
     textAlign: "center",
     backgroundColor: "#e9ecef",
+    minHeight:"100vh"
   },
   tagline: {
     marginBottom: "1pc",

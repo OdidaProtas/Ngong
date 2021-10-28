@@ -17,6 +17,7 @@ export default function BusinessNavigation() {
         <Switch>
           {navigationOptions.map((nav: any, idx: number) => {
             const { component, isExact, path, isProtected } = nav;
+            const Component: any = component;
             if (isProtected)
               return (
                 <ProtectedRoute
@@ -29,10 +30,12 @@ export default function BusinessNavigation() {
             return (
               <Route
                 key={idx}
-                component={component}
+                // component={component}
                 exact={isExact}
                 path={path}
-              />
+              >
+                <Component />
+              </Route>
             );
           })}
         </Switch>

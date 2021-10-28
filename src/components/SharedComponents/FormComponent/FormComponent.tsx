@@ -36,24 +36,24 @@ export default function FormComponent({
       >
         {({ errors, touched, values, handleChange }) => (
           <Form>
-            {/* {fields.map((field: any, index: number) => {
+            {fields.map((field: any, index: number) => {
               const { name, type, label } = field;
               return (
                 <div key={index}>
                   <TextField
-                    fullWidth
+                  fullWidth
                     name={name}
                     label={label}
                     sx={styles.textInput}
-                    error={touched[name] && Boolean(errors[name])}
                     value={values[name]}
                     onChange={handleChange}
                     helperText={touched[name] && errors[name]}
+                    error={touched[name] && Boolean(errors[name])}
                     type={type}
                   />
                 </div>
               );
-            })} */}
+            })}
             <div>
               <Suspense fallback={<div></div>}>
                 <ButtonWithLoaderComponent title={btnTitle} loading={loading} />

@@ -1,27 +1,53 @@
-import { Suspense } from "react";
+import { Suspense, useEffect, useReducer, useState } from "react";
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Switch,
   Route,
-  Redirect,
   useRouteMatch,
+  useParams,
 } from "react-router-dom";
 import { BusinessForm } from "..";
-import { OverviewComponent } from "../../components/DashboardComponents";
-import { DateSalutationComponent } from "../../components/SharedComponents";
+import TablesSkeleton from "../../components/SharedComponents/TablesSkeleton/TablesSkeleton";
+import { useAxiosRequest } from "../../hooks";
+import { axiosInstance } from "../../state";
 import navigationOptions from "./DashboardNavigationSchema";
 import DashProtectedRoute from "./DashProtectedRoute";
+import DashboardContext, { initialState, reducer } from "./state";
 
 export default function DashboardNavigation() {
-  const { path, url } = useRouteMatch();
+  const { path } = useRouteMatch();
 
+  const [dashboardState, dashboardDispatch] = useReducer(reducer, initialState);
+  const [loading, setLoading] = useState(false);
+
+  const { store } = dashboardState;
+
+  const { id }: any = useParams();
+
+  useEffect(() => {
+    if (!store) {
+      setLoading(true);
+      axiosInstance
+        .get(`/stores/${id}`)
+        .then((res) => {
+          dashboardDispatch({ type: "ADD_STORE", payload: res.data });
+          setLoading(false);
+        })
+        .catch((e) => {
+          setLoading(false);
+          console.log(e);
+        });
+    }
+  }, []);
+
+  if (!store || loading) return <TablesSkeleton />;
 
   return (
-    <div>
+    <DashboardContext.Provider value={{ ...dashboardState, dashboardDispatch }}>
       {/* <DateSalutationComponent /> */}
       <Switch>
         {navigationOptions.map((options: any, idx: number) => {
-          const { url, component , isExact} = options;
+          const { url, component, isExact } = options;
           return (
             <DashProtectedRoute
               key={idx}
@@ -31,12 +57,16 @@ export default function DashboardNavigation() {
             />
           );
         })}
-        <Route path={`${path}/setup`} component={BusinessForm}/>
+        <Route path={`${path}/setup`}>
+          <Suspense fallback={<TablesSkeleton />}>
+            <BusinessForm />
+          </Suspense>
+        </Route>
         <Route path="**">
           <h4>Url not configured</h4>
         </Route>
       </Switch>
       {/* <BusinessForm /> */}
-    </div>
+    </DashboardContext.Provider>
   );
 }

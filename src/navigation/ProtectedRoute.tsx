@@ -1,5 +1,5 @@
 5;
-import { Component, useContext, useEffect } from "react";
+import { Component, Suspense, useContext, useEffect } from "react";
 import { Redirect, Route } from "react-router-dom";
 import Loader from "../components/SharedComponents/Loader/Loader";
 import { AuthContext } from "../state";
@@ -12,10 +12,12 @@ export default function ProtectedRoute({ component: Component, ...rest }: any) {
 
   return (
     <Route
-      {...rest} 
+      {...rest}
       render={(props) =>
         isLoggedIn ? (
-          <Component {...rest} {...props} />
+          <Suspense fallback={<Loader />}>
+            <Component {...rest} {...props} />
+          </Suspense>
         ) : (
           <Redirect to="/signin" />
         )

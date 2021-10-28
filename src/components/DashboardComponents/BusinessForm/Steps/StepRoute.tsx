@@ -13,10 +13,10 @@ export default function StepRoute({ component: Component, ...rest }: any) {
     <Route
       {...rest}
       render={(props) =>
-        true ? (
+        false ? (
           <Component {...rest} {...props} />
         ) : (
-          <Redirect to={`${path}/step-two`} />
+          <Redirect to={`${url}/step-two`} />
         )
       }
     />

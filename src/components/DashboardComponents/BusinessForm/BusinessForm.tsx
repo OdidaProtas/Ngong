@@ -1,42 +1,23 @@
 import Box from "@mui/material/Box/Box";
 import Grid from "@mui/material/Grid/Grid";
-import Toolbar from "@mui/material/Toolbar/Toolbar";
 import Typography from "@mui/material/Typography/Typography";
-import React, { useState } from "react";
 import { Route, Switch, useRouteMatch } from "react-router";
-import { useAxiosRequest } from "../../../hooks";
-import { FormComponent, LogoComponent } from "../../SharedComponents";
-import { fields, initialState, validationSchema } from "./form";
-import Progress from "./Progress/Progress";
-import StepOne from "./Steps/StepOne";
-import StepTwo from "./Steps/StepTwo";
-import Lottie from "react-lottie";
+import { LogoComponent } from "../../SharedComponents";
+import { lazy, Suspense } from "react";
 
-import SetupImg from "../../../assets/images/setup.png";
-
-import * as animationData from "../../../assets/lotties/setup.json";
+import Container from "@mui/material/Container";
 import StepRoute from "./Steps/StepRoute";
+import TablesSkeleton from "../../SharedComponents/TablesSkeleton/TablesSkeleton";
 
-const defaultOptions = {
-  loop: true,
-  autoplay: true,
-  animationData: animationData,
-  rendererSettings: {
-    preserveAspectRatio: "xMidYMid slice",
-  },
-};
+const StepOne = lazy(() => import("./Steps/StepOne"));
+const StepTwo = lazy(() => import("./Steps/StepTwo"));
+
+import Setup from "../../../assets/images/set.png";
 
 export default function BusinessForm() {
-  const { loading } = useAxiosRequest();
-
-  const handleProfileSubmit = (value: any) => {
-    console.log(value);
-  };
-
-  const handleClose = () => {};
   const { path, url } = useRouteMatch();
   return (
-    <div>
+    <Container sx={{ bgcolor: "background.paper", p: 4, borderRadius: "4px" }}>
       {/* <Progress /> */}
       {/* <Toolbar> */}
       <Box
@@ -56,7 +37,7 @@ export default function BusinessForm() {
       {/* </Toolbar> */}
       <div style={styles.root}>
         <Grid container>
-          <Grid item xs={12} md={8} lg={6}>
+          <Grid item xs>
             <Typography
               style={{ textAlign: "center" }}
               variant="h5"
@@ -68,34 +49,30 @@ export default function BusinessForm() {
               Answer a few questions and we'll set up your store based on the
               answers
             </Typography>
-            <Switch>
-              <StepRoute
-                exact
-                path={path}
-                component={StepOne}
-              />
-              <Route exact path={`${path}/step-two`}>
-                <StepTwo />
-              </Route>
-              <Route path={`**`}>Can't find what you are looking for</Route>
-            </Switch>
+            <Suspense fallback={<TablesSkeleton />}>
+              {/* <Switch> */}
+              {/* <StepRoute exact path={path} component={StepOne} /> */}
+              {/* </Switch> */}
+              <StepOne />
+            </Suspense>
           </Grid>
-          <Grid item xs={12} md={4} lg={6}>
+          <Grid item xs={12} md={4} lg={5} pt={2}>
             <div
               style={{
                 display: "flex",
-                alignItems: "center",
                 justifyContent: "center",
-                marginTop: "70px",
+                alignItems: "center",
+                height: "100%",
               }}
             >
-              <Lottie options={defaultOptions} height={400} width={400} />
-              {/* <img width="90%" src={SetupImg} alt="Setup illustration" /> */}
+              <div style={{ textAlign: "center" }}>
+                <img width="70%" src={Setup} alt="Setup illustration" />
+              </div>
             </div>
           </Grid>
         </Grid>
       </div>
-    </div>
+    </Container>
   );
 }
 
@@ -104,8 +81,9 @@ const styles: any = {
     paddingTop: "10px",
   },
   title: {
-    marginTop: "10px",
-    marginBottom: "18px",
+    mt: 3,
+    mb: 3,
+    fontWeight: "bold",
   },
   subtitle: {
     marginBottom: "18px",

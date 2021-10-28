@@ -17,30 +17,26 @@ export default function LoginForm() {
   const { signIn } = useContext(AuthContext) as any;
 
   const { email, stateDispatch }: any = useContext(SignInContext);
-  const { processRequest, data, loading }: any = useAxiosRequest();
+
+  const [loading, setLoading] = useState(false);
 
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e: any) => {
+    setLoading(true);
     e.preventDefault();
-    const requestOptions = {
-      method: "post",
-      endpoint: `/login/`,
-      payload: {
-        email,
-        password,
-      },
-    };
-    processRequest(requestOptions);
+    axiosInstance
+      .post("/login/", { email, password })
+      .then((res) => {
+        signIn(res.data);
+        const user: any = jwtDecode(res.data);
+        setLoading(false);
+        history.push(`/store-login/${user.id}`);
+      })
+      .catch((e) => {
+        setLoading(false);
+      });
   };
-
-  useEffect(() => {
-    if (data) {
-      signIn(data);
-      const user: any = jwtDecode(data);
-      history.push(`/store-login/${user.id}`);
-    }
-  }, [data]);
 
   useEffect(() => {
     if (email === "" || email === undefined || email === null) {

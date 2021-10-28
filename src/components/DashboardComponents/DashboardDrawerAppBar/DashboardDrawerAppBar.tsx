@@ -18,7 +18,12 @@ import Typography from "@mui/material/Typography";
 import { LogoComponent } from "../../SharedComponents/";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 
-import { useRouteMatch, useHistory, useLocation } from "react-router";
+import {
+  useRouteMatch,
+  useHistory,
+  useLocation,
+  useParams,
+} from "react-router";
 
 import { analyticsItems, drawerItems } from "./dataArray";
 import { StateContext } from "../../../state/appstate";
@@ -64,10 +69,14 @@ export default function DashboardDrawerAppBar(props: Props) {
     handleDrawerToggle();
   };
 
+  const params: any = useParams();
+
+  const store = myStores?.filter((st: any) => st.id === params.id)[0];
+
   const { pathname } = useLocation();
 
   const drawer = (
-    <div style={{ backgroundColor: "#e9ecef", minHeight: "100vh" }}>
+    <div style={{ backgroundColor: "#e9ecef", minHeight: "100%" }}>
       <Toolbar>
         <LogoComponent />
       </Toolbar>
@@ -144,7 +153,7 @@ export default function DashboardDrawerAppBar(props: Props) {
       <CssBaseline />
       <AppBar
         position="fixed"
-        color="secondary"
+        color="default"
         elevation={0}
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
@@ -162,7 +171,7 @@ export default function DashboardDrawerAppBar(props: Props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            {myStores ? "setup indeed" : "Setup store"}
+            {myStores ? store.name : ""}
           </Typography>
           <div style={{ position: "absolute", right: 20 }}>
             <AccountMenu />

@@ -1,11 +1,16 @@
 const overviewFields: any = [
   {
-    label: "Full name",
-    name: "fullname",
+    label: "First name",
+    name: "firstName",
     placeholder: "Enter customer full name  ",
     type: "text",
   },
-
+  {
+    label: "Last name",
+    name: "lastName",
+    placeholder: "Enter customer full name  ",
+    type: "text",
+  },
   {
     label: "Mobile Phone",
     name: "phone",

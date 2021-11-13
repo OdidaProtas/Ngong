@@ -13,34 +13,39 @@ import useModalControls from "../../../../hooks/modals/useModalControls";
 import { ModalDialog } from "../../../SharedComponents";
 import DatePickerWidget from "./DatePickerWidget";
 
-export default function ProductStatus() {
+export default function ProductStatus({
+  handleChange,
+  error,
+  touched,
+  value,
+}: any) {
   const [isActive, setIsActive] = useState("false");
   const { open, toggle } = useModalControls();
 
-  const handleChange = (e: any) => {
-    setIsActive(e.target.value);
-  };
   return (
     <div>
-      PRODUCT STATUS
+      <Typography sx={{ mb: 2 }}>PRODUCT STATUS</Typography>
       <ModalDialog toggle={toggle} open={open}>
-        <Box sx={{ p: 2 }}>
+        <Box sx={{ mt: 1 }}>
           <Typography>Schedule product availability</Typography>
-          <DatePickerWidget />
+          <DatePickerWidget values={value} handleChange={handleChange} />
         </Box>
       </ModalDialog>
       <div>
-        <FormControl sx={{ mt: 3 }} fullWidth>
+        <FormControl size="small" sx={{ mt: 1 }} fullWidth>
           <InputLabel id="demo-simple-select-label">Set Status</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={isActive}
+            value={value.status}
             label="Set Status"
+            error={Boolean(error) && Boolean(touched)}
+            name="status"
             onChange={handleChange}
           >
-            <MenuItem value={"true"}>Active</MenuItem>
-            <MenuItem value={"false"}>Draft</MenuItem>
+            <MenuItem value={"draft"}>Draft</MenuItem>
+            <MenuItem value={"active"}>Active</MenuItem>
+            <MenuItem value={"archived"}>Archived</MenuItem>
           </Select>
         </FormControl>
         <Typography variant="caption" sx={{ mt: 2 }}>
@@ -48,15 +53,16 @@ export default function ProductStatus() {
             ? "This product will be available to 1 sales channel."
             : "This product will be hidden from all sales channels."}
         </Typography>
-        <Divider sx={{ mt: 3 }} />
-        Sales channels and apps
-        <FormControlLabel
-          control={<Checkbox defaultChecked />}
-          label="Marketplace"
-        />
-        <Button onClick={toggle} sx={{ textTransform: "none" }}>
+        <Divider sx={{ my: 1 }} />
+        <Button
+          color="secondary"
+          size="small"
+          onClick={toggle}
+          sx={{ textTransform: "none" }}
+        >
           Schedule Availability
         </Button>
+        <Typography sx={{ mt: 1 }}>{value.availability}</Typography>
       </div>
     </div>
   );

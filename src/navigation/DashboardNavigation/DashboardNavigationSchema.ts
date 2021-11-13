@@ -46,7 +46,7 @@ const navigationOptions = [
     name: "marketing",
     isProtected: false,
     url: "marketing",
-    isExact: true,
+    isExact: false,
     component: Marketing,
   },
   {
@@ -64,7 +64,7 @@ const navigationOptions = [
     component: Affiliates,
   },
   {
-    name: "overview",
+    name: "Live",
     isProtected: false,
     url: "overview",
     isExact: true,
@@ -74,7 +74,7 @@ const navigationOptions = [
     name: "insights",
     isProtected: false,
     url: "insights",
-    isExact: true,
+    isExact: false,
     component: Insights,
   },
   {

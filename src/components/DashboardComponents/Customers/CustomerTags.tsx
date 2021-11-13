@@ -1,57 +1,91 @@
-import Box from "@mui/material/Box/Box";
-import Checkbox from "@mui/material/Checkbox/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel/FormControlLabel";
-import Grid from "@mui/material/Grid/Grid";
-import TextField from "@mui/material/TextField/TextField";
-import Typography from "@mui/material/Typography/Typography";
-import { Form, Formik } from "formik";
-import React, { Suspense } from "react";
-import { ButtonWithLoaderComponent } from "../../SharedComponents";
+import * as React from 'react';
+import { Theme, useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Chip from '@mui/material/Chip';
 
-export default function CustomerTags({ fields }: any) {
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+const names = [
+  'Oliver Hansen',
+  'Van Henry',
+  'April Tucker',
+  'Ralph Hubbard',
+  'Omar Alexander',
+  'Carlos Abbott',
+  'Miriam Wagner',
+  'Bradley Wilkerson',
+  'Virginia Andrews',
+  'Kelly Snyder',
+];
+
+function getStyles(name: string, personName: readonly string[], theme: Theme) {
+  return {
+    fontWeight:
+      personName.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
+}
+
+export default function CustomerTags() {
+  const theme = useTheme();
+  const [personName, setPersonName] = React.useState<string[]>([]);
+
+  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      // On autofill we get a the stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  };
+
   return (
-    <Grid container>
-      <Grid item xs={12} lg={4} mt={3}>
-        <Typography variant="h5">Tags</Typography>
-        <Typography>Add tags to help you organize your customers</Typography>
-      </Grid>
-      <Grid item xs={12} lg={8}>
-        <Box sx={{ bgcolor: "background.paper", mt: 2, p: 4 }}>
-          <Formik
-            validationSchema={{}}
-            initialValues={{}}
-            onSubmit={(value) => console.log(value)}
-          >
-            {({ errors, touched, values, handleChange }: any) => (
-              <Form>
-                {fields.map((field: any, index: number) => {
-                  const { name, type, label }: any = field;
-                  return (
-                    <div key={index}>
-                      <TextField
-                        fullWidth
-                        name={name}
-                        sx={{ mb: 2 }}
-                        label={label}
-                        error={touched[name] && Boolean(errors[name])}
-                        value={values[name]}
-                        onChange={handleChange}
-                        helperText={touched[name] && errors[name]}
-                        type={type}
-                      />
-                    </div>
-                  );
-                })}
-                {/* <Box sx={{ mt: 2 }} style={{ position: "absolute" }}>
-                  <Suspense fallback={<div></div>}>
-                    <ButtonWithLoaderComponent title={"Save"} loading={false} />
-                  </Suspense>
-                </Box> */}
-              </Form>
-            )}
-          </Formik>
-        </Box>
-      </Grid>
-    </Grid>
+    <div>
+      <FormControl sx={{ m: 1, width: 300 }}>
+        <InputLabel id="demo-multiple-chip-label">Chip</InputLabel>
+        <Select
+          labelId="demo-multiple-chip-label"
+          id="demo-multiple-chip"
+          multiple
+          value={personName}
+          onChange={handleChange}
+          input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+          renderValue={(selected) => (
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+              {selected.map((value) => (
+                <Chip key={value} label={value} />
+              ))}
+            </Box>
+          )}
+          MenuProps={MenuProps}
+        >
+          {names.map((name) => (
+            <MenuItem
+              key={name}
+              value={name}
+              style={getStyles(name, personName, theme)}
+            >
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </div>
   );
 }

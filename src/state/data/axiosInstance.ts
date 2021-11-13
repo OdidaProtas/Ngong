@@ -1,18 +1,21 @@
 import axios from "axios";
 
-const endpoint = "http://localhost:5000";
-const userToken = localStorage.getItem("userToken");
+const endpoint = "https://warm-meadow-66799.herokuapp.com";
+// const endpoint = "http://localhost:5000";
 
-// https://warm-meadow-66799.herokuapp.com
 
-const axiosInstance = axios.create({
+const axiosInstance:any = axios.create({
   baseURL: endpoint,
-  timeout: 15000,
+  timeout: 50000,
 });
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    config.headers.common["access_token"] = JSON.parse(userToken);
+    const userToken = localStorage.getItem("userToken");
+    if (userToken) {
+      config.headers.common["access_token"] = JSON.parse(userToken);
+    }
+
     return config;
   },
   (error) => {
@@ -21,4 +24,3 @@ axiosInstance.interceptors.request.use(
 );
 
 export default axiosInstance;
-

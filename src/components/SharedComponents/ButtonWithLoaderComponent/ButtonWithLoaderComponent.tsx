@@ -8,11 +8,13 @@ const CircularProgress = lazy(
 interface ButtonAndLoaderComponentInterface {
   loading: boolean;
   title: string;
+  disabled?: boolean;
 }
 
 export default function ButtonWithLoaderComponent({
   loading,
   title,
+  disabled,
 }: ButtonAndLoaderComponentInterface) {
   const classes = useStyles();
   return (
@@ -27,11 +29,12 @@ export default function ButtonWithLoaderComponent({
         <Button
           disableElevation
           fullWidth
+          disabled={disabled}
           variant="contained"
           type="submit"
           color="secondary"
           sx={{
-            textTransform:"none"
+            textTransform: "none",
           }}
         >
           {title}

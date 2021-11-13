@@ -5,12 +5,11 @@ export default function bootstrapAsync(dispatch: any) {
 
   try {
     userToken = localStorage.getItem("userToken");
+    if (userToken) {
+      const user = jwt_decode(JSON.parse(userToken));
+      dispatch({ type: "RESTORE_TOKEN", payload: user });
+    }
   } catch (e) {
     console.log("Token failed to restore");
-  }
-
-  if (userToken) {
-    const user = jwt_decode(JSON.parse(userToken));
-    dispatch({ type: "RESTORE_TOKEN", payload: user });
   }
 }

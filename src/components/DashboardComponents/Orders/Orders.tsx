@@ -4,6 +4,8 @@ import OrdersTabs from "./OrdersTabs";
 
 import { Switch, Route } from "react-router";
 import OrderDraftForm from "./Form/OrderDraftForm";
+import EmptyOrders from "./EmptyOrders";
+import AbandonedCheckouts from "./Tabs/AbandonedCheckouts";
 
 export default function Orders() {
   const { path } = useRouteMatch();
@@ -12,10 +14,13 @@ export default function Orders() {
     <div>
       <Switch>
         <Route exact path={path}>
-          <OrdersTabs />
+          <EmptyOrders />
         </Route>
         <Route exact path={`${path}/new`}>
           <OrderDraftForm />
+        </Route>
+        <Route exact path={`${path}/abandoned`}>
+          <AbandonedCheckouts />
         </Route>
       </Switch>
     </div>

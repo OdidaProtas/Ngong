@@ -3,8 +3,10 @@ import {
   DashboardScreen,
   HomeScreen,
   NotFoundScreen,
+  ProductScreen,
   SignInScreen,
   SignUpScreen,
+  StoreScreen,
   StoreSelectionScreen,
 } from "../../screens";
 
@@ -50,6 +52,20 @@ const navigationOptions = [
     path: "/store-login/:id",
     isExact: false,
     component: StoreSelectionScreen,
+  },
+  {
+    name: "Account",
+    isProtected: false,
+    path: "/products-preview/:id",
+    isExact: true,
+    component: ProductScreen,
+  },
+  {
+    name: "Account",
+    isProtected: false,
+    path: "/store-theme/:id",
+    isExact: false,
+    component: StoreScreen,
   },
   {
     name: "NotFoundScreen",

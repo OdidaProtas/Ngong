@@ -20,7 +20,6 @@ export default function DashProtectedRoute({
     store: { profile },
   } = state;
 
-  console.log(profile);
 
   return (
     <Route

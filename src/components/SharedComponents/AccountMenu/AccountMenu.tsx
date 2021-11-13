@@ -11,10 +11,12 @@ import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
-import { AuthContext } from "../../../state";
-import { useHistory } from "react-router";
+import { AuthContext, axiosInstance } from "../../../state";
+import { useHistory, useParams, useRouteMatch } from "react-router";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import { StateContext } from "../../../state/appstate";
+import useMyStores from "../../../hooks/stores/useMyStores";
+import OfflinePrompt from "./OfflinePrompt";
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -31,26 +33,38 @@ export default function AccountMenu() {
     authState: { user, loaded },
   }: any = React.useContext(AuthContext);
 
-  const {stateDispatch}:any = React.useContext(StateContext)
+  const sitati: any = React.useContext(StateContext);
 
   const history = useHistory();
 
-  if (!loaded) return <Avatar />;
+  if (!loaded || !user) return <Avatar />;
 
   const { firstName, lastName, email, id }: any = user;
 
   const handleSignIn = () => {
     signOut();
-    stateDispatch({type:"ADD_MY_STORES", payload:null})
+    sitati.stateDispatch({ type: "ADD_MY_STORES", payload: null });
     history.push("/");
   };
 
+  useMyStores();
+
+  React.useEffect(() => {
+    if (!sitati.myStores) {
+      sitati.stateDispatch({ type: "FETCH_STORES" });
+    }
+  }, []);
+
   return (
     <React.Fragment>
+      <OfflinePrompt />
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Account settings">
           <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
-            <Avatar sx={{ width: 36, height: 36 }}>
+            <Avatar
+              color="success"
+              sx={{ width: 36, height: 36, bgcolor: "orange" }}
+            >
               {firstName[0]}
               {lastName[0]}
             </Avatar>
@@ -87,7 +101,7 @@ export default function AccountMenu() {
               zIndex: 0,
             },
           },
-        }}
+        } as any}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
@@ -115,15 +129,9 @@ export default function AccountMenu() {
         <Divider />
         <MenuItem>
           <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
-          Settings
+          Account Settings
         </MenuItem>
         <MenuItem onClick={() => handleSignIn()}>
           <ListItemIcon>

@@ -16,6 +16,7 @@ import {
 } from "./state/authstate";
 import reducer from "./state/authstate/AuthReducer";
 import Loader from "./components/SharedComponents/Loader/Loader";
+import { usePageVisibility } from "./hooks/usePageVisibility";
 
 function App() {
   const [appState, stateDispatch]: any = useReducer(stateReducer, initialState);
@@ -30,14 +31,23 @@ function App() {
     []
   );
 
+  const isVisible = usePageVisibility();
+
+  useEffect(() => {
+    if (!isVisible) localStorage.setItem("state", JSON.stringify(appState));
+  }, [isVisible]);
+
+  useEffect(() => {
+    const cacheState = JSON.parse(localStorage.getItem("state"));
+    console.log(cacheState)
+  }, []);
+
   useEffect(() => {
     const bootstrapAuth = () => bootstrapAuthAsync(authDispatch);
     const bootstrapState = () => bootstrapStateAsync(stateDispatch);
     bootstrapAuth();
     bootstrapState();
   }, []);
-
-
 
   return (
     <AuthContext.Provider value={{ ...authContext, authState }}>

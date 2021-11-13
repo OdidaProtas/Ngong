@@ -1,37 +1,32 @@
 import InsightsIcon from "@mui/icons-material/Insights";
 import AssessmentIcon from "@mui/icons-material/Assessment";
 import SummarizeIcon from "@mui/icons-material/Summarize";
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import PeopleIcon from "@mui/icons-material/People";
 import MoveToInboxIcon from "@mui/icons-material/MoveToInbox";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import PublicIcon from '@mui/icons-material/Public';
 
 const analyticsItems: any = [
   {
-    title: "Overview",
-    icon: SummarizeIcon,
-    path: "overview",
-  },
-  {
-    title: "Insights",
+    title: "Analytics",
     icon: InsightsIcon,
-    path: "insights",
+    path: "overview",
   },
   {
     title: "Reports",
     icon: AssessmentIcon,
+    path: "insights",
+  },
+  {
+    title: "Live view",
+    icon: PublicIcon,
     path: "reports",
   },
 ];
 
 const drawerItems: any = [
-  {
-    title: "Home",
-    icon: HomeRoundedIcon,
-    path: "",
-  },
   {
     title: "Products",
     icon: LocalOfferIcon,

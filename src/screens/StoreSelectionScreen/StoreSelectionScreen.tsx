@@ -1,12 +1,9 @@
 import Grid from "@mui/material/Grid";
 import Box from "@mui/system/Box/Box";
-import React, { lazy, Suspense, useContext, useEffect } from "react";
+import { lazy, Suspense } from "react";
 import AccountMenu from "../../components/SharedComponents/AccountMenu/AccountMenu";
 
 import Logo from "../../assets/images/logo_transparent.png";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import Button from "@mui/material/Button";
 import {
   Route,
   Switch,
@@ -16,38 +13,13 @@ import {
 } from "react-router";
 import TbFallBack from "./TbFallBack";
 import StoreEmpty from "./StoreEmpty";
-import { AuthContext } from "../../state";
-import TablesSkeleton from "../../components/SharedComponents/TablesSkeleton/TablesSkeleton";
-import { AnyObject } from "yup/lib/object";
-import { useAxiosRequest } from "../../hooks";
 import StoreRoute from "./StoreRoute";
-import { StateContext } from "../../state/appstate";
 const StoreList = lazy(() => import("./StoreList"));
 const StoreForm = lazy(() => import("./StoreForm"));
 
 export default function StoreSelectionScreen() {
   const history = useHistory();
   const { path } = useRouteMatch();
-
-  const { loading, processRequest, data } = useAxiosRequest();
-
-  const { myStores, stateDispatch }: any = useContext(StateContext);
-
-  useEffect(() => {
-    if (myStores === null) {
-      processRequest({
-        method: "get",
-        endpoint: `/my-stores`,
-      });
-    }
-  }, []);
-
-  useEffect(() => {
-    if (data) {
-      stateDispatch({ type: "ADD_MY_STORES", payload: data });
-    }
-  }, [data]);
-
   return (
     <div className="signin" style={{ minHeight: "100vh" }}>
       <Grid container>
@@ -69,7 +41,7 @@ export default function StoreSelectionScreen() {
             >
               <Switch>
                 <StoreRoute
-                  loading={loading}
+                  loading={false}
                   component={StoreEmpty}
                   exact
                   path={path}

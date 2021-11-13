@@ -56,20 +56,6 @@ export default function BusinessForm() {
               <StepOne />
             </Suspense>
           </Grid>
-          <Grid item xs={12} md={4} lg={5} pt={2}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100%",
-              }}
-            >
-              <div style={{ textAlign: "center" }}>
-                <img width="70%" src={Setup} alt="Setup illustration" />
-              </div>
-            </div>
-          </Grid>
         </Grid>
       </div>
     </Container>

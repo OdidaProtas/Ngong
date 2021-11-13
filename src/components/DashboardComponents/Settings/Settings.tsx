@@ -28,7 +28,7 @@ export default function Settings() {
         if (index > -1) {
           newstores.splice(index, 1);
         }
-        stateDispatch({ type: "ADD_MY_STORES", payload: newstores });
+        // stateDispatch({ type: "ADD_MY_STORES", payload: newstores });
         setLoading(false);
         push(`/store-login/${id}`);
       })
@@ -41,9 +41,10 @@ export default function Settings() {
       {loading ? (
         `Deleting...`
       ) : (
-        <button onClick={handleDelete} style={{ marginTop: 100 }}>
-          delete store
-        </button>
+        <div></div>
+        // <button onClick={handleDelete} style={{ marginTop: 100 }}>
+        // delete store
+        // </button>
       )}
     </div>
   );

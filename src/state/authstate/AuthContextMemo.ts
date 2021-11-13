@@ -10,7 +10,6 @@ const authContextMemo = (dispatch: any, state: any) => ({
     localStorage.clear();
     dispatch({ type: "SIGN_OUT" });
   },
-  isLoggedIn: state.isLoggedIn,
 });
 
 export default authContextMemo;

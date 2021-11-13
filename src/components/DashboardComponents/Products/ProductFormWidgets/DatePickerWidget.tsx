@@ -1,21 +1,25 @@
-import Box from "@mui/material/Box/Box";
-import { useState } from "react";
+import * as React from "react";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
 
-export default function DatePickerWidget() {
-  const [value, setValue] = useState<Date | null>(new Date());
-
+export default function DatePickerWidget({ values, handleChange }: any) {
+  const date = new Date();
   return (
-    <Box sx={{ mt: 3 }}>
-      {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DateTimePicker
-          renderInput={(props) => <TextField {...props} />}
-          label="DateTimePicker"
-          value={value}
-          onChange={(newValue) => {
-            setValue(newValue);
-          }}
-        />
-      </LocalizationProvider> */}
-    </Box>
+    <Stack component="form" noValidate spacing={3} pt={3}>
+      <TextField
+        color="secondary"
+        size="small"
+        id="datetime-local"
+        label="Availability"
+        type="datetime-local"
+        name={"availability"}
+        onChange={handleChange}
+        value={values.availability}
+        fullWidth
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+    </Stack>
   );
 }

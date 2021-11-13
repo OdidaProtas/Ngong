@@ -1,80 +1,68 @@
-import { height } from "@mui/system";
-import React, { Component } from "react";
+import Skeleton from "@mui/material/Skeleton";
+import Grid from "@mui/material/Grid";
+import React, { useEffect, useState } from "react";
+import DropZone from "./ProductFormWidgets/DropZone";
+import { useParams } from "react-router";
+import { axiosInstance } from "../../../state";
+import CircularProgress from "@mui/material/CircularProgress";
 
-export default class MediaPicker extends Component<{}, any> {
-  fileObj: any = [];
-  fileArray: any = [];
+export default function MediaPicker({ images, setImages }: any) {
+  const [selectedLength, setSelectedLength] = useState(0);
+  const [loadig, setLoading] = useState(false);
 
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      file: [null],
-    };
-    this.uploadMultipleFiles = this.uploadMultipleFiles.bind(this);
-    this.uploadFiles = this.uploadFiles.bind(this);
-  }
+  const { productID }: any = useParams();
 
-  uploadMultipleFiles(e: any) {
-    this.fileObj.push(e.target.files);
-    for (let i = 0; i < this.fileObj[0].length; i++) {
-      this.fileArray.push(URL.createObjectURL(this.fileObj[0][i]));
-    }
-    this.setState({ file: this.fileArray });
-  }
+  useEffect(() => {
+    axiosInstance
+      .get(`/product-media/${productID}`)
+      .then((res) => {
+        const media = res.data.map((data: any) => data.url);
+        const newImages = [...images];
+        setImages(newImages.concat(media));
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
 
-  uploadFiles(e: any) {
-    e.preventDefault();
-    console.log(this.state.file);
-  }
-
-  fileRef: any = React.createRef();
-
-  upload() {
-    this.fileRef.current.click();
-  }
-
-  render() {
-    return (
-      <form>
-        <div className="form-group multi-preview">
-          {(this.fileArray || []).map((url: any) => (
-            <img src={url} alt="..." />
-          ))}
-        </div>
-
-        <div>
-          <div style={{ display: "grid" }}>
-            <button
-              style={{ height: 300, textAlign:"center" }}
-              type="button"
-              id="plus"
-              onClick={this.upload}
-            >
-              MEDIA  
-              <br />
-              +
-              <br />
-              Click or drag and drop files to upload
-            </button>
-          </div>
-          <input
-            ref={this.fileRef}
-            hidden
-            type="file"
-            style={{ height: 100 }}
-            // className="form-control"
-            onChange={this.uploadMultipleFiles}
-            multiple
-          />
-        </div>
-        {/* <button
-          type="button"
-          className="btn btn-danger btn-block"
-          onClick={this.uploadFiles}
+  return (
+    <div>
+      {loadig ? (
+        <div
+          style={{
+            position: "absolute",
+            padding: "100px",
+            alignItems: "center",
+            justifyContent: "center",
+          } as any}
         >
-          Upload
-        </button> */}
-      </form>
-    );
-  }
+          <CircularProgress />
+        </div>
+      ) : null}
+
+      <Grid container  mb={1}>
+        {images.map((img: any) => (
+          <Grid
+            sx={{
+              border: "1px solid gray",
+              borderRadius: "4px",
+            }}
+            item
+            xs={6}
+            md={3}
+          >
+            <img width="100%" src={img} />
+          </Grid>
+        ))}
+      </Grid>
+
+      <DropZone
+        setLoading={setLoading}
+        setImagesLength={setSelectedLength}
+        imagesLength={selectedLength}
+        images={images}
+        setImages={setImages}
+      />
+    </div>
+  );
 }

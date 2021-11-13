@@ -7,6 +7,7 @@ import { useContext, useEffect } from "react";
 import { useHistory, useParams, useRouteMatch } from "react-router";
 import TablesSkeleton from "../../components/SharedComponents/TablesSkeleton/TablesSkeleton";
 import { StateContext } from "../../state/appstate";
+import TbFallBack from "./TbFallBack";
 
 export default function StoreList() {
   const { push } = useHistory();
@@ -56,23 +57,28 @@ export default function StoreList() {
                   mb: 3,
                   mt: 3,
                   backgroundColor: "#EDF6F9",
-                  p: 3,
+                  p: 1,
                   borderRadius: "4px",
                   cursor: "pointer",
                   display: "flex",
                 }}
                 key={idx}
               >
-                <Avatar>
+                <Avatar sx={{ mt: 0.9 }}>
                   <StoreFrontIcon />
                 </Avatar>
-                <Typography sx={{ mt: 0.8, ml: 2 }} variant="h6">
-                  {name}
-                </Typography>
+                <Box component="span">
+                  <Typography sx={{ ml: 2 }} variant="h6">
+                    {name}
+                  </Typography>
+                  <Typography variant="caption" sx={{ ml: 2 }}>
+                    {name}.tokea.biz
+                  </Typography>
+                </Box>
               </Box>
             );
           })}
-        {!myStores ? <TablesSkeleton /> : null}
+        {!myStores ? <TbFallBack /> : null}
       </div>
     </div>
   );

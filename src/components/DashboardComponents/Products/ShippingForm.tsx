@@ -5,39 +5,48 @@ import Grid from "@mui/material/Grid/Grid";
 import TextField from "@mui/material/TextField/TextField";
 import Typography from "@mui/material/Typography/Typography";
 import React from "react";
+import UnitPicker from "./ProductFormWidgets/UnitPicker";
 
-export default function ShippingForm() {
+export default function ShippingForm({ handleChange, values }: any) {
   return (
     <div>
       <FormControlLabel
-        control={<Checkbox defaultChecked />}
+        control={
+          <Checkbox
+            size="small"
+            color="secondary"
+            name={"isPhysical"}
+            value={values.isPhysical}
+            onChange={handleChange}
+            defaultChecked={values.isPhysical}
+          />
+        }
         label="This is a physical product"
       />
-      <Divider sx={{ mt: 3, mb: 3 }} />
-      Weight
-      <br />
-      <Typography variant="caption">
-        Used to calculate shipping rates at checkout and label prices during
-        fulfillment.
-      </Typography>
-      <Grid container spacing={2} sx={{ mt: 2 }}>
-        <Grid item xs={6}>
-          <TextField placeholder="Ksh. 0.0" label="Price" fullWidth></TextField>
-        </Grid>
-        <Grid item xs={6}>
-            KG
-          {/* <TextField
-            placeholder="Ksh. 0.0"
-            label="Compare at Price"
-            fullWidth
-          ></TextField> */}
-        </Grid>
-      </Grid>
-      <Divider sx={{ mt: 3, mb: 3 }} />
-      <FormControlLabel
-        control={<Checkbox defaultChecked />}
-        label="This product has multiple options, like different sizes or colors"
-      />
+      {values.isPhysical ? (
+        <div>
+          <Divider sx={{ mt: 1, mb: 1 }} />
+          <Grid container spacing={2} sx={{ mt: 1 }}>
+            <Grid item xs={7} mb={2}>
+              <TextField
+                size="small"
+                helperText="Used to calculate shipping rates at checkout and label prices during
+              fulfillment."
+                placeholder="0.0"
+                label="Weight"
+                name="weight"
+                onChange={handleChange}
+                value={values.weight}
+                fullWidth
+                type="number"
+              ></TextField>
+            </Grid>
+            <Grid item xs={4}>
+              <UnitPicker values={values} handleChange={handleChange} />
+            </Grid>
+          </Grid>
+        </div>
+      ) : null}
     </div>
   );
 }

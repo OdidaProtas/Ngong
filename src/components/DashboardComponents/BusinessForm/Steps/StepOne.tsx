@@ -6,8 +6,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { useHistory, useRouteMatch } from "react-router";
-import { AuthContext } from "../../../../state";
+import { useHistory, useParams, useRouteMatch } from "react-router";
+import { AuthContext, axiosInstance } from "../../../../state";
 import { ButtonWithLoaderComponent } from "../../../SharedComponents";
 import { getCountNames, getSubcouties } from "../../../../state/data/locations";
 import Grid from "@mui/material/Grid";
@@ -23,19 +23,37 @@ import FormGroup from "@mui/material/FormGroup";
 import Container from "@mui/material/Container";
 import { Form, Formik } from "formik";
 import storeSchema from "./validationSchema";
+import DashboardContext from "../../../../navigation/DashboardNavigation/state";
 
 export default function StepOne() {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
-  const { user } = useContext(AuthContext) as any;
-  const { path, url } = useRouteMatch();
+  const { id }: any = useParams();
+  const { url } = useRouteMatch();
   const next = () => {
     history.push(`${url}/step-two`);
   };
 
   const counties = getCountNames();
 
-  const subcounties = getSubcouties("county");
+  const { store, dashboardDispatch }:any = useContext(DashboardContext);
+
+  const handleSubmit = (values) => {
+    setLoading(true);
+    axiosInstance
+      .post(`/stores/${id}`, values)
+      .then((res) => {
+        setLoading(false);
+        dashboardDispatch({
+          type: "ADD_STORE",
+          payload: { ...store, profile: res.data },
+        });
+        history.push(`/admin/${id}`);
+      })
+      .catch((e) => {
+        setLoading(false);
+      });
+  };
 
   return (
     <Container>
@@ -47,38 +65,41 @@ export default function StepOne() {
           subCounty: "",
           county: "",
           address: "",
-          apartmemt: "",
+          apartment: "",
           phoneNumber: "",
           isRegistered: false,
         }}
         validationSchema={storeSchema}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
+        onSubmit={handleSubmit}
       >
         {({ errors, touched, values, handleChange }) => (
           <Form>
             <Box sx={{ minWidth: 120, marginTop: "30px" }}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label-3">
-                  What industry will you be operating in?
-                </InputLabel>
-                <Select
-                  name="industry"
-                  labelId="demo-simple-select-label-3"
-                  id="demo-simple-select-3"
-                  value={values.industry}
-                  error={touched.industry && Boolean(errors.industry)}
-                  label="What industry will you be operating in?"
-                  onChange={handleChange}
-                >
-                  {categories.map((category) => (
-                    <MenuItem key={category} value={category}>
-                      {category}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+            <FormControl fullWidth variant="standard">
+                    <InputLabel
+                      variant="standard"
+                      htmlFor="uncontrolled-native0090"
+                    >
+                      What industry will you be operating in?
+                    </InputLabel>
+                    <NativeSelect
+                      onChange={handleChange}
+                      value={values.industry}
+                      error={touched.industry && Boolean(errors.industry)}
+                      inputProps={{
+                        name: "industry",
+                        id: "uncontrolled-native0090",
+                      }}
+                    >
+                      <option></option>
+                      {categories.map((category: any) => (
+                        <option key={category} value={category}>
+                          {category}
+                        </option>
+                      ))}
+                    </NativeSelect>
+                  </FormControl>
+              
             </Box>
             <Grid container spacing={2}>
               <Grid sx={{ mt: 2 }} item xs={6}>
@@ -155,9 +176,9 @@ export default function StepOne() {
               <TextField
                 label="Apartment"
                 name="apartment"
-                value={values.apartmemt}
-                helperText={touched.apartmemt && errors.apartmemt}
-                error={touched.apartmemt && Boolean(errors.apartmemt)}
+                value={values.apartment}
+                helperText={touched.apartment && errors.apartment}
+                error={touched.apartment && Boolean(errors.apartment)}
                 onChange={handleChange}
                 placeholder="Apartment, Suite, etc... "
                 fullWidth
@@ -171,6 +192,7 @@ export default function StepOne() {
                 helperText={touched.phoneNumber && errors.phoneNumber}
                 error={touched.phoneNumber && Boolean(errors.phoneNumber)}
                 label="Phone number"
+                type="tel"
                 placeholder="07 "
                 InputProps={{
                   startAdornment: (

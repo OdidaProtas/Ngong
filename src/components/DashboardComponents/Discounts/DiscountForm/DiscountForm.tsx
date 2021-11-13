@@ -103,7 +103,7 @@ export default function DiscountForm() {
                 mt: 3,
                 position: "fixed",
                 width: "25%",
-              }}
+              } as any}
             >
                 SUMMARY
             </Box>

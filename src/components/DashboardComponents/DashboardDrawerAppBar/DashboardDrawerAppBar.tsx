@@ -17,6 +17,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { LogoComponent } from "../../SharedComponents/";
 import StorefrontIcon from "@mui/icons-material/Storefront";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 
 import {
   useRouteMatch,
@@ -27,10 +28,10 @@ import {
 
 import { analyticsItems, drawerItems } from "./dataArray";
 import { StateContext } from "../../../state/appstate";
-import Avatar from "@mui/material/Avatar";
 import AccountMenu from "../../SharedComponents/AccountMenu/AccountMenu";
 import Container from "@mui/material/Container";
 import { AuthContext } from "../../../state";
+import useMyStores from "../../../hooks/stores/useMyStores";
 
 const drawerWidth = 240;
 
@@ -60,20 +61,24 @@ export default function DashboardDrawerAppBar(props: Props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const params: any = useParams();
+
+  const store = myStores?.filter((st: any) => st.id === params.id)[0];
+
   const handleNavigation = (newU: string) => {
     if (newU === "") {
-      history.push(`/admin/${id}`);
+      history.push(`/admin/${store.id}`);
     } else {
       history.push(`${url}/${newU}`);
     }
     handleDrawerToggle();
   };
 
-  const params: any = useParams();
-
-  const store = myStores?.filter((st: any) => st.id === params.id)[0];
-
   const { pathname } = useLocation();
+
+  useMyStores();
+
+  console.log(path);
 
   const drawer = (
     <div style={{ backgroundColor: "#e9ecef", minHeight: "100%" }}>
@@ -82,6 +87,14 @@ export default function DashboardDrawerAppBar(props: Props) {
       </Toolbar>
       <Divider />
       <List>
+        <ListItem
+          // selected={path === "/admin/:id"}
+          onClick={() => handleNavigation("")}
+          button
+        >
+          <ListItemIcon>{<HomeRoundedIcon />}</ListItemIcon>
+          <ListItemText primary={"Home"} />
+        </ListItem>
         {drawerItems.map((item: any, index: number) => {
           return (
             <ListItem
@@ -171,9 +184,9 @@ export default function DashboardDrawerAppBar(props: Props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            {myStores ? store.name : ""}
+            {myStores ? store?.name : ""}
           </Typography>
-          <div style={{ position: "absolute", right: 20 }}>
+          <div style={{ position: "absolute", right: 20 } as any}>
             <AccountMenu />
           </div>
         </Toolbar>
@@ -220,10 +233,10 @@ export default function DashboardDrawerAppBar(props: Props) {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           backgroundColor: "#e9ecef",
           minHeight: "100vh",
+          pt: 3,
         }}
       >
         <Toolbar />

@@ -1,51 +1,29 @@
 import Box from "@mui/material/Box/Box";
 import Button from "@mui/material/Button/Button";
-import TextField from "@mui/material/TextField/TextField";
 import Typography from "@mui/material/Typography/Typography";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { HoimeNavBar, HomeCreateStore } from "../../components/HomeComponents";
 
 import Logo from "../../assets/images/logo_transparent.png";
-import Toolbar from "@mui/material/Toolbar/Toolbar";
 
 import Automation from "../../assets/images/automation.png";
 import useModalControls from "../../hooks/modals/useModalControls";
 import { ModalDialog } from "../../components/SharedComponents";
 import { AuthContext } from "../../state";
 import { useHistory } from "react-router";
-import AccountMenu from "../../components/SharedComponents/AccountMenu/AccountMenu";
-import Loader from "../../components/SharedComponents/Loader/Loader";
 
 const ModalTitle = "Get started with Protus. Register a store";
 
 export default function HomeScreen() {
   const { open, toggle } = useModalControls();
   const {
-    authState: { isLoggedIn, loaded, user },
+    authState: { isLoggedIn, user },
   }: any = useContext(AuthContext);
   const history = useHistory();
-  const signOut = () => {};
 
   return (
     <>
-      {/* <HoimeNavBar /> */}
-      {/* <Toolbar> */}
-      <div style={{ textAlign: "right", padding: "6px" }}>
-        {isLoggedIn ? (
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <AccountMenu />
-          </div>
-        ) : (
-          <Button
-            onClick={() => history.push("/signin")}
-            sx={{ textTransform: "none" }}
-            size="small"
-          >
-            Login
-          </Button>
-        )}
-      </div>
-      {/* </Toolbar> */}
+      <HoimeNavBar />
       <Box sx={styles["root"]}>
         <ModalDialog title={ModalTitle} toggle={toggle} open={open}>
           <HomeCreateStore />
@@ -118,7 +96,7 @@ const styles: any = {
     alignItems: "center",
     textAlign: "center",
     backgroundColor: "#e9ecef",
-    minHeight:"100vh"
+    minHeight: "100vh",
   },
   tagline: {
     marginBottom: "1pc",

@@ -59,8 +59,8 @@ export default function SwitchMode({option}) {
         <MenuItem onClick={() => handleNav("")}>All products</MenuItem>
         <MenuItem onClick={() => handleNav("inventory")}>Inventory</MenuItem>
         <MenuItem onClick={() => handleNav("transfers")}>Transfers</MenuItem>
-        <MenuItem onClick={() => handleNav("collections/empty")}>Collections</MenuItem>
-        <MenuItem onClick={() => handleNav("gift-cards/empty")}>Gift cards</MenuItem>
+        <MenuItem onClick={() => handleNav("collections")}>Collections</MenuItem>
+        <MenuItem onClick={() => handleNav("gift-cards")}>Gift cards</MenuItem>
       </Menu>
     </div>
   );

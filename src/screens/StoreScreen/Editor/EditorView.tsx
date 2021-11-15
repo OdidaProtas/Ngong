@@ -1,19 +1,6 @@
-import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
-import Paper from "@mui/material/Paper";
-import Skeleton from "@mui/material/Skeleton";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/system/Box";
-import React, { useState } from "react";
-
-import landing from "../../../assets/images/landing-page-leads.png";
-import Appbar from "./EditoViewComponents/Appbar";
-import Collections from "./EditoViewComponents/Collections";
-import EmailSub from "./EditoViewComponents/EmailSub";
-import FeatureCards from "./EditoViewComponents/FeatureCards";
-import Footer from "./EditoViewComponents/Footer";
-import FullWidth from "./EditoViewComponents/FullWidth";
-import LandingPage from "./EditoViewComponents/LandingPage";
+import { useState } from "react";
+import HomePage from "./Pages/HomePage";
 
 export default function EditorView({ handleModeChange, mode }) {
   const [appTheme, setAppTheme] = useState({
@@ -21,20 +8,38 @@ export default function EditorView({ handleModeChange, mode }) {
     title: {},
   });
 
+  const isMobile = mode === "mobile";
+
   return (
-    <div style={{ border: "1px solid lightgray" }}>
-      <Box sx={{ p: 2, textAlign: "center" }}>
-        <Typography>Welcome to our store</Typography>
+    <div
+      style={{
+        display: isMobile ? "flex" : "block",
+        justifyContent: "center",
+        backgroundColor: "white",
+      }}
+    >
+      <Box
+        style={
+          {
+            border: "1px solid lightgray",
+            maxWidth: isMobile ? 300 : "100%",
+          } as any
+        }
+        className="editorview-desktop"
+      >
+        <HomePage mode={mode} handleModeChange={handleModeChange} />
       </Box>
-      <Divider />
-      <Appbar handleChangeMode={handleModeChange} mode={mode} />
-      <LandingPage />
-      <Divider />
-      <FeatureCards />
-      <Collections />
-      <FullWidth />
-      <EmailSub />
-      <Footer />
+      <Box
+        className="editorview-mobile"
+        style={
+          {
+            border: "1px solid lightgray",
+            maxWidth: "100%",
+          } as any
+        }
+      >
+        <HomePage mode={mode} handleModeChange={handleModeChange} />
+      </Box>
     </div>
   );
 }

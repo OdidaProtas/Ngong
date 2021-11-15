@@ -77,18 +77,19 @@ export default function GiftCardForm() {
     setLoading(true);
     if (!isEdit) {
       axiosInstance
-        .post(`/products/${id}`, { ...value })
+        .post(`/gift-cards`, { ...value, store: id })
         .then((res) => {
           setLoading(false);
-          stateDispatch({ type: "ADD_PRODUCT", payload: res.data });
-          history.push(`/admin/${id}/products/${res.data.id}`);
+          stateDispatch({ type: "ADD_GIFTCARD", payload: res.data });
+          history.push(`/admin/${id}/products/gift-cards`);
         })
-        .catch((e) => {
+        .catch((e) => { 
+          alert("An error ocured")
           setLoading(false);
         });
     } else {
       axiosInstance
-        .patch(`/products/${productID}`, { ...value })
+        .patch(`/gift-cards/${productID}`, { ...value })
         .then((res) => {
           stateDispatch({
             type: "UPDATE_PRODUCT",
@@ -144,7 +145,7 @@ export default function GiftCardForm() {
   };
 
   const handlePreview = () => {
-    history.push(`/products-preview/${productID}`);
+    // history.push(`/products-preview/${productID}`);
     handleClose();
   };
 
@@ -153,7 +154,7 @@ export default function GiftCardForm() {
       const index = myProducts?.indexOf(prod);
       if (index > -1) {
         const next = myProducts[index + 1]?.id;
-        history.push(`/admin/${id}/products/${next}`);
+        // history.push(`/admin/${id}/products/${next}`);
       }
     }
   };
@@ -163,7 +164,7 @@ export default function GiftCardForm() {
       const index = myProducts?.indexOf(prod);
       if (index > 0) {
         const next = myProducts[index - 1]?.id;
-        history.push(`/admin/${id}/products/${next}`);
+        // history.push(`/admin/${id}/products/${next}`);
       }
     }
   };
@@ -353,23 +354,11 @@ export default function GiftCardForm() {
                           mt: 3,
                         }}
                       >
+                        Save product to upload media
                         {isEdit ? (
                           <MediaPicker setImages={setImages} images={images} />
                         ) : null}
                       </Box>
-                      <Box
-                        sx={{
-                          bgcolor: "background.paper",
-                          p: { lg: 4, md: 1, xs: 1 },
-                          borderRadius: "4px",
-                          pt: { lg: 3, md: 3, xs: 3 },
-                          mt: 3,
-                        }}
-                      >
-                        <Typography sx={{ mt: 2, mb: 1 }}>PRICING</Typography>
-                        <Pricing values={values} handleChange={handleChange} />
-                      </Box>
-
                       <Divider />
                       <Box
                         sx={{
@@ -431,14 +420,16 @@ export default function GiftCardForm() {
                 </Grid>
               </div>
               <div
-                style={{
-                  position: "fixed",
-                  bottom: 0,
-                  right: 0,
-                  backgroundColor: "gray",
-                  padding: 20,
-                  width: "100%",
-                } as any}
+                style={
+                  {
+                    position: "fixed",
+                    bottom: 0,
+                    right: 0,
+                    backgroundColor: "gray",
+                    padding: 20,
+                    width: "100%",
+                  } as any
+                }
               >
                 <div style={{ display: "flex", justifyContent: "flex-end" }}>
                   <div>

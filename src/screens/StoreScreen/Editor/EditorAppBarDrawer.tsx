@@ -38,7 +38,7 @@ interface Props {
 }
 
 export default function EditorAppBarDrawer(props: any) {
-  const { window, children, handleModeChange } = props;
+  const { window, children, handleModeChange, mode } = props;
   let { url, path } = useRouteMatch();
   const history = useHistory();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -71,10 +71,10 @@ export default function EditorAppBarDrawer(props: any) {
 
   useMyStores();
 
-  console.log(path);
-
   const container =
     window !== undefined ? () => window().document.body : undefined;
+
+  const isMobile = mode === "mobile";
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -101,10 +101,16 @@ export default function EditorAppBarDrawer(props: any) {
             {myStores ? store?.name : ""}
           </Typography>
           <div style={styles}>
-            <IconButton onClick={() => handleModeChange("desktop")}>
+            <IconButton
+              color={!isMobile ? "secondary" : "inherit"}
+              onClick={() => handleModeChange("desktop")}
+            >
               <DesktopWindowsIcon />
             </IconButton>
-            <IconButton onClick={() => handleModeChange("mobile")}>
+            <IconButton
+              color={isMobile ? "secondary" : "inherit"}
+              onClick={() => handleModeChange("mobile")}
+            >
               <PhoneAndroidIcon />
             </IconButton>
             {/* <IconButton>

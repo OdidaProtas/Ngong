@@ -54,3 +54,47 @@ input[type="file"] {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.editorview-desktop {
+  display: block;
+}
+
+.editorview-mobile {
+  display: none;
+}
+
+@media all and (min-width: 1024px) and (max-width: 1280px) {
+  .editorview-mobile {
+    display: none;
+  }
+  .editorview-desktop {
+    display: block;
+  }
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .editorview-mobile {
+    display: none;
+  }
+  .editorview-desktop {
+    display: block;
+  }
+}
+
+@media all and (min-width: 480px) and (max-width: 768px) {
+  .editorview-mobile {
+    display: block;
+  }
+  .editorview-desktop {
+    display: none;
+  }
+}
+
+@media all and (max-width: 480px) {
+  .editorview-mobile {
+    display: block;
+  }
+  .editorview-desktop {
+    display: none;
+  }
+}

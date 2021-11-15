@@ -16,24 +16,28 @@ export default function Conditions() {
       <FormControl component="fieldset">
         <FormLabel component="legend">Procucts must match</FormLabel>
         <RadioGroup
+          
+          sx={{ mt: 1, mb: 3 }}
           aria-label="gender"
           defaultValue="female"
+          row
           name="radio-buttons-group"
         >
           <FormControlLabel
             value="female"
-            control={<Radio />}
+            control={<Radio disabled color="secondary" size="small" />}
             label="All conditions"
           />
           <FormControlLabel
             value="male"
-            control={<Radio />}
+            control={<Radio disabled color="secondary" size="small" />}
             label="Any conditions"
           />
         </RadioGroup>
       </FormControl>
       <CollectionConditions />
       <Button
+      disabled
         color="inherit"
         disableElevation
         variant="outlined"

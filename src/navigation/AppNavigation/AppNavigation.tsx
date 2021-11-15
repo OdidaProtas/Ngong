@@ -5,6 +5,14 @@ import Loader from "../../components/SharedComponents/Loader/Loader";
 import navigationOptions from "./AppNavigationSchema";
 
 export default function BusinessNavigation() {
+  if (window.location.host.split(".")[0] == "shop")
+    return (
+      <div>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus,
+        fugit sint eum minus molestiae corrupti nihil nisi ex quod minima saepe
+        omnis maiores, nesciunt soluta inventore ducimus iusto voluptate
+      </div>
+    );
   return (
     <Suspense
       fallback={

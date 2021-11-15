@@ -9,6 +9,7 @@ import {
   StoreScreen,
   StoreSelectionScreen,
 } from "../../screens";
+import Logout from "../../screens/LogoutScreen/Logout";
 
 const navigationOptions = [
   {
@@ -66,6 +67,13 @@ const navigationOptions = [
     path: "/store-theme/:id",
     isExact: false,
     component: StoreScreen,
+  },
+  {
+    name: "Logout",
+    isProtected: false,
+    path: "/logout",
+    isExact: false,
+    component: Logout,
   },
   {
     name: "NotFoundScreen",

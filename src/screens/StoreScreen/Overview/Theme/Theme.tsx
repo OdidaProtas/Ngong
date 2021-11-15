@@ -8,7 +8,7 @@ import Skeleton from "@mui/material/Skeleton";
 import Typography from "@mui/material/Typography";
 import React from "react";
 
-import LandingImg from "../../../../assets/images/landing-page-leads.png";
+import LandingImg from "../../../../assets/images/template.png";
 import useModalControls from "../../../../hooks/modals/useModalControls";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useHistory, useParams } from "react-router";

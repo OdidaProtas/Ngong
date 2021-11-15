@@ -84,7 +84,7 @@ export default function CollectionConditionsItem() {
           <CollectionsSelect options={equatorOptions} label="Is equal to" />
         </Grid>
         <Grid item xs>
-          <TextField size="small" />
+          <TextField disabled size="small" />
           {/* <CollectionsSelect /> */}
         </Grid>
       </Grid>

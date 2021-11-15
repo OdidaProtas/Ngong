@@ -63,7 +63,67 @@ const stateReducer = (state: any, action: any) => {
         myProducts: items,
       };
 
-      case "RESTORE_CACHE":
+    case "ADD_SUPPLIERS":
+      return {
+        ...state,
+        suppliers: action.payload,
+        supplierLoading: false,
+      };
+    case "SUPPLIERS_LOADING":
+      return {
+        ...state,
+        supplierLoading: true,
+      };
+
+    case "ADD_SUPPLIER":
+      const suppliers = [...state.suppliers];
+      suppliers.push(action.payload);
+      return {
+        ...state,
+        suppliers: suppliers,
+      };
+
+    case "ADD_TRANSFERS":
+      return {
+        ...state,
+        transfers: action.payload,
+      };
+
+    case "ADD_TRANSFER":
+      const data = state.transfers || [];
+      data.push(action.payload);
+      return {
+        ...state,
+        transfers: data,
+      };
+
+    case "ADD_COLLECTIONS":
+      return {
+        ...state,
+        collections: action.payload,
+      };
+
+    case "ADD_GIFTCARDS":
+      return {
+        ...state,
+        giftCards: action.payload,
+      };
+
+    case "ADD_GIFTCARD":
+      const g = state.giftCards || [];
+      g.push(action.payload);
+      return {
+        ...state,
+        giftCards: g,
+      };
+
+    case "ADD_COLLECTION":
+      const c = state.collections || [];
+      c.push(action.payload);
+      return {
+        ...state,
+        collections: c,
+      };
 
     default:
       return {

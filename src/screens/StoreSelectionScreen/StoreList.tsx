@@ -49,7 +49,8 @@ export default function StoreList() {
       <div>
         {myStores &&
           myStores.map((store: any, idx: any) => {
-            const { name, id } = store;
+            const { name, id }: any = store;
+            
             return (
               <Box
                 onClick={() => push(`/admin/${id}`)}
@@ -72,7 +73,7 @@ export default function StoreList() {
                     {name}
                   </Typography>
                   <Typography variant="caption" sx={{ ml: 2 }}>
-                    {name}.tokea.biz
+                    {name?.toLowerCase().split(" ").join("-")}.tokea.biz
                   </Typography>
                 </Box>
               </Box>

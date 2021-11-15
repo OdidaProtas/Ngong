@@ -78,6 +78,7 @@ export default function GiftCardOptions({ option, handleDelete, onSubmit }: any)
             size="small"
             color="secondary"
             placeholder="0"
+            disabled  
             name="option"
             value={optionName}
             onChange={(e: any) => setOptionName(e.target.value)}

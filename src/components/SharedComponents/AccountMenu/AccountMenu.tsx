@@ -44,7 +44,7 @@ export default function AccountMenu() {
   const handleSignIn = () => {
     signOut();
     sitati.stateDispatch({ type: "ADD_MY_STORES", payload: null });
-    history.push("/");
+    history.push("/logout");
   };
 
   useMyStores();

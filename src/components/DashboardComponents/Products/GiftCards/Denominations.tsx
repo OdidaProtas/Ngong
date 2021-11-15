@@ -69,7 +69,6 @@ export default function Denominations({ handleChange, values }: any) {
 
   return (
     <div>
-
       {true ? (
         <div>
           <Divider sx={{ mt: 3, mb: 1 }} />
@@ -92,6 +91,9 @@ export default function Denominations({ handleChange, values }: any) {
               color="secondary"
             >
               Add another option
+            </Button>
+            <Button sx={{ ml: 2, textTransform: "none" }} color="inherit">
+              Done
             </Button>
           </Box>
         </div>

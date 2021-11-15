@@ -14,10 +14,12 @@ export default function LandingPage() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            backgroundSize: "cover",
+            backgroundImage:
+              "url(https://res.cloudinary.com/dreamnerd/image/upload/v1636780397/media/oa4uyq5dzcotureiprvf.jpg)",
           }}
         >
-          {/* <img width="100%" src={landing} alt="" /> */}
-          <Box sx={{ textAlign: "center" }}>
+          <Box sx={{ textAlign: "center", bgcolor: "white", p: 6 }}>
             <Typography variant="h6">Make your brand visible</Typography>
             <Button
               disableElevation
@@ -26,7 +28,7 @@ export default function LandingPage() {
               variant="contained"
               sx={{ textTransform: "none", mt: 3 }}
             >
-              View our catalog
+              Shop all
             </Button>
           </Box>
         </div>

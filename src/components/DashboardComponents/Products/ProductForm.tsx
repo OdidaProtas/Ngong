@@ -188,7 +188,7 @@ export default function ProductForm() {
                 <Box>
                   <Button
                     type="button"
-                    onClick={() => history.push(`/admin/${id}/products`)}
+                    onClick={() => history.goBack()}
                     sx={{ mb: 2, textTransform: "none" }}
                     size="small"
                     color="secondary"
@@ -197,7 +197,7 @@ export default function ProductForm() {
                     {isEdit ? values.title : "Add Products"}
                   </Button>
                   {isEdit ? (
-                    <Box sx={{ display: "inline", mt:-2 }}>
+                    <Box sx={{ display: "inline", ml: 2 }}>
                       <StatusChip status={values.status} />
                     </Box>
                   ) : null}
@@ -438,14 +438,16 @@ export default function ProductForm() {
                 </Grid>
               </div>
               <div
-                style={{
-                  position: "fixed",
-                  bottom: 0,
-                  right: 0,
-                  backgroundColor: "gray",
-                  padding: 20,
-                  width: "100%",
-                } as any}
+                style={
+                  {
+                    position: "fixed",
+                    bottom: 0,
+                    right: 0,
+                    backgroundColor: "gray",
+                    padding: 20,
+                    width: "100%",
+                  } as any
+                }
               >
                 <div style={{ display: "flex", justifyContent: "flex-end" }}>
                   <div>

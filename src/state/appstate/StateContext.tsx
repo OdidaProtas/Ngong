@@ -6,6 +6,13 @@ export const initialState = {
   loadingStores: false,
   myProducts: null,
   productLoading: false,
+  suppliers: null,
+  supplierLoading: false,
+  vendors: null,
+  transfers: null,
+  transfersLoading: false,
+  collections: null,
+  giftCards: null,
 };
 
 const StateContext = createContext(initialState);

@@ -36,6 +36,8 @@ export default function Nav({ option }) {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         color="secondary"
+        disableElevation
+        disableRipple
         endIcon={<ArrowDropDownCircle />}
         sx={{ textTransform: "none" }}
       >
@@ -57,6 +59,7 @@ export default function Nav({ option }) {
         }}
       >
         <MenuItem onClick={() => handleNav("")}>Orders</MenuItem>
+        <MenuItem onClick={() => handleNav("drafts")}>Draft orders</MenuItem>
         <MenuItem onClick={() => handleNav("abandoned")}>
           Abandoned Checkouts
         </MenuItem>

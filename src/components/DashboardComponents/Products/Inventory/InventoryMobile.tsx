@@ -26,6 +26,7 @@ import { makeStyles } from "@mui/styles";
 import Collapse from "@mui/material/Collapse";
 import MobileSelectedHeader from "../ProductLists/MobileSelectedHeader";
 import AddSetMode from "./AddSetMode";
+import InventoryTransferPopover from "./InventoryTransferPopover";
 
 const useRowStyles = makeStyles({
   root: {
@@ -472,7 +473,12 @@ function Row(props) {
                 : "Inventory not tracked"
             }`}
           </Typography>
-          <Typography variant="caption">Incoming: 0</Typography>
+          <Typography variant="caption">
+            Incoming:{" "}
+            <span style={{ display: "inline" }}>
+              <InventoryTransferPopover />
+            </span>
+          </Typography>
         </TableCell>
 
         <TableCell padding="none" align="right">

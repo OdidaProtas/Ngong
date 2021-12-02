@@ -36,19 +36,33 @@ export default function Reports() {
       </Badge>
       <Suspense
         fallback={
-          <div>
-            <Skeleton height={25} width={25}  variant="circular"></Skeleton>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              minHeight: "87vh",
+            }}
+          >
+            <Skeleton
+              sx={{ mb: 24}}
+              height={360}
+              width={360}
+              variant="circular"
+            ></Skeleton>
           </div>
         }
       >
         <Globe />
       </Suspense>
-      <div style={{ position: "fixed", bottom: 30 } as any}>
+      <div style={{ position: "fixed", bottom: 10 } as any}>
         <Grid container spacing={2}>
           {options.map(({ title, desc, items }, idx) => (
             <Grid key={idx} item xs={12} lg={6}>
               <Paper sx={{ p: 3 }} elevation={0}>
                 {title}
+
+                <Typography color="secondary" variant="h5">0</Typography>
               </Paper>
             </Grid>
           ))}

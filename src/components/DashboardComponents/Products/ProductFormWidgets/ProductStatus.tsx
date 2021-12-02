@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import useModalControls from "../../../../hooks/modals/useModalControls";
 import { ModalDialog } from "../../../SharedComponents";
 import DatePickerWidget from "./DatePickerWidget";
+import SelectSalesChanell from "./SelectSalesChanell";
 
 export default function ProductStatus({
   handleChange,
@@ -24,7 +25,7 @@ export default function ProductStatus({
 
   return (
     <div>
-      <Typography sx={{ mb: 2 }}>PRODUCT STATUS</Typography>
+      <Typography sx={{ mb: 2 }}>Product status</Typography>
       <ModalDialog toggle={toggle} open={open}>
         <Box sx={{ mt: 1 }}>
           <Typography>Schedule product availability</Typography>
@@ -48,20 +49,7 @@ export default function ProductStatus({
             <MenuItem value={"archived"}>Archived</MenuItem>
           </Select>
         </FormControl>
-        <Typography variant="caption" sx={{ mt: 2 }}>
-          {JSON.parse(isActive)
-            ? "This product will be available to 1 sales channel."
-            : "This product will be hidden from all sales channels."}
-        </Typography>
-        <Divider sx={{ my: 1 }} />
-        <Button
-          color="secondary"
-          size="small"
-          onClick={toggle}
-          sx={{ textTransform: "none" }}
-        >
-          Schedule Availability
-        </Button>
+        {value.status === "active" ? <SelectSalesChanell /> : null}
         <Typography sx={{ mt: 1 }}>{value.availability}</Typography>
       </div>
     </div>

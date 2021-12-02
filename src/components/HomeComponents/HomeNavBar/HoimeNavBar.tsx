@@ -6,6 +6,7 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
@@ -16,6 +17,12 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import AccountMenu from "../../SharedComponents/AccountMenu/AccountMenu";
+import Button from "@mui/material/Button";
+import Popover from "@mui/material/Popover";
+import { LogoComponent } from "../../SharedComponents";
+
+import logo from "../../../assets/images/logo_transparent.png";
+import { useHistory } from "react-router";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -61,6 +68,8 @@ export default function HoimeNavBar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
+
+  const { push } = useHistory();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -129,7 +138,7 @@ export default function HoimeNavBar() {
         </IconButton>
         <p>Messages</p>
       </MenuItem>
-      <MenuItem>
+      {/* <MenuItem>
         <IconButton
           size="small"
           aria-label="show 17 new notifications"
@@ -140,7 +149,7 @@ export default function HoimeNavBar() {
           </Badge>
         </IconButton>
         <p>Notifications</p>
-      </MenuItem>
+      </MenuItem> */}
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -158,7 +167,7 @@ export default function HoimeNavBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar color="secondary" elevation={0} position="fixed">
+      <AppBar color="inherit" elevation={0} position="fixed">
         <Toolbar>
           {/* <IconButton
             size="large"
@@ -169,15 +178,46 @@ export default function HoimeNavBar() {
           >
             <MenuIcon />
           </IconButton> */}
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            Bizna
-          </Typography>
-          <Search>
+          <Toolbar>
+            <img style={{ maxHeight: "66px" }} src={logo} />
+          </Toolbar>
+          <Box sx={{ display: { lg: "flex", xs: "none" } }}>
+            <Box>
+              <Button
+                sx={{ mt: 0.5, textTransform: "none", ml: 3 }}
+                disableElevation
+                color="inherit"
+                size="small"
+                endIcon={<KeyboardArrowDownIcon />}
+              >
+                Sell
+              </Button>
+            </Box>
+            <Box>
+              <Button
+                sx={{ mt: 0.5, textTransform: "none", mr: 2 }}
+                disableElevation
+                color="inherit"
+                size="small"
+                endIcon={<KeyboardArrowDownIcon />}
+              >
+                Market
+              </Button>
+            </Box>
+            <Box>
+              <Button
+                sx={{ mt: 0.5, textTransform: "none", mr: 2 }}
+                disableElevation
+                color="inherit"
+                size="small"
+                endIcon={<KeyboardArrowDownIcon />}
+              >
+                Manage
+              </Button>
+            </Box>
+          </Box>
+
+          {/* <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -185,10 +225,57 @@ export default function HoimeNavBar() {
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
             />
-          </Search>
+          </Search> */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
+            <Box>
+              <Button
+                sx={{ mt: 0.5, textTransform: "none", mr: 2 }}
+                disableElevation
+                color="inherit"
+                size="small"
+                endIcon={<KeyboardArrowDownIcon />}
+              >
+                Pricing
+              </Button>
+            </Box>
+            <Box>
+              <Button
+                sx={{ mt: 0.5, textTransform: "none", mr: 2 }}
+                disableElevation
+                color="inherit"
+                size="small"
+                endIcon={<KeyboardArrowDownIcon />}
+              >
+                Learn
+              </Button>
+            </Box>
+            <Box>
+              <Button
+                onClick={() => push("/signin")}
+                sx={{ mt: 0.5, textTransform: "none", mr: 2 }}
+                disableElevation
+                color="inherit"
+                size="small"
+              >
+                Login
+              </Button>
+            </Box>
+            <Box>
+              {/* <Button
+                onClick={() => push("/signin/new")}
+                sx={{ mt: 0.5, textTransform: "none" }}
+                disableElevation
+                color="secondary"
+                size="small"
+                variant="contained"
+              >
+                Get started
+              </Button> */}
+              <AccountMenu />
+            </Box>
+
+            {/* <IconButton
               size="small"
               aria-label="show 4 new mails"
               color="inherit"
@@ -205,16 +292,53 @@ export default function HoimeNavBar() {
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
-            <AccountMenu />
+            </IconButton> */}
+            {/* <AccountMenu /> */}
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <AccountMenu/>
+            <AccountMenu />
           </Box>
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
     </Box>
+  );
+}
+
+function BasicPopover() {
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
+  return (
+    <div>
+      <Button aria-describedby={id} variant="contained" onClick={handleClick}>
+        Open Popover
+      </Button>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+      >
+        <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+      </Popover>
+    </div>
   );
 }

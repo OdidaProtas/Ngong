@@ -32,6 +32,7 @@ import AccountMenu from "../../SharedComponents/AccountMenu/AccountMenu";
 import Container from "@mui/material/Container";
 import { AuthContext } from "../../../state";
 import useMyStores from "../../../hooks/stores/useMyStores";
+import Nav from "./Nav";
 
 const drawerWidth = 240;
 
@@ -78,52 +79,22 @@ export default function DashboardDrawerAppBar(props: Props) {
 
   useMyStores();
 
-  console.log(path);
-
   const drawer = (
-    <div style={{ backgroundColor: "#e9ecef", minHeight: "100%" }}>
+    <div className="drawer" style={{ backgroundColor: "#e9ecef", minHeight:"100vh"}}>
       <Toolbar>
         <LogoComponent />
       </Toolbar>
       <Divider />
       <List>
-        <ListItem
-          // selected={path === "/admin/:id"}
-          onClick={() => handleNavigation("")}
-          button
-        >
+        <ListItem onClick={() => history.push(`/admin/${store.id}`)} button>
           <ListItemIcon>{<HomeRoundedIcon />}</ListItemIcon>
           <ListItemText primary={"Home"} />
         </ListItem>
-        {drawerItems.map((item: any, index: number) => {
-          return (
-            <ListItem
-              onClick={() => handleNavigation(item.path)}
-              button
-              key={index}
-              selected={pathname.includes(item.path)}
-            >
-              <ListItemIcon>{<item.icon />}</ListItemIcon>
-              <ListItemText primary={item.title} />
-            </ListItem>
-          );
-        })}
       </List>
       <Divider />
-      <List>
-        {analyticsItems.map((item: any, index: number) => (
-          <ListItem
-            onClick={() => handleNavigation(item.path)}
-            button
-            key={index}
-            selected={pathname.includes(item.path)}
-          >
-            <ListItemIcon>{<item.icon />}</ListItemIcon>
-            <ListItemText primary={item.title} />
-          </ListItem>
-        ))}
-      </List>
+      <Nav toggle={handleDrawerToggle} options={drawerItems} />
       <Divider />
+      <Nav toggle={handleDrawerToggle} options={analyticsItems} />
       <List>
         {["Sales Channels"].map((text, index) => (
           <ListItem
@@ -236,7 +207,7 @@ export default function DashboardDrawerAppBar(props: Props) {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           backgroundColor: "#e9ecef",
           minHeight: "100vh",
-          pt: 3,
+          pt: 1,
         }}
       >
         <Toolbar />

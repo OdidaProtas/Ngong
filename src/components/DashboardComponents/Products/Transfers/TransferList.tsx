@@ -1,3 +1,4 @@
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import React from "react";
@@ -23,8 +24,11 @@ export default function TransferList() {
           </Button>
         </div>
       </div>
-
+      <Box>
       <TransferListDesktop />
+      </Box>
+      <Box>
+      </Box>
     </div>
   );
 }

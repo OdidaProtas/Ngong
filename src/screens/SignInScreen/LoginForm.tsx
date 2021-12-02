@@ -34,6 +34,7 @@ export default function LoginForm() {
         history.push(`/store-login/${user.id}`);
       })
       .catch((e) => {
+        alert("An error occured while loggin in");
         setLoading(false);
       });
   };

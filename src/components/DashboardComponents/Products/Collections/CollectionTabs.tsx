@@ -4,6 +4,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CollectionsTable from "./CollectionsTable";
+import CollectionsMobile from "./CollectionsMobile";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -71,16 +72,36 @@ export default function CollectionsTabs() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-          <CollectionsTable/>
+        <Box sx={{ display: { lg: "none", xs: "block" } }}>
+          <CollectionsMobile />
+        </Box>
+        <Box sx={{ display: { lg: "block", xs: "none" } }}>
+          <CollectionsTable />
+        </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>
-          {/* <CollectionsTable/> */}
+        <Box sx={{ display: { lg: "none", xs: "block" } }}>
+          <CollectionsMobile />
+        </Box>
+        <Box sx={{ display: { lg: "block", xs: "none" } }}>
+          <CollectionsTable />
+        </Box>
       </TabPanel>
       <TabPanel value={value} index={2}>
-          {/* <CollectionsTable/> */}
+        <Box sx={{ display: { lg: "none", xs: "block" } }}>
+          <CollectionsMobile />
+        </Box>
+        <Box sx={{ display: { lg: "block", xs: "none" } }}>
+          <CollectionsTable />
+        </Box>
       </TabPanel>
       <TabPanel value={value} index={3}>
-          {/* <CollectionsTable/> */}
+        <Box sx={{ display: { lg: "none", xs: "block" } }}>
+          <CollectionsMobile />
+        </Box>
+        <Box sx={{ display: { lg: "block", xs: "none" } }}>
+          <CollectionsTable />
+        </Box>
       </TabPanel>
     </Box>
   );

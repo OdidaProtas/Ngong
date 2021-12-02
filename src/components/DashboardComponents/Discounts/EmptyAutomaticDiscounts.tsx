@@ -5,12 +5,14 @@ import React from "react";
 import { useHistory, useRouteMatch } from "react-router";
 
 import DiscountIllustration from "../../../assets/images/discounts.png";
+import SwitchMode from "./SwitchMode";
 
 export default function EmptyAutomaticDiscounts() {
   const { url } = useRouteMatch();
   const history = useHistory();
   return (
     <div>
+      <SwitchMode option="Automatic discounts"/>
       <Box
         sx={{
           bgcolor: "background.paper",
@@ -32,7 +34,7 @@ export default function EmptyAutomaticDiscounts() {
           variant="contained"
           color="secondary"
           sx={{ textTransform: "none", mb: 3 }}
-          onClick={()=>history.push(`${url}/new/automatic`)}
+          onClick={()=>history.push(`${url}/new`)}
         >
           Create automatic discount
         </Button>

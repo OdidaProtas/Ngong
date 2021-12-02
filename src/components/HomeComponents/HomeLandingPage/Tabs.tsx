@@ -28,7 +28,7 @@ const action = () => {
       onClick={() => push(`/admin/${id}/settings`)}
       disableElevation
       variant="contained"
-      sx={{ textTransform: "none" }}
+      sx={{ textTransform: "none", mt: 1 }}
       color="secondary"
       size="small"
     >
@@ -72,14 +72,15 @@ export default function VerticalTabs() {
   };
 
   const { url } = useRouteMatch();
-  const history = useHistory();
+  const {push} = useHistory();
+  const { id }: any = useParams();
 
   return (
     <Box>
       <SnackbarContent
         sx={{ mt: 3 }}
         elevation={0}
-        message="Give your business time to grow. Get Bizna monthly or select a one-year, two-year, or three-year plan for savings of up to 25%."
+        message="Give your business time to grow. Get MyBizz monthly or select a one-year, two-year, or three-year plan for savings of up to 25%."
         action={action()}
       />
       <Box
@@ -228,7 +229,7 @@ export default function VerticalTabs() {
               color="secondary"
               variant="contained"
               sx={{ mt: 6, textTransform: "none", mb: 4 }}
-              onClick={() => history.push(`${url}/products/new`)}
+              onClick={() => push(`${url}/products/new`)}
             >
               Add product
             </Button>
@@ -249,6 +250,7 @@ export default function VerticalTabs() {
               disableElevation
               color="secondary"
               variant="contained"
+              onClick={() => push(`/store-theme/${id}/editor`)}
               sx={{ mt: 6, textTransform: "none", mb: 4 }}
             >
               Customize theme
@@ -270,6 +272,7 @@ export default function VerticalTabs() {
               disableElevation
               color="secondary"
               variant="contained"
+              onClick={() => push(`/admin/${id}/sales-channels`)}
               sx={{ mt: 6, textTransform: "none", mb: 4 }}
             >
               Add channels

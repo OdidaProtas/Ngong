@@ -83,8 +83,8 @@ export default function GiftCardForm() {
           stateDispatch({ type: "ADD_GIFTCARD", payload: res.data });
           history.push(`/admin/${id}/products/gift-cards`);
         })
-        .catch((e) => { 
-          alert("An error ocured")
+        .catch((e) => {
+          alert("An error ocured");
           setLoading(false);
         });
     } else {
@@ -413,6 +413,7 @@ export default function GiftCardForm() {
                       />
                     </Box>
                     <OrganizationWidgets
+                      setFieldValue={undefined}
                       values={values}
                       handleChange={handleChange}
                     />

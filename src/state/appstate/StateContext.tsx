@@ -13,6 +13,8 @@ export const initialState = {
   transfersLoading: false,
   collections: null,
   giftCards: null,
+  customers: null,
+  orders: null,
 };
 
 const StateContext = createContext(initialState);

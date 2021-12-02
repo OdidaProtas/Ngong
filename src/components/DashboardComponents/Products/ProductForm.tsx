@@ -71,7 +71,7 @@ export default function ProductForm() {
   const isEdit = !!productID && productID !== "empty";
 
   const handleSubmit = (value: any) => {
-    console.log(value);
+    value["vendor"] = value.vendor.id;
     setLoading(true);
     if (!isEdit) {
       axiosInstance
@@ -180,27 +180,33 @@ export default function ProductForm() {
         onSubmit={handleSubmit}
         enableReinitialize
       >
-        {({ values, errors, touched, handleChange }) => {
+        {({ values, errors, touched, handleChange, setFieldValue }) => {
           const { status } = values;
           return (
             <Form>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Box>
-                  <Button
-                    type="button"
-                    onClick={() => history.goBack()}
-                    sx={{ mb: 2, textTransform: "none" }}
-                    size="small"
-                    color="secondary"
-                  >
-                    <ArrowBackIosIcon />
-                    {isEdit ? values.title : "Add Products"}
-                  </Button>
-                  {isEdit ? (
-                    <Box sx={{ display: "inline", ml: 2 }}>
-                      <StatusChip status={values.status} />
-                    </Box>
-                  ) : null}
+                <Box
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <Box>
+                    <Button
+                      type="button"
+                      onClick={() => history.goBack()}
+                      sx={{ textTransform: "none" }}
+                      size="small"
+                      color="secondary"
+                    >
+                      <ArrowBackIosIcon />
+                      {isEdit ? values.title : "Add Products"}
+                    </Button>
+                  </Box>
+                  <Box>
+                    {isEdit ? (
+                      <Box sx={{ ml: 2, mt: 0.5 }}>
+                        <StatusChip status={values.status} />
+                      </Box>
+                    ) : null}
+                  </Box>
                 </Box>
                 <Box sx={{ display: isEdit ? "block" : "none" }}>
                   <Box sx={{ display: "flex" }}>
@@ -432,6 +438,7 @@ export default function ProductForm() {
                     </Box>
                     <OrganizationWidgets
                       values={values}
+                      setFieldValue={setFieldValue}
                       handleChange={handleChange}
                     />
                   </Grid>
@@ -478,9 +485,9 @@ export default function ProductForm() {
       </Formik>
       <Box sx={{ mb: 18, display: "flex" }}>
         <Box>
-          <Button sx={{ mr: 2 }} color="error" variant="outlined">
+          {/* <Button sx={{ mr: 2 }} color="error" variant="outlined">
             Delete Product
-          </Button>
+          </Button> */}
         </Box>
       </Box>
     </div>

@@ -10,7 +10,7 @@ export default function AbandonedCheckouts() {
     <div>
       <Nav option="Abandoned checkouts" />
       <Box
-        sx={{ p: 4, bgcolor: "background.paper", borderRadius: "4px", mt: 3 }}
+        sx={{ p: 4, bgcolor: "background.paper", borderRadius: "4px", mt: 3, pb:12 }}
       >
         <div style={{ textAlign: "center" }}>
           <Box sx={{ display: { lg: "none", xs: "block" } }}>

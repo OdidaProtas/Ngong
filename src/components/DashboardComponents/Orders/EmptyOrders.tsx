@@ -32,6 +32,7 @@ export default function EmptyOrders() {
             ends.
           </Typography>
           <Button
+            disabled
             color="secondary"
             disableElevation
             sx={{ textTransform: "none", mt: 3 }}
@@ -39,15 +40,6 @@ export default function EmptyOrders() {
             onClick={() => history.push(`/admin/${id}/settings`)}
           >
             Select Plan
-          </Button>
-          <Button
-            color="secondary"
-            disableElevation
-            sx={{ textTransform: "none", mt: 3, ml: 2 }}
-            variant="contained"
-            onClick={() => history.push(`/admin/${id}/orders/new`)}
-          >
-            Draft Order
           </Button>
         </div>
       </Box>

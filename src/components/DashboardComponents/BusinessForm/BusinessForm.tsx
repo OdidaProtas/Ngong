@@ -17,7 +17,14 @@ import Setup from "../../../assets/images/set.png";
 export default function BusinessForm() {
   const { path, url } = useRouteMatch();
   return (
-    <Container sx={{ bgcolor: "background.paper", p: 4, borderRadius: "4px" }}>
+    <Container
+      sx={{
+        bgcolor: "background.paper",
+        p: { lg: 4, xs: 1 },
+        borderRadius: "4px",
+        mb: 6,
+      }}
+    >
       {/* <Progress /> */}
       {/* <Toolbar> */}
       <Box

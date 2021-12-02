@@ -63,10 +63,9 @@ export default function EditorNav() {
           },
         })}
       >
-        <Paper elevation={0} sx={{ width: 256, borderRadius: 0 }}>
+        <Paper elevation={0} sx={{ width: 256, borderRadius: 0, minWidth:"100vh" }}>
           <FireNav component="nav" disablePadding>
             <ListItemButton>
-              {/* <ListItemIcon sx={{ fontSize: 20 }}>🔥</ListItemIcon> */}
               <ListItemText
                 sx={{ my: 0 }}
                 primary="Store name"

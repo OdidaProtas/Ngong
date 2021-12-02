@@ -31,10 +31,13 @@ import TextField from "@mui/material/TextField";
 import ListMenu from "./ListMenu";
 import FilterDrawer from "./FilterDrawer";
 
+import Autocomplete from "@mui/material/Autocomplete";
+
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { makeStyles } from "@mui/styles";
 import Collapse from "@mui/material/Collapse";
+import { useContext } from "react";
 
 const useRowStyles = makeStyles({
   root: {
@@ -238,10 +241,13 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 
 interface EnhancedTableToolbarProps {
   numSelected: number;
+  addSearch:any
 }
 
 const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
-  const { numSelected } = props;
+  const { numSelected, addSearch } = props;
+  const { myProducts } = useContext(StateContext);
+
 
   return (
     <Toolbar
@@ -289,19 +295,32 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
           </Box>
         </Box>
       ) : (
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <TextField
-            placeholder="Filter products"
-            size="small"
-            color="secondary"
-            InputProps={{ startAdornment: <Search /> }}
+        <Box >
+          <Autocomplete
+            disablePortal
             fullWidth
-            sx={{ mr: 12 }}
+            multiple
+            id="combo-box-demo"
+            options={myProducts || []}
+            getOptionLabel={(o: any) => o.title}
+            onChange={(e, v) => {
+              if (v.length > 0) addSearch(v);
+              else addSearch(null)
+            }}
+            sx={{ width: 300 }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                color="secondary"
+                size="small"
+                label="Filter products"
+              />
+            )}
           />
           <ListMenu />
-          <Tooltip title="All filters">
+          {/* <Tooltip title="All filters">
             <FilterDrawer />
-          </Tooltip>
+          </Tooltip> */}
         </Box>
       )}
     </Toolbar>
@@ -315,37 +334,44 @@ export default function EnhancedTable({ context }) {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [searchItems, setSearchItems] = React.useState(null);
+
+  const addSearchItem = (i) => setSearchItems(i   );
 
   const { myProducts }: any = React.useContext(StateContext);
   const { push } = useHistory();
   const { id }: any = useParams();
 
-  const rows = myProducts
-    ?.filter((p) => {
-      if (context === "all") return p;
-      else return p.status === context;
-    })
-    ?.map((product: any) => {
-      const {
-        title,
-        id,
-        status,
-        trackQuantity,
-        quantity,
-        productType,
-        vendor,
-      } = product;
-      return createData(
-        title,
-        trackQuantity,
-        status,
-        "",
-        quantity,
-        id,
-        productType,
-        vendor
-      );
-    });
+  const createRows = (data) => {
+    return data
+      ?.filter((p) => {
+        if (context === "all") return p;
+        else return p.status === context;
+      })
+      ?.map((product: any) => {
+        const {
+          title,
+          id,
+          status,
+          trackQuantity,
+          quantity,
+          productType,
+          vendor,
+        } = product;
+        return createData(
+          title,
+          trackQuantity,
+          status,
+          "",
+          quantity,
+          id,
+          productType,
+          vendor
+        );
+      });
+  };
+
+  const rows = createRows(searchItems ? searchItems : myProducts);
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -414,7 +440,7 @@ export default function EnhancedTable({ context }) {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar addSearch={addSearchItem} numSelected={selected.length} />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -555,31 +581,15 @@ function Row(props) {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
-                History
+                Insights
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell align="right">Amount</TableCell>
-                    <TableCell align="right">Total price</TableCell>
+                    Product insights will appear here once active
                   </TableRow>
                 </TableHead>
-                <TableBody>
-                  {/* {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
-                      <TableCell component="th" scope="row">
-                        {historyRow.date}
-                      </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
-                      <TableCell align="right">
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
-                      </TableCell>
-                    </TableRow>
-                  ))} */}
-                </TableBody>
+                <TableBody></TableBody>
               </Table>
             </Box>
           </Collapse>

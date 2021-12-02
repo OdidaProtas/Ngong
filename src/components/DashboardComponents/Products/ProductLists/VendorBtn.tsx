@@ -13,6 +13,8 @@ import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import RadioGroup from "@mui/material/RadioGroup";
 import Radio from "@mui/material/Radio";
+import { StateContext } from "../../../../state/appstate";
+import { useContext } from "react";
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -67,50 +69,56 @@ export default function VendorBtn() {
     setAnchorEl(null);
   };
 
-  return (
-    <div>
-      <Button
-        size="small"
-        sx={{ textTransform: "none", ml: 1, mt: 0.2 }}
-        id="demo-customized-button"
-        aria-controls="demo-customized-menu"
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        variant="contained"
-        disableElevation
-        onClick={handleClick}
-        color="secondary"
-        endIcon={<KeyboardArrowDownIcon />}
-      >
-        Vendor
-      </Button>
-      <StyledMenu
-        id="demo-customized-menu"
-        MenuListProps={{
-          "aria-labelledby": "demo-customized-button",
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-      >
-        <FormControl sx={{ p: 2 }} component="fieldset">
-          <RadioGroup
-            aria-label="gender"
-            name="gender1"
-            value={"value"}
-            // onChange={handleChange}
-          >
-            <FormControlLabel
-              value="other"
-              control={<Radio />}
-              label="Dreamnerdy"
-            />
-          </RadioGroup>
-        </FormControl>
-        <MenuItem onClick={handleClose} disableRipple>
-          Clear
-        </MenuItem>
-      </StyledMenu>
-    </div>
-  );
+  const { myProducts } = useContext(StateContext);
+
+  console.log(myProducts);
+
+  return <div></div>
+
+  // return (
+  //   <div>
+  //     <Button
+  //       size="small"
+  //       sx={{ textTransform: "none", ml: 1, mt: 0.2 }}
+  //       id="demo-customized-button"
+  //       aria-controls="demo-customized-menu"
+  //       aria-haspopup="true"
+  //       aria-expanded={open ? "true" : undefined}
+  //       variant="contained"
+  //       disableElevation
+  //       onClick={handleClick}
+  //       color="secondary"
+  //       endIcon={<KeyboardArrowDownIcon />}
+  //     >
+  //       Vendor
+  //     </Button>
+  //     <StyledMenu
+  //       id="demo-customized-menu"
+  //       MenuListProps={{
+  //         "aria-labelledby": "demo-customized-button",
+  //       }}
+  //       anchorEl={anchorEl}
+  //       open={open}
+  //       onClose={handleClose}
+  //     >
+  //       <FormControl sx={{ p: 2 }} component="fieldset">
+  //         <RadioGroup
+  //           aria-label="gender"
+  //           name="gender1"
+  //           value={"value"}
+  //           // onChange={handleChange}
+  //         >
+  //           <FormControlLabel
+  //             value="other"
+  //             control={<Radio />}
+  //             label="Dreamnerdy"
+  //           />
+  //         </RadioGroup>
+  //       </FormControl>
+  //       <MenuItem onClick={handleClose} disableRipple>
+  //         Clear
+  //       </MenuItem>
+  //     </StyledMenu>
+  //   </div>
+  // );
 }

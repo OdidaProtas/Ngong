@@ -31,6 +31,7 @@ import TbFallBack from "../../../../screens/StoreSelectionScreen/TbFallBack";
 import TablesSkeleton from "../../../SharedComponents/TablesSkeleton/TablesSkeleton";
 import { AuthContext, axiosInstance } from "../../../../state";
 import { Form, Formik } from "formik";
+import ProductSelect from "../../Orders/Form/ProductSelect";
 
 export default function TransferForm() {
   const { goBack, push } = useHistory();
@@ -166,34 +167,11 @@ export default function TransferForm() {
               </Box>
               <Box sx={{ bgcolor: "background.paper", my: 2, p: 3 }}>
                 <div>
-                  <Autocomplete
-                    multiple
-                    size="small"
-                    limitTags={2}
-                    id="multiple-limit-tags"
-                    options={myProducts}
-                    getOptionLabel={(option: any) => option.title}
-                    onChange={(e, v) => {
-                      setFieldValue("products", v);
-                    }}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Products"
-                        name="products"
-                        color="secondary"
-                        placeholder="Search Products"
-                      />
-                    )}
+                  <ProductSelect
+                    context="transfer"
+                    setFieldValue={setFieldValue}
+                    values={values}
                   />
-                  {/* <Tooltip title="Add Product">
-                    <IconButton
-                      onClick={() => push(`/admin/${id}/products/new`)}
-                      sx={{ mt: 1 }}
-                    >
-                      <Add />
-                    </IconButton>
-                  </Tooltip> */}
                 </div>
               </Box>
               <Box>

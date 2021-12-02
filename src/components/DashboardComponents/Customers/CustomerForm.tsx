@@ -1,7 +1,7 @@
 import IconButton from "@mui/material/IconButton/IconButton";
-import React from "react";
+import React, { useContext } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import Divider from "@mui/material/Divider/Divider";
 import Box from "@mui/system/Box/Box";
 import { ButtonWithLoaderComponent } from "../../SharedComponents";
@@ -17,9 +17,31 @@ import CustomerNotes from "./CustomerNotes";
 import CustomerTags from "./CustomerTags";
 import Button from "@mui/material/Button";
 import { Form, Formik } from "formik";
+import { axiosInstance } from "../../../state";
+import { StateContext } from "../../../state/appstate";
+import useModalControls from "../../../hooks/modals/useModalControls";
 export default function CustomerForm() {
   const history = useHistory();
-
+  const { open, toggle } = useModalControls();
+  const { id }: any = useParams();
+  const { stateDispatch }: any = useContext(StateContext);
+  const handleSubmit = (v) => {
+    toggle();
+    axiosInstance
+      .post(`/customers`, { ...v, store: id })
+      .then(({ data }) => {
+        toggle();
+        stateDispatch({
+          type: "ADD_CUSTOMER",
+          payload: data,
+        });
+        history.push(`/admin/${id}/customers`);
+      })
+      .catch((e) => {
+        toggle();
+        alert("an error ocurred");
+      });
+  };
   return (
     <div>
       <div>
@@ -33,36 +55,42 @@ export default function CustomerForm() {
           Add customer
         </Button>
         <Divider sx={{ mt: 2 }} />
-        <Formik
-          initialValues={{}}
-          onSubmit={function (values) {
-            console.log(values);
-          }}
-        >
+        <Formik initialValues={{}} onSubmit={handleSubmit}>
           {({ values, touched, errors, handleChange }) => {
             return (
               <Form>
                 <Box>
-                  <CustomerFormOverview fields={overviewFields} />
+                  <CustomerFormOverview
+                    handleChange={handleChange}
+                    fields={overviewFields}
+                  />
                   <Divider sx={{ mt: 2, mb: 2 }} />
-                  <CustomerAddress fields={contactFields} />
+                  <CustomerAddress
+                    handleChange={handleChange}
+                    fields={contactFields}
+                  />
                   <Divider sx={{ mt: 2, mb: 2 }} />
-                  <CustomerNotes fields={notesFields} />
+                  <CustomerNotes
+                    handleChange={handleChange}
+                    fields={notesFields}
+                  />
                   <Divider sx={{ mt: 2, mb: 2 }} />
                   <CustomerTags />
                   <div
-                    style={{
-                      height: 66,
-                      position: "fixed",
-                      bottom: 0,
-                      background: "lightgray",
-                      width: "90%",
-                      zIndex: 100,
-                      padding:20,
-                    } as any}
+                    style={
+                      {
+                        height: 66,
+                        position: "fixed",
+                        bottom: 0,
+                        background: "lightgray",
+                        width: "90%",
+                        zIndex: 100,
+                        padding: 20,
+                      } as any
+                    }
                   >
-                    <div style={{position:"absolute"} as any}>
-                      <Button color="secondary" disableElevation sx={{textTransform:"none"}} variant="contained" type="submit">Save</Button>
+                    <div style={{ position: "absolute" } as any}>
+                      <ButtonWithLoaderComponent title="Save" loading={open} />
                     </div>
                   </div>
                 </Box>

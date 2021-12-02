@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import "animate.css/animate.min.css";
 
 const App = lazy(() => import("./App"));
 

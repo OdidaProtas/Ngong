@@ -3,6 +3,7 @@ import { Switch, useRouteMatch } from "react-router";
 import { Route } from "react-router-dom";
 import DiscountForm from "./DiscountForm/DiscountForm";
 import DiscountTabs from "./DiscountTabs";
+import EmptyAutomaticDiscounts from "./EmptyAutomaticDiscounts";
 import EmptyDiscounts from "./EmptyDiscounts";
 
 export default function Discounts() {
@@ -11,14 +12,20 @@ export default function Discounts() {
     <div>
       <Switch>
         <Route exact path={path}>
-          <DiscountTabs />
+          <EmptyDiscounts />
         </Route>
         <Route exact path={`${path}/new`}>
           <DiscountForm />
         </Route>
-        <Route exact path={`${path}/new/automatic`}>
-          <DiscountForm />
+        <Route exact path={`${path}/empty`}>
+          <EmptyDiscounts />
         </Route>
+        <Route exact path={`${path}/auto`}>
+          <EmptyAutomaticDiscounts />
+        </Route> 
+        <Route exact path={`${path}/auto/new`}>
+          <DiscountForm />
+        </Route>  
       </Switch>
       {/* <EmptyDiscounts /> */}
     </div>

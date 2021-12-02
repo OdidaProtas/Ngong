@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import EmptyOrders from "./EmptyOrders";
 import EmptyDrafts from "./Tabs/EmptyDrafts";
 import AbandonedCheckouts from "./Tabs/AbandonedCheckouts";
+import DraftsTable from "./Drafts/DraftsTable";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -51,23 +52,64 @@ export default function OrdersTabs() {
     <Box sx={{ width: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
+          variant="scrollable"
+          sx={{ maxWidth: { lg: "100%", xs: 336 } }}
+          scrollButtons
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Orders" {...a11yProps(0)} />
-          <Tab label="Drafts" {...a11yProps(1)} />
-          <Tab label="Abandoned Checkouts" {...a11yProps(2)} />
+          <Tab
+            sx={{ textTransform: "none" }}
+            color="secondary"
+            label="All"
+            {...a11yProps(0)}
+          />
+          <Tab
+            sx={{ textTransform: "none" }}
+            color="secondary"
+            label="Opended and invoice sent"
+            {...a11yProps(1)}
+          />
+          <Tab
+            sx={{ textTransform: "none" }}
+            color="secondary"
+            label="Open"
+            {...a11yProps(2)}
+          />
+          <Tab
+            sx={{ textTransform: "none" }}
+            color="secondary"
+            label="Invoice sent"
+            {...a11yProps(3)}
+          />
+          <Tab
+            sx={{ textTransform: "none" }}
+            color="secondary"
+            label="Completed"
+            {...a11yProps(4)}
+          />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <EmptyOrders />
+        {/* <EmptyOrders /> */}
+        <DraftsTable />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <EmptyDrafts />
+        <DraftsTable />
+        {/* <EmptyDrafts /> */}
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <AbandonedCheckouts />
+        <DraftsTable />
+        {/* <AbandonedCheckouts /> */}
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <DraftsTable />
+        {/* <AbandonedCheckouts /> */}
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+        <DraftsTable />
+        {/* <AbandonedCheckouts /> */}
       </TabPanel>
     </Box>
   );

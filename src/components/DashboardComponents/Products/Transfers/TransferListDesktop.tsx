@@ -4,6 +4,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TransferDesktopTable from "./TransferDesktopTable";
+import TransferListMobile from "./TransferListMobile";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -75,16 +76,36 @@ export default function TransferListDesktop() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <TransferDesktopTable  />
+        <Box sx={{ display: { lg: "block", xs: "none" } }}>
+          <TransferDesktopTable />
+        </Box>
+        <Box sx={{ display: { lg: "none", xs: "block" } }}>
+          <TransferListMobile />
+        </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <TransferDesktopTable/>
+        <Box sx={{ display: { lg: "block", xs: "none" } }}>
+          <TransferDesktopTable />
+        </Box>
+        <Box sx={{ display: { lg: "none", xs: "block" } }}>
+          <TransferListMobile />
+        </Box>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <TransferDesktopTable />
+        <Box sx={{ display: { lg: "block", xs: "none" } }}>
+          <TransferDesktopTable />
+        </Box>
+        <Box sx={{ display: { lg: "none", xs: "block" } }}>
+          <TransferListMobile />
+        </Box>
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <TransferDesktopTable />
+        <Box sx={{ display: { lg: "block", xs: "none" } }}>
+          <TransferDesktopTable />
+        </Box>
+        <Box sx={{ display: { lg: "none", xs: "block" } }}>
+          <TransferListMobile />
+        </Box>
       </TabPanel>
     </Box>
   );

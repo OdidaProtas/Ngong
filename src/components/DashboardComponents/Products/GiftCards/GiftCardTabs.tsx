@@ -4,6 +4,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import GiftCardList from "./GiftCardList";
+import GiftCardMobile from "./GiftCardMobile";
 // import ProductTable from "./ProductTable";
 
 interface TabPanelProps {
@@ -72,16 +73,36 @@ export default function GiftCardTabs() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <GiftCardList context="all" />
+        <Box sx={{ display: { lg: "none", xs: "block" } }}>
+          <GiftCardMobile context="all" />
+        </Box>
+        <Box sx={{ display: { lg: "block", xs: "none" } }}>
+          <GiftCardList context="all" />
+        </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <GiftCardList context="active" />
+        <Box sx={{ display: { lg: "none", xs: "block" } }}>
+          <GiftCardMobile context="all" />
+        </Box>
+        <Box sx={{ display: { lg: "block", xs: "none" } }}>
+          <GiftCardList context="all" />
+        </Box>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <GiftCardList context="drafts" />
+        <Box sx={{ display: { lg: "none", xs: "block" } }}>
+          <GiftCardMobile context="all" />
+        </Box>
+        <Box sx={{ display: { lg: "block", xs: "none" } }}>
+          <GiftCardList context="all" />
+        </Box>
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <GiftCardList context="archived" />
+        <Box sx={{ display: { lg: "none", xs: "block" } }}>
+          <GiftCardMobile context="all" />
+        </Box>
+        <Box sx={{ display: { lg: "block", xs: "none" } }}>
+          <GiftCardList context="all" />
+        </Box>
       </TabPanel>
     </Box>
   );

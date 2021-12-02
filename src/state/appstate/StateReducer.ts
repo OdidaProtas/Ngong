@@ -125,6 +125,46 @@ const stateReducer = (state: any, action: any) => {
         collections: c,
       };
 
+    case "ADD_CUSTOMER":
+      const cs = state.customers || [];
+      cs.push(action.payload);
+      return {
+        ...state,
+        customers: cs,
+      };
+
+    case "ADD_CUSTOMERS":
+      return {
+        ...state,
+        customers: action.payload,
+      };
+
+    case "ADD_ORDERS":
+      return {
+        ...state,
+        orders: action.payload,
+      };
+
+    case "ADD_ORDER":
+      const o = state.orders || [];
+      o.push(action.payload);
+      return {
+        ...state,
+        orders: o,
+      };
+
+    case "ADD_VENDORS":
+      return {
+        ...state,
+        vendors: action.payload,
+      };
+    case "ADD_VENDOR":
+      const v = state.vendors || [];
+      v.push(action.payload);
+      return {
+        ...state,
+        vendors: v,
+      };
     default:
       return {
         ...state,

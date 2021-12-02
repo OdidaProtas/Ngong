@@ -34,6 +34,8 @@ import Collapse from "@mui/material/Collapse";
 import MoreOptionsBtn from "../ProductLists/MoreOptionsBtn";
 import ListMenu from "../ProductLists/ListMenu";
 import FilterDrawer from "../ProductLists/FilterDrawer";
+import Popover from "@mui/material/Popover";
+import InventoryTransferPopover from "./InventoryTransferPopover";
 
 const useRowStyles = makeStyles({
   root: {
@@ -494,6 +496,9 @@ function Row(props) {
     props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
+  
+
+  
 
   return (
     <React.Fragment>
@@ -537,7 +542,9 @@ function Row(props) {
         <TableCell align="right">{`${
           row.sellOutOfStock ? `Continue Selling` : "Stop selling"
         }`}</TableCell>
-        <TableCell align="right">{0}</TableCell>
+        <TableCell color="info" align="right">
+          <InventoryTransferPopover />
+        </TableCell>
         <TableCell align="right">{row.quantity}</TableCell>
         <TableCell>
           <IconButton

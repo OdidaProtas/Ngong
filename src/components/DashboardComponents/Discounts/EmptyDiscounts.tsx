@@ -5,12 +5,14 @@ import React from "react";
 import { useHistory, useRouteMatch } from "react-router";
 
 import DiscountIllustration from "../../../assets/images/discount.jpg";
+import SwitchMode from "./SwitchMode";
 
 export default function EmptyDiscounts() {
   const { url } = useRouteMatch();
   const history = useHistory();
   return (
     <div>
+      <SwitchMode option="Discounts" />
       <Box
         sx={{
           bgcolor: "background.paper",

@@ -54,7 +54,7 @@ function App() {
       <StateContext.Provider value={{ ...appState, stateDispatch }}>
         <Suspense fallback={<Loader />}>
           <AppNavigation />
-        </Suspense>
+      </Suspense>
       </StateContext.Provider>
     </AuthContext.Provider>
   );

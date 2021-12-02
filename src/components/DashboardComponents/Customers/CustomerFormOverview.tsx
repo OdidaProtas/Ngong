@@ -9,7 +9,7 @@ import { Field, Form, Formik } from "formik";
 import React, { Suspense } from "react";
 import { ButtonWithLoaderComponent } from "../../SharedComponents";
 
-export default function CustomerFormOverview({ fields }: any) {
+export default function CustomerFormOverview({ fields, handleChange }: any) {
   return (
     <Grid container>
       <Grid item xs={12} lg={4} mt={3}>
@@ -24,8 +24,9 @@ export default function CustomerFormOverview({ fields }: any) {
                 <Field name={name}>
                   {({ field }) => (
                     <TextField
-                    color="secondary"
+                      color="secondary"
                       fullWidth
+                      required
                       name={name}
                       size="small"
                       sx={{ mb: 2 }}

@@ -8,7 +8,7 @@ import { Field, Form, Formik } from "formik";
 import React, { Suspense } from "react";
 import { ButtonWithLoaderComponent } from "../../SharedComponents";
 
-export default function CustomerAddress({ fields }: any) {
+export default function CustomerAddress({ fields, handleChange }: any) {
   return (
     <Grid container>
       <Grid item xs={12} lg={4} mt={3}>

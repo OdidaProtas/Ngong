@@ -46,6 +46,7 @@ export default function SignupForm() {
       })
       .catch((e) => {
         setLoading(false);
+        alert("An error occured")
         console.log(e);
       });
   };

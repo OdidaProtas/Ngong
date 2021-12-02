@@ -13,6 +13,7 @@ export default function GiftCardTable() {
         <SwitchMode option="Gift cards"></SwitchMode>
         <div>
           <Button
+            size="small"
             onClick={() => push(`/admin/${id}/products/gift-cards/new`)}
             sx={{ textTransform: "none" }}
             color="secondary"
@@ -20,6 +21,7 @@ export default function GiftCardTable() {
             Add gift card
           </Button>
           <Button
+            size="small"
             onClick={() => push(`/admin/${id}/products/gift-cards/issue`)}
             disableElevation
             variant="contained"
